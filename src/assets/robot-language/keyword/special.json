@@ -1,0 +1,107 @@
+{
+    "name": "Special",
+    "version": "3.0.4",
+    "sections": [
+        {
+            "name": "*** Settings ***",
+            "args": [],
+            "doc": "1) Importing test libraries, resource files and variable files. \n 2) Defining metadata for test suites and test cases."
+        },
+        {
+            "name": "*** Variables ***",
+            "args": [],
+            "doc": "Defining variables that can be used elsewhere in the test data."
+        },
+        {
+            "name": "*** Tasks ***",
+            "args": [],
+            "doc": "Creating tasks using available keywords. Single file can only contain either test cases or tasks."
+        },
+        {
+            "name": "*** Test Cases ***",
+            "args": [],
+            "doc": "Creating test cases from available keywords."
+        },
+        {
+            "name": "*** Keywords ***",
+            "args": [],
+            "doc": "Creating user keywords from existing lower-level keywords"
+        }
+    ],
+    "settingsKeyWord": [
+        {
+            "name": "Documentation",
+            "args": [
+                "messages"
+            ],
+            "doc": "Used for setting a user keyword documentation."
+        },
+        {
+            "name": "Return",
+            "args": [
+                "value"
+            ],
+            "doc": "Specifies user keyword return values."
+        },
+        {
+            "name": "Library",
+            "args": [
+                "name"
+            ],
+            "doc": "Import some Library need"
+        }
+    ],
+    "testCasesKeyWord": [
+        {
+            "name": "[Documentation]",
+            "args": [
+                "messages"
+            ],
+            "doc": "Used for setting a user keyword documentation."
+        },
+        {
+            "name": "[Tags]",
+            "args": [
+                "messages"
+            ],
+            "doc": "Sets tags for the keyword."
+        },
+        {
+            "name": "[Return]",
+            "args": [
+                "value"
+            ],
+            "doc": "Specifies user keyword return values."
+        },
+        {
+            "name": "[Teardown]",
+            "args": [
+                "value"
+            ],
+            "doc": "Specify user keyword teardown."
+        },
+        {
+            "name": "[Timeout]",
+            "args": [
+                "timeout",
+                "message"
+            ],
+            "doc": "Sets the possible user keyword timeout. Timeouts are discussed in a section of their own."
+        },
+        {
+            "name": "[Setup]",
+            "args": [
+                "args",
+                "message"
+            ],
+            "doc": "Used for specifying a test setup."
+        },
+        {
+            "name": "[Arguments]",
+            "args": [
+                "*args"
+            ],
+            "doc": "Arguments of function"
+        }
+    ]
+}

@@ -1,0 +1,32 @@
+<nb-card>
+    <nb-card-header
+        >{{ title }}
+        <button type="button" class="close " aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </nb-card-header>
+    <nb-card-body>
+        <h6>Choose File</h6>
+        <div class="input-group ">
+            <span class="btn-input"> <em class="icon text-info fa fa-upload mr-2 upload-icon"></em></span>
+            <input type="text" class="form-control fileName mb-0" placeholder="Upload your file" />
+        </div>
+        <h6>Version</h6>
+        <h6>Platform</h6>
+        <nb-select #platForm name="platForm" placeholder="Select Showcase" status="info">
+            <nb-option value="win7">win7</nb-option>
+            <nb-option value="win10">win10</nb-option>
+            <nb-option value="linux">linux</nb-option>
+            <nb-option value="mac">mac</nb-option>
+        </nb-select>
+        <div *ngIf="title === 'Edit'" class="d-flex checkbox">
+            <h6>Default</h6>
+            <nb-checkbox status="success" #checkbox class="col-sm-4"> </nb-checkbox>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <button class="float-right " nbButton hero status="info">Cancel</button>
+        <button class="float-right mr-2 ml-0" nbButton hero status="default">Submit</button>
+    </nb-card-footer>
+</nb-card>
+<!-- <input class="inputFile" type="file" (change)="fileChangeEvent($event)" #inputFile /> -->

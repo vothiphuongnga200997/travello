@@ -1,0 +1,4 @@
+<a (click)="onClick()" class="text-info cursor-pointer">
+    <em [class]="renderValue" *ngIf="value.type && value.type === 'icon'"></em>
+    <span *ngIf="!value.type || value.type !== 'icon'">{{ renderValue }}</span>
+</a>

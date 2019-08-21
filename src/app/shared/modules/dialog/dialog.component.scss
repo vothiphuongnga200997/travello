@@ -1,0 +1,23 @@
+nb-card {
+    width: 350px;
+
+    // nb-card-header,
+    // nb-card-body {
+    //     text-align: center;
+    // }
+
+    nb-card-footer {
+        display: flex;
+        justify-content: flex-end;
+
+        button {
+            margin-left: 1em;
+            width: 100px;
+        }
+
+        .btn-hint {
+            background: #ebeff5;
+            color: #2a2a2a;
+        }
+    }
+}

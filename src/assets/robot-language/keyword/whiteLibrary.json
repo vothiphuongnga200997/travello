@@ -1,0 +1,1338 @@
+{
+    "name": "WhiteLibrary",
+    "version": "1.5.0",
+    "keywords": [
+        {
+            "args": [
+                "sut_id"
+            ],
+            "doc": "<p>Attaches a running application by process id.</p>\n<p><code>sut_id</code> is the application process id.</p>\n<p>Example:</p>\n<table border=\"1\">\n<tr>\n<td>Attach Application By Id</td>\n<td>12188</td>\n</tr>\n</table>",
+            "matched": true,
+            "name": "Attach Application By Id",
+            "shortdoc": "Attaches a running application by process id.",
+            "tags": []
+        },
+        {
+            "args": [
+                "sut_name"
+            ],
+            "doc": "<p>Attaches a running application by name.</p>\n<p><code>sut_name</code> is the name of the process.</p>\n<p>Example:</p>\n<table border=\"1\">\n<tr>\n<td>Attach Application By Name</td>\n<td>UIAutomationTest</td>\n</tr>\n</table>",
+            "matched": true,
+            "name": "Attach Application By Name",
+            "shortdoc": "Attaches a running application by name.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator"
+            ],
+            "doc": "<p>Attaches WhiteLibrary to a window.</p>\n<p><code>locator</code> is the locator of the window or a window object.</p>\n<h4>Window locator syntax</h4>\n<p>Syntax for a window locator is <code>prefix:value</code>.</p>\n<p>When the locator syntax is used, the window is searched from the currently attached application. See <a href=\"#Attach%20Application%20By%20Id\" class=\"name\">Attach Application By Id</a>, <a href=\"#Attach%20Application%20By%20Name\" class=\"name\">Attach Application By Name</a> or <a href=\"#Launch%20Application\" class=\"name\">Launch application</a> for more details about attaching an application.</p>\n<p>The following window locators are available:</p>\n<table border=\"1\">\n<tr>\n<th>Prefix</th>\n<th>Description</th>\n</tr>\n<tr>\n<td>title (or no prefix)</td>\n<td>Search by the exact window title. If no prefix is given, the window is searched by title by default.</td>\n</tr>\n<tr>\n<td>id</td>\n<td>Search by AutomationID.</td>\n</tr>\n<tr>\n<td>class_name</td>\n<td>Search by class name.</td>\n</tr>\n</table>\n<p>Examples:</p>\n<table border=\"1\">\n<tr>\n<td>Attach Window</td>\n<td>Main Window</td>\n<td># attach window with title</td>\n</tr>\n<tr>\n<td>Attach Window</td>\n<td>id:mainWindow</td>\n<td># attach window with Automation ID</td>\n</tr>\n<tr>\n<td>Attach Window</td>\n<td>class_name:NavigationWindow</td>\n<td># attach window with ClassName</td>\n</tr>\n</table>\n<h4>Window objects</h4>\n<p>A window can also be attached by directly passing the window object as the <code>locator</code> parameter value. This may be useful if the correct window cannot be found by using the window locator syntax.</p>\n<p>Example:</p>\n<table border=\"1\">\n<tr>\n<td>@{windows}</td>\n<td><a href=\"#Get%20Application%20Windows\" class=\"name\">Get Application Windows</a></td>\n<td></td>\n</tr>\n<tr>\n<td>Attach Window</td>\n<td>${windows[1]}</td>\n<td># attach window at index 1 in window list</td>\n</tr>\n</table>\n<p>When using a window object as the <code>locator</code> parameter value, the window is attached even if it does not belong to the currently attached application. Note that when attaching a window that belongs to a different application than the currently attached one, attaching the window does not affect what application is attached to the library.</p>",
+            "matched": true,
+            "name": "Attach Window",
+            "shortdoc": "Attaches WhiteLibrary to a window.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "expected_text",
+                "case_sensitive=True"
+            ],
+            "doc": "<p>Verifies exact text in a button.</p>\n<p><code>locator</code> is the locator of the button or Button item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>expected_text</code> is the expected button text.</p>\n<p><code>case_sensitive</code> defines if the text comparison is case sensitive (True/False). Defaults to <code>True</code>. Boolean values are evaluated in the same way as the Robot Framework BuiltIn library does, see <a href=\"http://robotframework.org/robotframework\">the documentation of BuiltIn</a> for details.</p>",
+            "matched": true,
+            "name": "Button Text Should Be",
+            "shortdoc": "Verifies exact text in a button.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "expected_text",
+                "case_sensitive=True"
+            ],
+            "doc": "<p>Verifies expected text is found in a button.</p>\n<p><code>locator</code> is the locator of the button or Button item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>expected_text</code> is the expected button text.</p>\n<p><code>case_sensitive</code> defines if the text comparison is case sensitive (True/False). Defaults to <code>True</code>. Boolean values are evaluated in the same way as the Robot Framework BuiltIn library does, see <a href=\"http://robotframework.org/robotframework\">the documentation of BuiltIn</a> for details.</p>",
+            "matched": true,
+            "name": "Button Text Should Contain",
+            "shortdoc": "Verifies expected text is found in a button.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "x_offset=0",
+                "y_offset=0"
+            ],
+            "doc": "<p>Clicks a button.</p>\n<p><code>locator</code> is the locator of the button or Button item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p>Optional arguments <code>x_offset</code> and <code>y_offset</code> can be used to define the coordinates to click at, relative to the center of the item.</p>",
+            "matched": true,
+            "name": "Click Button",
+            "shortdoc": "Clicks a button.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "x_offset=0",
+                "y_offset=0"
+            ],
+            "doc": "<p>Clicks an item.</p>\n<p><code>locator</code> is the locator of the item or object of an item. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p>Optional arguments <code>x_offset</code> and <code>y_offset</code> can be used to define the coordinates to click at, relative to the center of the item.</p>",
+            "matched": true,
+            "name": "Click Item",
+            "shortdoc": "Clicks an item.",
+            "tags": []
+        },
+        {
+            "args": [
+                "*text_path"
+            ],
+            "doc": "<p>Clicks an item in the currently open popup/context menu.</p>\n<p><code>text_path</code> is the path to the item to click.</p>\n<p>Examples:</p>\n<table border=\"1\">\n<tr>\n<td>Click Popup Menu Item</td>\n<td>Paste</td>\n<td></td>\n<td># click an item in the root level</td>\n</tr>\n<tr>\n<td>Click Popup Menu Item</td>\n<td>Refactor</td>\n<td>Rename</td>\n<td># click a sub item</td>\n</tr>\n</table>",
+            "matched": true,
+            "name": "Click Item In Popup Menu",
+            "shortdoc": "Clicks an item in the currently open popup/context menu.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "x_offset=0",
+                "y_offset=0"
+            ],
+            "doc": "<p>Clicks a menu button.</p>\n<p><code>locator</code> is the locator of the menu button or Menu item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p>Optional arguments <code>x_offset</code> and <code>y_offset</code> can be used to define the coordinates to click at, relative to the center of the item.</p>",
+            "matched": true,
+            "name": "Click Menu Button",
+            "shortdoc": "Clicks a menu button.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "index"
+            ],
+            "doc": "<p>Clicks a button in a toolstrip (toolbar).</p>\n<p><code>locator</code> is the locator of the toolstrip.</p>\n<p><code>index</code> is the zero-based index of the toolstrip button to click.</p>",
+            "matched": true,
+            "name": "Click Toolstrip Button By Index",
+            "shortdoc": "Clicks a button in a toolstrip (toolbar).",
+            "tags": []
+        },
+        {
+            "args": [],
+            "doc": "<p>Closes the attached application.</p>",
+            "matched": true,
+            "name": "Close Application",
+            "shortdoc": "Closes the attached application.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator=None"
+            ],
+            "doc": "<p>Closes a window.</p>\n<p><code>locator</code> is the locator of the window or a window object (optional).</p>\n<p>If no <code>locator</code> value is given, the currently attached window is closed. See <a href=\"#Attach%20Window\" class=\"name\">Attach Window</a> for details about window locators and attaching a window.</p>",
+            "matched": true,
+            "name": "Close Window",
+            "shortdoc": "Closes a window.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "expected"
+            ],
+            "doc": "<p>Verifies that a combobox contains an item with text <code>expected</code>.</p>\n<p>Fails if the combobox does not contain an item with the given text.</p>\n<p><code>locator</code> is the locator of the combobox or ComboBox item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>expected</code> is the expected item text.</p>",
+            "matched": true,
+            "name": "Combobox Should Contain",
+            "shortdoc": "Verifies that a combobox contains an item with text ``expected``.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "expected"
+            ],
+            "doc": "<p>Verifies that a combobox does not contain an item with text <code>expected</code>.</p>\n<p>Fails if the combobox contains an item with the given text.</p>\n<p><code>locator</code> is the locator of the combobox or ComboBox item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>expected</code> is the expected item text.</p>",
+            "matched": true,
+            "name": "Combobox Should Not Contain",
+            "shortdoc": "Verifies that a combobox does not contain an item with text ``expected``.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "x_offset=0",
+                "y_offset=0"
+            ],
+            "doc": "<p>Double clicks an item.</p>\n<p><code>locator</code> is the locator of the item or object of an item. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p>Optional arguments <code>x_offset</code> and <code>y_offset</code> can be used to define the coordinates to click at, relative to the center of the item.</p>",
+            "matched": true,
+            "name": "Double Click Item",
+            "shortdoc": "Double clicks an item.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "column_name",
+                "row_index",
+                "x_offset=0",
+                "y_offset=0"
+            ],
+            "doc": "<p>Double clicks a listview cell.</p>\n<p><code>locator</code> is the locator of the listview or ListView item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>column_name</code> is the name of the column.</p>\n<p><code>row_index</code> is the zero-based row index.</p>\n<p>Optional arguments <code>x_offset</code> and <code>y_offset</code> can be used to define the coordinates to click at, relative to the center of the item.</p>\n<p>Example:</p>\n<table border=\"1\">\n<tr>\n<td>Double Click Listview Cell</td>\n<td>id:addressList</td>\n<td>Street</td>\n<td>0</td>\n<td># double click cell in the column \"Street\" of the first row</td>\n</tr>\n</table>",
+            "matched": true,
+            "name": "Double Click Listview Cell",
+            "shortdoc": "Double clicks a listview cell.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "row_index",
+                "column_index",
+                "x_offset=0",
+                "y_offset=0"
+            ],
+            "doc": "<p>Double clicks a listview cell at index.</p>\n<p><code>locator</code> is the locator of the listview or ListView item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>row_index</code> is the zero-based row index.</p>\n<p><code>column_index</code> is the zero-based column index.</p>\n<p>Optional arguments <code>x_offset</code> and <code>y_offset</code> can be used to define the coordinates to click at, relative to the center of the item.</p>\n<p>Example:</p>\n<table border=\"1\">\n<tr>\n<td>Double Click Listview Cell By Index</td>\n<td>id:addressList</td>\n<td>0</td>\n<td>0</td>\n</tr>\n</table>",
+            "matched": true,
+            "name": "Double Click Listview Cell By Index",
+            "shortdoc": "Double clicks a listview cell at index.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "column_name",
+                "cell_text",
+                "x_offset=0",
+                "y_offset=0"
+            ],
+            "doc": "<p>Double clicks a listview row.</p>\n<p><code>locator</code> is the locator of the listview or ListView item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>column_name</code> and <code>cell_text</code> define the row. Row is the first matching row where text in column <code>column_name</code> is <code>cell_text</code>.</p>\n<p>Optional arguments <code>x_offset</code> and <code>y_offset</code> can be used to define the coordinates to click at, relative to the center of the item.</p>\n<p>Example:</p>\n<table border=\"1\">\n<tr>\n<td>Double Click Listview Row</td>\n<td>id:addressList</td>\n<td>City</td>\n<td>Helsinki</td>\n<td># double click row that has the text \"Helsinki\" in the column \"City\"</td>\n</tr>\n</table>",
+            "matched": true,
+            "name": "Double Click Listview Row",
+            "shortdoc": "Double clicks a listview row.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "row_index",
+                "x_offset=0",
+                "y_offset=0"
+            ],
+            "doc": "<p>Double clicks a listview row at index.</p>\n<p><code>locator</code> is the locator of the listview or ListView item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>row_index</code> is the zero-based row index.</p>\n<p>Optional arguments <code>x_offset</code> and <code>y_offset</code> can be used to define the coordinates to click at, relative to the center of the item.</p>\n<p>Example:</p>\n<table border=\"1\">\n<tr>\n<td>Double Click Listview Row By Index</td>\n<td>id:addressList</td>\n<td>4</td>\n</tr>\n</table>",
+            "matched": true,
+            "name": "Double Click Listview Row By Index",
+            "shortdoc": "Double clicks a listview row at index.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "*node_path"
+            ],
+            "doc": "<p>Double-clicks a tree node.</p>\n<p><code>locator</code> is the locator of the tree or Tree item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>node_path</code> is the path the to node to double-click.</p>\n<p>See examples of the node path in <a href=\"#Select%20Tree%20Node\" class=\"name\">Select Tree Node</a> documentation.</p>",
+            "matched": true,
+            "name": "Double Click Tree Node",
+            "shortdoc": "Double-clicks a tree node.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator1",
+                "locator2"
+            ],
+            "doc": "<p>Drags item with locator <code>locator1</code> to item with locator <code>locator2</code>.</p>\n<p><code>locator1</code> is the locator of the draggable object or draggable item.</p>\n<p><code>locator2</code> is the locator of the target for the draggable object or target item itself.</p>\n<p>Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>",
+            "matched": true,
+            "name": "Drag And Drop",
+            "shortdoc": "Drags item with locator ``locator1`` to item with locator ``locator2``.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "*node_path"
+            ],
+            "doc": "<p>Expands a tree node.</p>\n<p><code>locator</code> is the locator of the tree or Tree item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>node_path</code> is the path the to node to expand.</p>\n<p>See examples of the node path in <a href=\"#Select%20Tree%20Node\" class=\"name\">Select Tree Node</a> documentation.</p>",
+            "matched": true,
+            "name": "Expand Tree Node",
+            "shortdoc": "Expands a tree node.",
+            "tags": []
+        },
+        {
+            "args": [],
+            "doc": "<p>Returns a list of windows belonging to the currently attached application.</p>\n<p>Assumes that an application is attached. See <a href=\"#Attach%20Application%20By%20Name\" class=\"name\">Attach Application By Name</a> and <a href=\"#Attach%20Application%20By%20Id\" class=\"name\">Attach Application By Id</a> for details.</p>",
+            "matched": true,
+            "name": "Get Application Windows",
+            "shortdoc": "Returns a list of windows belonging to the currently attached application.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator"
+            ],
+            "doc": "<p>Returns the state of a check box.</p>\n<p>Returns <span class=\"name\">True</span> if the check box is selected, <span class=\"name\">False</span> if not.</p>\n<p><code>locator</code> is the locator of the check box or CheckBox item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>",
+            "matched": true,
+            "name": "Get Check Box State",
+            "shortdoc": "Returns the state of a check box.",
+            "tags": []
+        },
+        {
+            "args": [],
+            "doc": "<p>Returns a list of windows on the desktop.</p>",
+            "matched": true,
+            "name": "Get Desktop Windows",
+            "shortdoc": "Returns a list of windows on the desktop.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator"
+            ],
+            "doc": "<p>Returns the first item that matches the given locator.</p>\n<p><code>locator</code> is the locator of the item. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>",
+            "matched": true,
+            "name": "Get Item",
+            "shortdoc": "Returns the first item that matches the given locator.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator"
+            ],
+            "doc": "<p>Returns a list of items that match the given <code>locator</code>.</p>\n<p>Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>",
+            "matched": true,
+            "name": "Get Items",
+            "shortdoc": "Returns a list of items that match the given ``locator``.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "column_name",
+                "row_index"
+            ],
+            "doc": "<p>Returns text of a listview cell.</p>\n<p>See <a href=\"#Double%20Click%20Listview%20Cell\" class=\"name\">Double Click Listview Cell</a> for details about arguments <code>locator</code>, <code>column_name</code>, and <code>row_index</code>.</p>",
+            "matched": true,
+            "name": "Get Listview Cell Text",
+            "shortdoc": "Returns text of a listview cell.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "row_index",
+                "column_index"
+            ],
+            "doc": "<p>Returns text of a listview cell at index.</p>\n<p>See <a href=\"#Double%20Click%20Listview%20Cell%20By%20Index\" class=\"name\">Double Click Listview Cell By Index</a> for details about arguments <code>locator</code>, <code>row_index</code>, and <code>column_index</code>.</p>",
+            "matched": true,
+            "name": "Get Listview Cell Text By Index",
+            "shortdoc": "Returns text of a listview cell at index.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "column_name",
+                "cell_text"
+            ],
+            "doc": "<p>Returns a list containing text of each cell in a listview row.</p>\n<p>See <a href=\"#Double%20Click%20Listview%20Row\" class=\"name\">Double Click Listview Row</a> for details about the arguments <code>locator</code>, <code>column_name</code>, and <code>cell_text</code>.</p>",
+            "matched": true,
+            "name": "Get Listview Row Text",
+            "shortdoc": "Returns a list containing text of each cell in a listview row.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "row_index"
+            ],
+            "doc": "<p>Returns text of a listview row as a list.</p>\n<p>See <a href=\"#Double%20Click%20Listview%20Row%20By%20Index\" class=\"name\">Double Click Listview Row By Index</a> for details about arguments <code>locator</code> and <code>row_index</code>.</p>",
+            "matched": true,
+            "name": "Get Listview Row Text By Index",
+            "shortdoc": "Returns text of a listview row as a list.",
+            "tags": []
+        },
+        {
+            "args": [],
+            "doc": "<p>Returns mouse position as tuple (x, y).</p>\n<p>Position is relative to application window top left. If mouse is outside the application window the return values is either negative or bigger than window dimensions.</p>\n<p>Example:</p>\n<table border=\"1\">\n<tr>\n<td>${x}</td>\n<td>${y}</td>\n<td>Get Mouse Location</td>\n</tr>\n</table>",
+            "matched": true,
+            "name": "Get Mouse Location",
+            "shortdoc": "Returns mouse position as tuple (x, y).",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator"
+            ],
+            "doc": "<p>Returns the value of a progress bar.</p>\n<p><code>locator</code> is the locator of the progress bar or ProgressBar item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>",
+            "matched": true,
+            "name": "Get Progressbar Value",
+            "shortdoc": "Returns the value of a progress bar.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator"
+            ],
+            "doc": "<p>Returns the state of a radio button.</p>\n<p>Returns <span class=\"name\">True</span> if the radio button is selected, <span class=\"name\">False</span> if not.</p>\n<p><code>locator</code> is the locator of the radio button or RadioButton item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>",
+            "matched": true,
+            "name": "Get Radio Button State",
+            "shortdoc": "Returns the state of a radio button.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator"
+            ],
+            "doc": "<p>Returns the value of a slider.</p>\n<p><code>locator</code> is the locator of the slider or Slider item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>",
+            "matched": true,
+            "name": "Get Slider Value",
+            "shortdoc": "Returns the value of a slider.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator"
+            ],
+            "doc": "<p>Gets all tab pages and returns them as a list.</p>\n<p><code>locator</code> is the locator of the tab control item or Tab item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>",
+            "matched": true,
+            "name": "Get Tab Pages",
+            "shortdoc": "Gets all tab pages and returns them as a list.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator"
+            ],
+            "doc": "<p>Returns the text of a label.</p>\n<p><code>locator</code> is the locator of the label or Label item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>",
+            "matched": true,
+            "name": "Get Text From Label",
+            "shortdoc": "Returns the text of a label.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator"
+            ],
+            "doc": "<p>Returns the text of a text box.</p>\n<p><code>locator</code> is the locator of the text box or Textbox item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>",
+            "matched": true,
+            "name": "Get Text From Textbox",
+            "shortdoc": "Returns the text of a text box.",
+            "tags": []
+        },
+        {
+            "args": [],
+            "doc": "<p>Returns BusyTimeout value of White.</p>\n<p>See also <a href=\"#Set%20White%20Busy%20Timeout\" class=\"name\">Set White Busy Timeout</a>.</p>",
+            "matched": true,
+            "name": "Get White Busy Timeout",
+            "shortdoc": "Returns BusyTimeout value of White.",
+            "tags": []
+        },
+        {
+            "args": [],
+            "doc": "<p>Returns DoubleClickInterval value of White.</p>\n<p>See also <a href=\"#Set%20White%20Double%20Click%20Interval\" class=\"name\">Set White Double Click Interval</a>.</p>",
+            "matched": true,
+            "name": "Get White Double Click Interval",
+            "shortdoc": "Returns DoubleClickInterval value of White.",
+            "tags": []
+        },
+        {
+            "args": [],
+            "doc": "<p>Returns DragStepCount value of White.</p>\n<p>See also <a href=\"#Set%20White%20Drag%20Step%20Count\" class=\"name\">Set White Drag Step Count</a>.</p>",
+            "matched": true,
+            "name": "Get White Drag Step Count",
+            "shortdoc": "Returns DragStepCount value of White.",
+            "tags": []
+        },
+        {
+            "args": [],
+            "doc": "<p>Returns FindWindowTimeout value of White.</p>\n<p>See also <a href=\"#Set%20White%20Find%20Window%20Timeout\" class=\"name\">Set White Find Window Timeout</a>.</p>",
+            "matched": true,
+            "name": "Get White Find Window Timeout",
+            "shortdoc": "Returns FindWindowTimeout value of White.",
+            "tags": []
+        },
+        {
+            "args": [],
+            "doc": "<p>Returns title of the currently attached window.</p>\n<p>Assumes that a window is attached. See <a href=\"#Attach%20Window\" class=\"name\">Attach Window</a> for details.</p>",
+            "matched": true,
+            "name": "Get Window Title",
+            "shortdoc": "Returns title of the currently attached window.",
+            "tags": []
+        },
+        {
+            "args": [
+                "key"
+            ],
+            "doc": "<p>Hold down a special key.</p>\n<p><code>key</code> must be one of the accepted special keys, see documentation of <a href=\"#Press%20Special%20Key\" class=\"name\">Press Special Key</a></p>",
+            "matched": true,
+            "name": "Hold Special Key",
+            "shortdoc": "Hold down a special key.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "input_value"
+            ],
+            "doc": "<p>Writes text to a textbox.</p>\n<p><code>locator</code> is the locator of the text box or Textbox item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>input_value</code> is the text to write.</p>",
+            "matched": true,
+            "name": "Input Text To Textbox",
+            "shortdoc": "Writes text to a textbox.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator"
+            ],
+            "doc": "<p>Verifies that an item is disabled.</p>\n<p><code>locator</code> is the locator of the item. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>",
+            "matched": true,
+            "name": "Item Should Be Disabled",
+            "shortdoc": "Verifies that an item is disabled.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator"
+            ],
+            "doc": "<p>Verifies that an item is enabled.</p>\n<p><code>locator</code> is the locator of the item. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>",
+            "matched": true,
+            "name": "Item Should Be Enabled",
+            "shortdoc": "Verifies that an item is enabled.",
+            "tags": []
+        },
+        {
+            "args": [
+                "sut_path",
+                "args=None"
+            ],
+            "doc": "<p>Launches an application.</p>\n<p><code>sut_path</code> is the absolute path to the application to launch.</p>\n<p><code>args</code> is a string of arguments to use when starting the application (optional).</p>\n<p>Examples:</p>\n<table border=\"1\">\n<tr>\n<td>Launch Application</td>\n<td>C:/path/to/MyApp.exe</td>\n<td></td>\n<td># Launch without arguments</td>\n</tr>\n<tr>\n<td>Launch Application</td>\n<td>C:/path/to/MyApp.exe</td>\n<td>/o log.txt</td>\n<td># Launch with arguments</td>\n</tr>\n</table>",
+            "matched": true,
+            "name": "Launch Application",
+            "shortdoc": "Launches an application.",
+            "tags": []
+        },
+        {
+            "args": [
+                "key"
+            ],
+            "doc": "<p>Leave a special key that was previously held down.</p>\n<p><code>key</code> must be one of the accepted special keys, see documentation of <a href=\"#Press%20Special%20Key\" class=\"name\">Press Special Key</a></p>",
+            "matched": true,
+            "name": "Leave Special Key",
+            "shortdoc": "Leave a special key that was previously held down.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "expected"
+            ],
+            "doc": "<p>Checks the listbox selection.</p>\n<p>Fails if the selection was not as expected.</p>\n<p><code>locator</code> is the locator of the listbox or ListBox item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>expected</code> is the expected selection value.</p>",
+            "matched": true,
+            "name": "Listbox Selection Should Be",
+            "shortdoc": "Checks the listbox selection.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "expected"
+            ],
+            "doc": "<p>Checks that listbox contains an item with text <code>expected</code>.</p>\n<p>Fails if the listbox does not contain an item with the given text.</p>\n<p><code>locator</code> is the locator of the listbox or ListBox item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>expected</code> is the expected item text.</p>",
+            "matched": true,
+            "name": "Listbox Should Contain",
+            "shortdoc": "Checks that listbox contains an item with text ``expected``.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "expected"
+            ],
+            "doc": "<p>Verifies that a listbox does not contain an item with text <code>expected</code>.</p>\n<p>Fails if the listbox contains an item with the given text.</p>\n<p><code>locator</code> is the locator of the listbox or ListBox item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>expected</code> is the expected item text.</p>",
+            "matched": true,
+            "name": "Listbox Should Not Contain",
+            "shortdoc": "Verifies that a listbox does not contain an item with text ``expected``.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "row_index",
+                "column_index",
+                "expected"
+            ],
+            "doc": "<p>Verifies that the given listview cell contains text <code>expected</code>.</p>\n<p>See <a href=\"#Double%20Click%20Listview%20Cell%20By%20Index\" class=\"name\">Double Click Listview Cell By Index</a> for details about arguments <code>locator</code>, <code>row_index</code>, and <code>column_index</code>.</p>",
+            "matched": true,
+            "name": "Listview Cell At Index Should Contain",
+            "shortdoc": "Verifies that the given listview cell contains text ``expected``.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "row_index",
+                "column_index",
+                "expected"
+            ],
+            "doc": "<p>Verifies that the given listview cell does not contain text <code>expected</code>.</p>\n<p>See <a href=\"#Double%20Click%20Listview%20Cell%20By%20Index\" class=\"name\">Double Click Listview Cell By Index</a> for details about arguments <code>locator</code>, <code>row_index</code>, and <code>column_index</code>.</p>",
+            "matched": true,
+            "name": "Listview Cell At Index Should Not Contain",
+            "shortdoc": "Verifies that the given listview cell does not contain text ``expected``.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "column_name",
+                "row_index",
+                "expected"
+            ],
+            "doc": "<p>Verifies that the given listview cell contains text <code>expected</code>.</p>\n<p>See <a href=\"#Double%20Click%20Listview%20Cell\" class=\"name\">Double Click Listview Cell</a> for details about arguments <code>locator</code>, <code>column_name</code>, and <code>row_index</code>.</p>",
+            "matched": true,
+            "name": "Listview Cell Should Contain",
+            "shortdoc": "Verifies that the given listview cell contains text ``expected``.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "column_name",
+                "row_index",
+                "expected"
+            ],
+            "doc": "<p>Verifies that the given listview cell does not contain text <code>expected</code>.</p>\n<p>See <a href=\"#Double%20Click%20Listview%20Cell\" class=\"name\">Double Click Listview Cell</a> for details about arguments <code>locator</code>, <code>column_name</code>, and <code>row_index</code>.</p>",
+            "matched": true,
+            "name": "Listview Cell Should Not Contain",
+            "shortdoc": "Verifies that the given listview cell does not contain text ``expected``.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "row_index",
+                "column_index",
+                "expected"
+            ],
+            "doc": "<p>Verifies that listview cell text is <code>expected</code>.</p>\n<p>See <a href=\"#Double%20Click%20Listview%20Cell%20By%20Index\" class=\"name\">Double Click Listview Cell By Index</a> for details about arguments <code>locator</code>, <code>row_index</code>, and <code>column_index</code>.</p>",
+            "matched": true,
+            "name": "Listview Cell Text At Index Should Be",
+            "shortdoc": "Verifies that listview cell text is ``expected``.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "row_index",
+                "column_index",
+                "expected"
+            ],
+            "doc": "<p>Verifies that listview cell text is not <code>expected</code>.</p>\n<p>See <a href=\"#Double%20Click%20Listview%20Cell%20By%20Index\" class=\"name\">Double Click Listview Cell By Index</a> for details about arguments <code>locator</code>, <code>row_index</code>, and <code>column_index</code>.</p>",
+            "matched": true,
+            "name": "Listview Cell Text At Index Should Not Be",
+            "shortdoc": "Verifies that listview cell text is not ``expected``.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "column_name",
+                "row_index",
+                "expected"
+            ],
+            "doc": "<p>Verifies that listview cell text is <code>expected</code>.</p>\n<p>See <a href=\"#Double%20Click%20Listview%20Cell\" class=\"name\">Double Click Listview Cell</a> for details about arguments <code>locator</code>, <code>column_name</code>, and <code>row_index</code>.</p>",
+            "matched": true,
+            "name": "Listview Cell Text Should Be",
+            "shortdoc": "Verifies that listview cell text is ``expected``.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "column_name",
+                "row_index",
+                "expected"
+            ],
+            "doc": "<p>Verifies that listview cell text is not <code>expected</code>.</p>\n<p>See <a href=\"#Double%20Click%20Listview%20Cell\" class=\"name\">Double Click Listview Cell</a> for details about arguments <code>locator</code>, <code>column_name</code>, and <code>row_index</code>.</p>",
+            "matched": true,
+            "name": "Listview Cell Text Should Not Be",
+            "shortdoc": "Verifies that listview cell text is not ``expected``.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "row_index",
+                "expected"
+            ],
+            "doc": "<p>Verifies that any cell in the given listview row contains text <code>expected</code>.</p>\n<p>See <a href=\"#Double%20Click%20Listview%20Row%20By%20Index\" class=\"name\">Double Click Listview Row By Index</a> for details about arguments <code>locator</code> and <code>row_index</code>.</p>",
+            "matched": true,
+            "name": "Listview Row At Index Should Contain",
+            "shortdoc": "Verifies that any cell in the given listview row contains text ``expected``.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "row_index",
+                "expected"
+            ],
+            "doc": "<p>Verifies that any cell in the given listview row does not contain text <code>expected</code>.</p>\n<p>See <a href=\"#Double%20Click%20Listview%20Row%20By%20Index\" class=\"name\">Double Click Listview Row By Index</a> for details about arguments <code>locator</code> and <code>row_index</code>.</p>",
+            "matched": true,
+            "name": "Listview Row At Index Should Not Contain",
+            "shortdoc": "Verifies that any cell in the given listview row does not contain text ``expected``.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "column_name",
+                "cell_text",
+                "expected"
+            ],
+            "doc": "<p>Verifies that the given listview row contains text <code>expected</code>.</p>\n<p>See <a href=\"#Double%20Click%20Listview%20Row\" class=\"name\">Double Click Listview Row</a> for details about the arguments <code>locator</code>, <code>column_name</code>, and <code>cell_text</code>.</p>",
+            "matched": true,
+            "name": "Listview Row Should Contain",
+            "shortdoc": "Verifies that the given listview row contains text ``expected``.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "column_name",
+                "cell_text",
+                "expected"
+            ],
+            "doc": "<p>Verifies that the given listview row does not contain text <code>expected</code>.</p>\n<p>See <a href=\"#Double%20Click%20Listview%20Row\" class=\"name\">Double Click Listview Row</a> for details about the arguments <code>locator</code>, <code>column_name</code>, and <code>cell_text</code>.</p>",
+            "matched": true,
+            "name": "Listview Row Should Not Contain",
+            "shortdoc": "Verifies that the given listview row does not contain text ``expected``.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator=None"
+            ],
+            "doc": "<p>Maximizes a window.</p>\n<p><code>locator</code> is the locator of the window or a window object (optional).</p>\n<p>If no <code>locator</code> value is given, the currently attached window is maximized. See <a href=\"#Attach%20Window\" class=\"name\">Attach Window</a> for details about attaching a window and window locator syntax.</p>",
+            "matched": true,
+            "name": "Maximize Window",
+            "shortdoc": "Maximizes a window.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator=None"
+            ],
+            "doc": "<p>Minimizes a window.</p>\n<p><code>locator</code> is the locator of the window or a window object (optional).</p>\n<p>If no <code>locator</code> value is given, the currently attached window is minimized. See <a href=\"#Attach%20Window\" class=\"name\">Attach Window</a> for details about attaching a window and window locator syntax.</p>",
+            "matched": true,
+            "name": "Minimize Window",
+            "shortdoc": "Minimizes a window.",
+            "tags": []
+        },
+        {
+            "args": [
+                "x=None",
+                "y=None"
+            ],
+            "doc": "<p>Clicks mouse at given position.</p>\n<p>Position (<code>x</code>, <code>y</code>) is relative to application window top left. If no coordinates are given it uses current mouse position.</p>",
+            "matched": true,
+            "name": "Mouse Click",
+            "shortdoc": "Clicks mouse at given position.",
+            "tags": []
+        },
+        {
+            "args": [
+                "x=None",
+                "y=None"
+            ],
+            "doc": "<p>Double clicks mouse at given position.</p>\n<p>Position (<code>x</code>, <code>y</code>) is relative to application window top left. If no coordinates are given it uses current mouse position.</p>",
+            "matched": true,
+            "name": "Mouse Double Click",
+            "shortdoc": "Double clicks mouse at given position.",
+            "tags": []
+        },
+        {
+            "args": [
+                "x=None",
+                "y=None"
+            ],
+            "doc": "<p>Presses left mouse button down at given position.</p>\n<p>Position (<code>x</code>, <code>y</code>) is relative to application window top left. If no coordinates are given it uses current mouse position.</p>",
+            "matched": true,
+            "name": "Mouse Left Button Down",
+            "shortdoc": "Presses left mouse button down at given position.",
+            "tags": []
+        },
+        {
+            "args": [
+                "x=None",
+                "y=None"
+            ],
+            "doc": "<p>Releases left mouse button up at given position.</p>\n<p>Position (<code>x</code>, <code>y</code>) is relative to application window top left. If no coordinates are given it uses current mouse position.</p>",
+            "matched": true,
+            "name": "Mouse Left Button Up",
+            "shortdoc": "Releases left mouse button up at given position.",
+            "tags": []
+        },
+        {
+            "args": [
+                "x=None",
+                "y=None"
+            ],
+            "doc": "<p>Right clicks mouse at given position.</p>\n<p>Position (<code>x</code>, <code>y</code>) is relative to application window top left. If no coordinates are given it uses current mouse position.</p>",
+            "matched": true,
+            "name": "Mouse Right Click",
+            "shortdoc": "Right clicks mouse at given position.",
+            "tags": []
+        },
+        {
+            "args": [
+                "x=None",
+                "y=None"
+            ],
+            "doc": "<p>Right double clicks mouse at given position.</p>\n<p>Position (<code>x</code>, <code>y</code>) is relative to application window top left. If no coordinates are given it uses current mouse position.</p>",
+            "matched": true,
+            "name": "Mouse Right Double Click",
+            "shortdoc": "Right double clicks mouse at given position.",
+            "tags": []
+        },
+        {
+            "args": [
+                "x",
+                "y"
+            ],
+            "doc": "<p>Add (<code>x</code>, <code>y</code>) to current mouse location.</p>",
+            "matched": true,
+            "name": "Move Mouse",
+            "shortdoc": "Add (``x``, ``y``) to current mouse location.",
+            "tags": []
+        },
+        {
+            "args": [
+                "keys"
+            ],
+            "doc": "<p>Press a key or keys.</p>\n<p><code>keys</code> is the key or keys to press.</p>\n<p>Example:</p>\n<table border=\"1\">\n<tr>\n<td>Press Keys</td>\n<td>a</td>\n</tr>\n<tr>\n<td>Press Keys</td>\n<td>Text with special characters!</td>\n</tr>\n</table>",
+            "matched": true,
+            "name": "Press Keys",
+            "shortdoc": "Press a key or keys.",
+            "tags": []
+        },
+        {
+            "args": [
+                "key"
+            ],
+            "doc": "<p>Press a special key (Ctrl, tab, alt for example).</p>\n<p><code>key</code> must be one of the following: SHIFT, CONTROL, ALT, LEFT_ALT, RIGHT_ALT, RETURN ,RIGHT, BACKSPACE, LEFT, ESCAPE, TAB, HOME, END, UP, DOWN, INSERT, DELETE, CAPS, F1, F2, F3, F4, F5, F6, F7, F8, F9, F11, F12, F13, F14,F15, F16, F17, F18, F19, F20, F21, F22, F23,F24, PAGEUP, PAGEDOWN, PRINT, PRINTSCREEN, SPACE, NUMLOCK, SCROLL, LWIN, RWIN</p>",
+            "matched": true,
+            "name": "Press Special Key",
+            "shortdoc": "Press a special key (Ctrl, tab, alt for example).",
+            "tags": []
+        },
+        {
+            "args": [
+                "window_title=None"
+            ],
+            "doc": "<p>Restores a window.</p>\n<p><code>locator</code> is the locator of the window or a window object (optional).</p>\n<p>If no <code>locator</code> value is given, the currently attached window is restored. See <a href=\"#Attach%20Window\" class=\"name\">Attach Window</a> for details about attaching a window and window locator syntax.</p>",
+            "matched": true,
+            "name": "Restore Window",
+            "shortdoc": "Restores a window.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "x_offset=0",
+                "y_offset=0"
+            ],
+            "doc": "<p>Right clicks an item.</p>\n<p><code>locator</code> is the locator of the item or object of an item. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p>Optional arguments <code>x_offset</code> and <code>y_offset</code> can be used to define the coordinates to click at, relative to the center of the item.</p>",
+            "matched": true,
+            "name": "Right Click Item",
+            "shortdoc": "Right clicks an item.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "column_name",
+                "row_index",
+                "x_offset=0",
+                "y_offset=0"
+            ],
+            "doc": "<p>Right clicks a listview cell using its column name and row index.</p>\n<p>See <a href=\"#Double%20Click%20Listview%20Cell\" class=\"name\">Double Click Listview Cell</a> for details about arguments <code>locator</code>, <code>column_name</code>, and <code>row_index</code>.</p>",
+            "matched": true,
+            "name": "Right Click Listview Cell",
+            "shortdoc": "Right clicks a listview cell using its column name and row index.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "row_index",
+                "column_index",
+                "x_offset=0",
+                "y_offset=0"
+            ],
+            "doc": "<p>Right clicks a listview cell at index.</p>\n<p>See <a href=\"#Double%20Click%20Listview%20Cell%20By%20Index\" class=\"name\">Double Click Listview Cell By Index</a> for details about arguments <code>locator</code>, <code>row_index</code>, and <code>column_index</code>.</p>",
+            "matched": true,
+            "name": "Right Click Listview Cell By Index",
+            "shortdoc": "Right clicks a listview cell at index.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "column_name",
+                "cell_text",
+                "x_offset=0",
+                "y_offset=0"
+            ],
+            "doc": "<p>Right clicks a listview row that has given text in given column.</p>\n<p>See <a href=\"#Double%20Click%20Listview%20Row\" class=\"name\">Double Click Listview Row</a> for details about the arguments <code>locator</code>, <code>column_name</code>, and <code>cell_text</code>.</p>",
+            "matched": true,
+            "name": "Right Click Listview Row",
+            "shortdoc": "Right clicks a listview row that has given text in given column.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "row_index",
+                "x_offset=0",
+                "y_offset=0"
+            ],
+            "doc": "<p>Right clicks a listview row at index.</p>\n<p>See <a href=\"#Double%20Click%20Listview%20Row%20By%20Index\" class=\"name\">Double Click Listview Row By Index</a> for details about arguments <code>locator</code> and <code>row_index</code>.</p>",
+            "matched": true,
+            "name": "Right Click Listview Row By Index",
+            "shortdoc": "Right clicks a listview row at index.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "*node_path"
+            ],
+            "doc": "<p>Right-clicks a tree node.</p>\n<p><code>locator</code> is the locator of the tree or Tree item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>node_path</code> is the path the to node to right-click.</p>\n<p>See examples of the node path in <a href=\"#Select%20Tree%20Node\" class=\"name\">Select Tree Node</a> documentation.</p>",
+            "matched": true,
+            "name": "Right Click Tree Node",
+            "shortdoc": "Right-clicks a tree node.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "item_index"
+            ],
+            "doc": "<p>Selects a value from combobox by using its index.</p>\n<p><code>locator</code> is the locator of the combobox or ComboBox item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>item_index</code> is the index to be selected.</p>",
+            "matched": true,
+            "name": "Select Combobox Index",
+            "shortdoc": "Selects a value from combobox by using its index.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "value"
+            ],
+            "doc": "<p>Selects a value from a combobox.</p>\n<p><code>locator</code> is the locator of the combobox or ComboBox item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>value</code> is the value to be selected.</p>",
+            "matched": true,
+            "name": "Select Combobox Value",
+            "shortdoc": "Selects a value from a combobox.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "item_index"
+            ],
+            "doc": "<p>Selects an item by its index from a listbox.</p>\n<p><code>locator</code> is the locator of the listbox or ListBox item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>item_index</code> is the index of the item to select.</p>",
+            "matched": true,
+            "name": "Select Listbox Index",
+            "shortdoc": "Selects an item by its index from a listbox.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "value"
+            ],
+            "doc": "<p>Selects a value from a listbox.</p>\n<p><code>locator</code> is the locator of the listbox or ListBox item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>value</code> is the value to be selected.</p>",
+            "matched": true,
+            "name": "Select Listbox Value",
+            "shortdoc": "Selects a value from a listbox.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "column_name",
+                "row_index"
+            ],
+            "doc": "<p>Selects a listview cell.</p>\n<p>See <a href=\"#Double%20Click%20Listview%20Cell\" class=\"name\">Double Click Listview Cell</a> for details about arguments <code>locator</code>, <code>column_name</code>, and <code>row_index</code>.</p>",
+            "matched": true,
+            "name": "Select Listview Cell",
+            "shortdoc": "Selects a listview cell.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "row_index",
+                "column_index"
+            ],
+            "doc": "<p>Selects a listview cell at index.</p>\n<p>See <a href=\"#Double%20Click%20Listview%20Cell%20By%20Index\" class=\"name\">Double Click Listview Cell By Index</a> for details about arguments <code>locator</code>, <code>row_index</code>, and <code>column_index</code>.</p>",
+            "matched": true,
+            "name": "Select Listview Cell By Index",
+            "shortdoc": "Selects a listview cell at index.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "column_name",
+                "cell_text"
+            ],
+            "doc": "<p>Selects a listview row.</p>\n<p>See <a href=\"#Double%20Click%20Listview%20Row\" class=\"name\">Double Click Listview Row</a> for details about the arguments <code>locator</code>, <code>column_name</code>, and <code>cell_text</code>.</p>",
+            "matched": true,
+            "name": "Select Listview Row",
+            "shortdoc": "Selects a listview row.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "row_index"
+            ],
+            "doc": "<p>Selects a listview row at index.</p>\n<p>See <a href=\"#Double%20Click%20Listview%20Row%20By%20Index\" class=\"name\">Double Click Listview Row By Index</a> for details about arguments <code>locator</code> and <code>row_index</code>.</p>",
+            "matched": true,
+            "name": "Select Listview Row By Index",
+            "shortdoc": "Selects a listview row at index.",
+            "tags": []
+        },
+        {
+            "args": [
+                "window_title"
+            ],
+            "doc": "<p>Attaches a modal window.</p>\n<p><code>window_title</code> is the title of the window.</p>",
+            "matched": true,
+            "name": "Select Modal Window",
+            "shortdoc": "Attaches a modal window.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator"
+            ],
+            "doc": "<p>Selects a radio button.</p>\n<p><code>locator</code> is the locator of the radio button or RadioButton item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>",
+            "matched": true,
+            "name": "Select Radio Button",
+            "shortdoc": "Selects a radio button.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "title"
+            ],
+            "doc": "<p>Selects a tab page.</p>\n<p><code>locator</code> is the locator of the tab control item or Tab item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>title</code> is the title of the tab page.</p>",
+            "matched": true,
+            "name": "Select Tab Page",
+            "shortdoc": "Selects a tab page.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "index"
+            ],
+            "doc": "<p>Selects a tab page by index.</p>\n<p><code>locator</code> is the locator of the tab control item or Tab item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>index</code> is integer index the tab page. Indexing starts from 0.</p>",
+            "matched": true,
+            "name": "Select Tab Page By Index",
+            "shortdoc": "Selects a tab page by index.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "*node_path"
+            ],
+            "doc": "<p>Selects a tree node.</p>\n<p><code>locator</code> is the locator of the tree or Tree item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>node_path</code> is the path the to node to select.</p>\n<p>Example tree (tree locator is tree_id):</p>\n<pre>\nroot\n|\n|---parent_node\n|   |\n|   |---child_node\n|   |\n|   |---sibling_node\n|\n|---other parent\n</pre>\n<p>Example usage to select <code>sibling node</code>:</p>\n<table border=\"1\">\n<tr>\n<td>Select Tree Node</td>\n<td>tree_id</td>\n<td>root</td>\n<td>parent_node</td>\n<td>sibling_node</td>\n</tr>\n</table>",
+            "matched": true,
+            "name": "Select Tree Node",
+            "shortdoc": "Selects a tree node.",
+            "tags": []
+        },
+        {
+            "args": [
+                "x",
+                "y"
+            ],
+            "doc": "<p>Sets mouse position to (<code>x</code>, <code>y</code>).</p>\n<p>Position is relative to application window top left.</p>",
+            "matched": true,
+            "name": "Set Mouse Location",
+            "shortdoc": "Sets mouse position to (``x``, ``y``).",
+            "tags": []
+        },
+        {
+            "args": [
+                "path"
+            ],
+            "doc": "<p>Sets the directory where WhiteLibrary stores screenshots and returns the previously set path.</p>\n<p>If the given directory does not exist in the system, it will be created when the first screenshot is taken.</p>\n<p><code>path</code> is the directory path.</p>\n<p>The directory can also be set when the library is imported, see <a href=\"#Importing\" class=\"name\">Importing</a> for details.</p>",
+            "matched": true,
+            "name": "Set Screenshot Directory",
+            "shortdoc": "Sets the directory where WhiteLibrary stores screenshots and returns the previously set path.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "value"
+            ],
+            "doc": "<p>Sets a slider to the specified value.</p>\n<p><code>locator</code> is the locator of the slider or Slider item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>value</code> is the value to set.</p>",
+            "matched": true,
+            "name": "Set Slider Value",
+            "shortdoc": "Sets a slider to the specified value.",
+            "tags": []
+        },
+        {
+            "args": [
+                "timeout"
+            ],
+            "doc": "<p>Sets BusyTimeout for White and returns original value.</p>\n<p><code>timeout</code> is the timeout value as Robot time string.</p>\n<p>Default timeout is 5 seconds.</p>",
+            "matched": true,
+            "name": "Set White Busy Timeout",
+            "shortdoc": "Sets BusyTimeout for White and returns original value.",
+            "tags": []
+        },
+        {
+            "args": [
+                "interval"
+            ],
+            "doc": "<p>Sets DoubleClickInterval for White and returns original value.</p>\n<p>DoubleClickInterval adds delay in double click action between clicks.</p>\n<p><code>interval</code> is the interval value as Robot time string.</p>\n<p>Default interval is 0 milliseconds.</p>",
+            "matched": true,
+            "name": "Set White Double Click Interval",
+            "shortdoc": "Sets DoubleClickInterval for White and returns original value.",
+            "tags": []
+        },
+        {
+            "args": [
+                "value"
+            ],
+            "doc": "<p>Sets DragStepCount for White.</p>\n<p><code>value</code> is the DragStepCount value as integer.</p>\n<p>DragStepCount defines how many steps White uses to move dragged object to the destination. With default value 1 the dragged object is moved instantly in a single step from start to destination.</p>",
+            "matched": true,
+            "name": "Set White Drag Step Count",
+            "shortdoc": "Sets DragStepCount for White.",
+            "tags": []
+        },
+        {
+            "args": [
+                "timeout"
+            ],
+            "doc": "<p>Sets FindWindowTimeout for White and returns original value.</p>\n<p><code>timeout</code> is the timeout value as Robot time string.</p>\n<p>Default timeout is 30 seconds.</p>",
+            "matched": true,
+            "name": "Set White Find Window Timeout",
+            "shortdoc": "Sets FindWindowTimeout for White and returns original value.",
+            "tags": []
+        },
+        {
+            "args": [],
+            "doc": "<p>Takes a screenshot of the whole desktop and inserts screenshot link to log file.</p>\n<p>Returns path to the screenshot file.</p>",
+            "matched": true,
+            "name": "Take Desktop Screenshot",
+            "shortdoc": "Takes a screenshot of the whole desktop and inserts screenshot link to log file.",
+            "tags": []
+        },
+        {
+            "args": [
+                "status"
+            ],
+            "doc": "<p>Disables or enables automatic screenshot capturing on failure.</p>\n<p><code>status</code> is the desired state (True/False) of automatic screenshot on failure. Boolean values are evaluated in the same way as the Robot Framework BuiltIn library does, see <a href=\"http://robotframework.org/robotframework\">the documentation of BuiltIn</a> for details.</p>\n<p>WhiteLibrary automatically takes a screenshot on failure unless it is disabled with this keyword.</p>",
+            "matched": true,
+            "name": "Take Screenshots On Failure",
+            "shortdoc": "Disables or enables automatic screenshot capturing on failure.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator"
+            ],
+            "doc": "<p>Toggles a check box.</p>\n<p><code>locator</code> is the locator of the check box or CheckBox item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>",
+            "matched": true,
+            "name": "Toggle Check Box",
+            "shortdoc": "Toggles a check box.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "expected"
+            ],
+            "doc": "<p><b>DEPRECATED.</b> Use <a href=\"#Button%20Text%20Should%20Be\" class=\"name\">Button Text Should Be</a> or <a href=\"#Button%20Text%20Should%20Contain\" class=\"name\">Button Text Should Contain</a> instead.</p>\n<p>Verifies text in a button.</p>\n<p><code>locator</code> is the locator of the button or Button item object.</p>\n<p><code>expected</code> is the expected button text.</p>",
+            "matched": true,
+            "name": "Verify Button",
+            "shortdoc": "*DEPRECATED.* Use `Button Text Should Be` or `Button Text Should Contain` instead.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "expected"
+            ],
+            "doc": "<p>Verifies state of a check box.</p>\n<p><code>locator</code> is the locator of the check box or CheckBox item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>expected</code> is the expected state (True/False).</p>",
+            "matched": true,
+            "name": "Verify Check Box",
+            "shortdoc": "Verifies state of a check box.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "expected"
+            ],
+            "doc": "<p><b>DEPRECATED</b> Please use Verify Combobox Selection instead.</p>\n<p>Verifies the selected value of a combobox.</p>\n<p><code>locator</code> is the locator of the combobox or ComboBox item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>expected</code> is the expected selection value.</p>",
+            "matched": true,
+            "name": "Verify Combobox Item",
+            "shortdoc": "*DEPRECATED* Please use Verify Combobox Selection instead.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "expected"
+            ],
+            "doc": "<p>Verifies that the combobox value is selected.</p>\n<p><code>locator</code> is the locator of the combobox or ComboBox item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>expected</code> is the expected selection value.</p>",
+            "matched": true,
+            "name": "Verify Combobox Selection",
+            "shortdoc": "Verifies that the combobox value is selected.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "expected"
+            ],
+            "doc": "<p>Verifies text of a label.</p>\n<p><code>locator</code> is the locator of the label or Label item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>expected</code> is the expected text.</p>",
+            "matched": true,
+            "name": "Verify Label",
+            "shortdoc": "Verifies text of a label.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "expected"
+            ],
+            "doc": "<p>Verifies the text of a menu item.</p>\n<p><code>locator</code> is the locator of the menu item or Menu item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>expected</code> is the expected text of the menu item.</p>",
+            "matched": true,
+            "name": "Verify Menu",
+            "shortdoc": "Verifies the text of a menu item.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "expected"
+            ],
+            "doc": "<p>Verifies the value of a progress bar.</p>\n<p><code>locator</code> is the locator of the progress bar or ProgressBar item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>expected</code> is the expected value of the progress bar.</p>",
+            "matched": true,
+            "name": "Verify Progressbar Value",
+            "shortdoc": "Verifies the value of a progress bar.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "expected"
+            ],
+            "doc": "<p>Verifies state of a radio button.</p>\n<p><code>locator</code> is the locator of the radio button or RadioButton item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>expected</code> is the expected state (True/False).</p>",
+            "matched": true,
+            "name": "Verify Radio Button",
+            "shortdoc": "Verifies state of a radio button.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "expected"
+            ],
+            "doc": "<p>Verifies a slider value.</p>\n<p><code>locator</code> is the locator of the slider or Slider item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>expected</code> is the expected value of the slider.</p>",
+            "matched": true,
+            "name": "Verify Slider Value",
+            "shortdoc": "Verifies a slider value.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "expected"
+            ],
+            "doc": "<p>Verifies text in a text box.</p>\n<p><code>locator</code> is the locator of the text box or Textbox item object. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>expected</code> is the expected text of the text box.</p>",
+            "matched": true,
+            "name": "Verify Text In Textbox",
+            "shortdoc": "Verifies text in a text box.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "timeout"
+            ],
+            "doc": "<p>Waits until no items with given locator exist in the attached window.</p>\n<p>Fails if <code>timeout</code> is exceeded.</p>\n<p><code>locator</code> is the locator of the item. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>timeout</code> is the maximum time to wait as a Robot time string.</p>\n<p>See <a href=\"#Waiting%20and%20timeouts\" class=\"name\">Waiting and timeouts</a> for more information about waiting in WhiteLibrary.</p>",
+            "matched": true,
+            "name": "Wait Until Item Does Not Exist",
+            "shortdoc": "Waits until no items with given locator exist in the attached window.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator",
+                "timeout"
+            ],
+            "doc": "<p>Waits until an item with given locator exists in the attached window.</p>\n<p>Fails if <code>timeout</code> is exceeded.</p>\n<p><code>locator</code> is the locator of the item. Locator syntax is explained in <a href=\"#Item%20locators\" class=\"name\">Item locators</a>.</p>\n<p><code>timeout</code> is the maximum time to wait as a Robot time string.</p>\n<p>See <a href=\"#Waiting%20and%20timeouts\" class=\"name\">Waiting and timeouts</a> for more information about waiting in WhiteLibrary.</p>",
+            "matched": true,
+            "name": "Wait Until Item Exists",
+            "shortdoc": "Waits until an item with given locator exists in the attached window.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator=None"
+            ],
+            "doc": "<p>Verifies that a window is maximized.</p>\n<p><code>locator</code> is the locator of the window or a window object (optional).</p>\n<p>If no <code>locator</code> value is given, the status of the currently attached window is verified. See <a href=\"#Attach%20Window\" class=\"name\">Attach Window</a> for details about attaching a window and window locator syntax.</p>",
+            "matched": true,
+            "name": "Window Should Be Maximized",
+            "shortdoc": "Verifies that a window is maximized.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator=None"
+            ],
+            "doc": "<p>Verifies that a window is minimized.</p>\n<p><code>locator</code> is the locator of the window or a window object (optional).</p>\n<p>If no <code>locator</code> value is given, the status of the currently attached window is verified. See <a href=\"#Attach%20Window\" class=\"name\">Attach Window</a> for details about attaching a window and window locator syntax.</p>",
+            "matched": true,
+            "name": "Window Should Be Minimized",
+            "shortdoc": "Verifies that a window is minimized.",
+            "tags": []
+        },
+        {
+            "args": [
+                "locator=None"
+            ],
+            "doc": "<p>Verifies that a window is restored.</p>\n<p><code>locator</code> is the locator of the window or a window object (optional).</p>\n<p>If title is not given, currently attached window status is queried. See <a href=\"#Attach%20Window\" class=\"name\">Attach Window</a> for more details.</p>",
+            "matched": true,
+            "name": "Window Should Be Restored",
+            "shortdoc": "Verifies that a window is restored.",
+            "tags": []
+        },
+        {
+            "args": [
+                "expected"
+            ],
+            "doc": "<p>Verifies that the title of the currently attached window is <code>expected</code>.</p>\n<p>Assumes that a window is attached. See <a href=\"#Attach%20Window\" class=\"name\">Attach Window</a> for details.</p>",
+            "matched": true,
+            "name": "Window Title Should Be",
+            "shortdoc": "Verifies that the title of the currently attached window is ``expected``.",
+            "tags": []
+        },
+        {
+            "args": [
+                "expected"
+            ],
+            "doc": "<p>Verifies that the title of the currently attached window contains text <code>expected</code>.</p>\n<p>Assumes that a window is attached. See <a href=\"#Attach%20Window\" class=\"name\">Attach Window</a> for details.</p>",
+            "matched": true,
+            "name": "Window Title Should Contain",
+            "shortdoc": "Verifies that the title of the currently attached window contains text ``expected``.",
+            "tags": []
+        }
+    ]
+}

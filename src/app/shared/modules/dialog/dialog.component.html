@@ -1,0 +1,12 @@
+<ng-template #dialog let-data let-ref="dialogRef">
+  <nb-card>
+    <nb-card-header>{{ config.title }}</nb-card-header>
+    <nb-card-body>{{ config.content }}</nb-card-body>
+    <nb-card-footer>
+      <button [class]="config.leftBtnStatus"
+        (click)="onLeftBtnClick(ref, config.data)">{{ config.leftBtnLabel }}</button>
+      <button [class]="config.rightBtnStatus"
+        (click)="onRightBtnClick(ref, config.data)">{{ config.rightBtnLabel }}</button>
+    </nb-card-footer>
+  </nb-card>
+</ng-template>
