@@ -11,6 +11,7 @@ import { ManageCustomerModule } from './manage-customer/manage-customer.module';
 import { ManageGuideModule } from './manage-guide/manage-guide-module';
 import { ManageTourModule } from './manage-tour/manage-tour.module';
 import { ManageLocationModule } from './manage-location/manage-location.module';
+import { ContractComponent } from './contract/contract.component';
 import { ContractModule } from './contract/contract.module';
 const PAGES_COMPONENTS = [PagesComponent];
 
@@ -31,7 +32,7 @@ const PAGES_COMPONENTS = [PagesComponent];
     ],
     exports: [PagesComponent],
 
-    declarations: [...PAGES_COMPONENTS, PagesComponent],
+    declarations: [...PAGES_COMPONENTS, PagesComponent, ContractComponent],
     entryComponents: [],
 })
 export class PagesModule {}

@@ -6,12 +6,12 @@ import { ThemeModule } from '../@theme/theme.module';
 import { SharedModule } from '../shared/share.module';
 import { ReportWorkFlowModule } from './report-workflow/report.module';
 import { HomeModule } from './home/home.module';
+import { HopDongModule } from './hop-dong/hop-dong.module';
 import { NbMenuModule } from '@nebular/theme';
 import { ManageCustomerModule } from './manage-customer/manage-customer.module';
 import { ManageGuideModule } from './manage-guide/manage-guide-module';
 import { ManageTourModule } from './manage-tour/manage-tour.module';
 import { ManageLocationModule } from './manage-location/manage-location.module';
-import { ContractModule } from './contract/contract.module';
 const PAGES_COMPONENTS = [PagesComponent];
 
 @NgModule({
@@ -22,7 +22,7 @@ const PAGES_COMPONENTS = [PagesComponent];
         ReportWorkFlowModule,
         LoginModule,
         HomeModule,
-        ContractModule,
+        HopDongModule,
         NbMenuModule,
         ManageLocationModule,
         ManageCustomerModule,
