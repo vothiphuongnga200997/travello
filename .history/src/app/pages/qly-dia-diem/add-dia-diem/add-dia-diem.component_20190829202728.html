@@ -1,0 +1,27 @@
+<nb-card>
+    <nb-card-header
+        >{{ title }}
+        <!-- <button type="button" class="close " aria-label="Close" (click)="dismiss()"> -->
+        <!-- <span aria-hidden="true">&times;</span> -->
+        <!-- </button> -->
+    </nb-card-header>
+    <nb-card-body class="m-3">
+        <div #contentLayout>
+            <div class="mb-3">
+                <h5>Địa điểm</h5>
+                <div class="input-group ">
+                    <input type="text" class="form-control fileName mb-0" placeholder="Nhập tên địa danh" />
+                </div>
+            </div>
+            <div class="row ">
+                <h5>Platform</h5>
+                <nb-select #platForm name="platForm" placeholder="Select Showcase" status="info">
+                    <nb-option value="win7">win7</nb-option>
+                    <nb-option value="win10">win10</nb-option>
+                    <nb-option value="linux">linux</nb-option>
+                    <nb-option value="mac">mac</nb-option>
+                </nb-select>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

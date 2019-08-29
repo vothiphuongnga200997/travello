@@ -1,0 +1,32 @@
+@import '../../pages.component.scss';
+
+@include nb-install-component() {
+    nb-card {
+        min-width: 800px;
+        min-height: 600px;
+    }
+}
+::ng-deep .completer-row {
+    display: inherit;
+    background: blue;
+}
+
+.completer-selected-row {
+    background-color: lightblue;
+    color: yellow;
+}
+
+.completer-row p {
+    position: relative;
+    top: 50%;
+    transform: translateY(50%);
+}
+
+.completer-dropdown-holder {
+    position: absolute;
+    background: red;
+}
+
+.customid {
+    background: blue;
+}

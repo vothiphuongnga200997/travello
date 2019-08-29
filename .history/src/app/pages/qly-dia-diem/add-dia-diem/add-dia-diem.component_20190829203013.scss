@@ -1,0 +1,14 @@
+@import '../../pages.component.scss';
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+    nb-card {
+        min-width: 800px;
+        max-height: 700px;
+    }
+}
+
+.content {
+    height: 600px;
+}
+

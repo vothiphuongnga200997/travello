@@ -1,0 +1,66 @@
+<nb-card>
+    <nb-card-header
+        >{{ title }}
+        <button type="button" class="close " aria-label="Close" (click)="dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </nb-card-header>
+    <nb-card-body>
+        <div class="mb-3">
+            <h5>Tên tour</h5>
+            <div class="input-group ">
+                <input type="text" class="form-control fileName mb-0" placeholder="Tên tour" />
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="row">
+                <div class="col-5">
+                    <h5>Ngày đi</h5>
+                    <div class="input-group ">
+                        <input type="date" class="form-control fileName mb-0" placeholder="Upload your file" />
+                    </div>
+                </div>
+                <div class="col-5">
+                    <h5>Ngày về</h5>
+                    <div class="input-group ">
+                        <input type="date" class="form-control fileName mb-0" placeholder="Upload your file" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="row">
+                <div class="col-5">
+                    <h5>Địa điểm</h5>
+                    <ng2-completer
+                        [(ngModel)]="searchStr"
+                        [datasource]="dataService"
+                        [minSearchLength]="0"
+                        [autofocus]="true"
+                        [minSearchLength]="0"
+                        (selected)="onSelected($event)"
+                    ></ng2-completer>
+                </div>
+            </div>
+            <div *ngFor="let item of listLocations; let i = index;">
+                <h5>Địa điểm {{i}}/h5>
+                <a>{{ item.location }}</a>
+            </div>
+        </div>
+        <h6>Platform</h6>
+        <nb-select #platForm name="platForm" placeholder="Select Showcase" status="info">
+            <nb-option value="win7">win7</nb-option>
+            <nb-option value="win10">win10</nb-option>
+            <nb-option value="linux">linux</nb-option>
+            <nb-option value="mac">mac</nb-option>
+        </nb-select>
+        <div *ngIf="title === 'Edit'" class="d-flex checkbox">
+            <h6>Default</h6>
+            <nb-checkbox status="success" #checkbox class="col-sm-4"> </nb-checkbox>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <button class="float-right " nbButton hero status="info" (click)="dismiss()">Cancel</button>
+        <button class="float-right mr-2 ml-0" nbButton hero status="default">Submit</button>
+    </nb-card-footer>
+</nb-card>

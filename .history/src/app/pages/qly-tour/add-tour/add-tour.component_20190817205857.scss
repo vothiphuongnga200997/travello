@@ -1,0 +1,8 @@
+@import '../../pages.component.scss';
+
+@include nb-install-component() {
+    nb-card {
+        min-width: 800px;
+        min-height: 600px;
+    }
+}

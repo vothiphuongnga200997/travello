@@ -73,7 +73,7 @@
         "msal": "^1.0.0-preview.5",
         "nebular-icons": "1.1.0",
         "ng2-ckeditor": "1.2.2",
-        "ng2-completer": "2.0.8",
+        "ng2-completer": "^2.0.8",
         "ng2-smart-table": "1.4.0",
         "ngx-cron-jobs": "^7.4.10",
         "ngx-echarts": "4.1.1",

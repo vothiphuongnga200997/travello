@@ -1,0 +1,32 @@
+@import '../../pages.component.scss';
+
+@include nb-install-component() {
+    nb-card {
+        min-width: 800px;
+        min-height: 600px;
+    }
+}
+:host >>> .completer-row {
+    display: inherit;
+    background: blue;
+}
+
+:host >>> .completer-selected-row {
+    background-color: lightblue;
+    color: yellow;
+}
+
+:host >>> .completer-row p {
+    position: relative;
+    top: 50%;
+    transform: translateY(50%);
+}
+
+:host >>> .completer-dropdown-holder {
+    position: absolute;
+    background: red;
+}
+
+:host >>> .customid {
+    background: blue;
+}
