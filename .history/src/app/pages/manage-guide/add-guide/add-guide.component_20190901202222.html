@@ -1,0 +1,74 @@
+<nb-card>
+    <nb-card-header
+        >{{ title }}
+        <button type="button" class="close " aria-label="Close" (click)="dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div #contentLayout>
+                <div class="mb-100">
+                    <div class="mt-2">
+                        <h5>Ngày sinh</h5>
+                        <div class="form-group">
+                            <input
+                                type="date"
+                                class="form-control fileName mb-0"
+                                placeholder="Nhập tên địa danh"
+                                formControlName="lastName"
+                                class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
+                            />
+                            <div class="required">
+                                <div *ngIf="submitted && f['lastName'].errors">
+                                    <div *ngIf="f['lastName'].errors.required">Last Name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <h5>Ngày sinh</h5>
+                        <div class="form-group">
+                            <input
+                                type="date"
+                                class="form-control fileName mb-0"
+                                placeholder="Nhập tên địa danh"
+                                formControlName="lastName"
+                                class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
+                            />
+                            <div class="required">
+                                <div *ngIf="submitted && f['lastName'].errors">
+                                    <div *ngIf="f['lastName'].errors.required">Last Name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <h5>Ngày sinh</h5>
+                        <div class="form-group">
+                            <input
+                                type="date"
+                                class="form-control fileName mb-0"
+                                placeholder="Nhập tên địa danh"
+                                formControlName="lastName"
+                                class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
+                            />
+                            <div class="required">
+                                <div *ngIf="submitted && f['lastName'].errors">
+                                    <div *ngIf="f['lastName'].errors.required">Last Name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <button class="float-right " nbButton hero status="info" (click)="dismiss()">Cancel</button>
+                <button class="float-right mr-2 ml-0" nbButton hero status="default" (ngSubmit)="onSubmit()">Submit</button>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>

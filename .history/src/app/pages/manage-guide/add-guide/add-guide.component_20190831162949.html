@@ -1,0 +1,37 @@
+<nb-card>
+    <nb-card-header
+        >{{ title }}
+        <button type="button" class="close " aria-label="Close" (click)="dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </nb-card-header>
+    <nb-card-body class="m-3">
+        <div #contentLayout>
+            <form [formGroup]="registerForm">
+                <div class="mb-3">
+                    <h5>Họ & tên</h5>
+                    <div class="input-group ">
+                        <input
+                            class="form-control fileName mb-0"
+                            placeholder="Nhập tên họ tên"
+                            type="text"
+                            formControlName="lastName"
+                            class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
+                        />
+                    </div>
+                    <h5 class="mt-4">Ngày sinh</h5>
+                    <input type="date" class="form-control fileName mb-0" placeholder="Nhập tên họ tên" />
+                    <h5 class="mt-4">Email</h5>
+                    <input type="email" class="form-control fileName mb-0" id="name" placeholder="Nhập Email" required />
+                    <h5 class="mt-4">Phone</h5>
+                    <input type="number" class="form-control fileName mb-0" placeholder="Nhập số điện thoại" />
+                </div>
+            </form>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <button class="float-right " nbButton hero status="info" (click)="dismiss()">Cancel</button>
+        <button class="float-right mr-2 ml-0" nbButton hero status="default">Submit</button>
+    </nb-card-footer>
+</nb-card>

@@ -1,0 +1,22 @@
+@import '../../pages.component.scss';
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+    nb-card {
+        min-width: 400px;
+        min-height: 400px;
+    }
+}
+.required {
+    height: 10px !important;
+    color: red;
+    font-size: 12px;
+    float: right;
+    padding-top: 5px;
+    width: 100%;
+}
+.footer {
+    margin-top: 150px;
+    border-top: 1px solid #e3e2f3;
+    padding-top: 10px;
+}

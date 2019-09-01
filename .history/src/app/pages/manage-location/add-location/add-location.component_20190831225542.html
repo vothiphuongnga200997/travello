@@ -1,0 +1,43 @@
+<nb-card>
+    <nb-card-header
+        >{{ title }}
+        <button type="button" class="close " aria-label="Close" (click)="dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </nb-card-header>
+    <nb-card-body class="m-3">
+        <div #contentLayout>
+            <div class="mb-3">
+                <h5>Địa điểm</h5>
+                <div class="input-group ">
+                    <input
+                        type="text"
+                        formControlName="lastName"
+                        class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
+                        class="form-control fileName mb-0"
+                        placeholder="Nhập tên địa danh"
+                        [(ngModel)]="location"
+                    />
+                </div>
+
+                <div class="required">
+                    <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                        <div *ngIf="f['lastName'].errors.required">Last Name is required</div>
+                    </div>
+                </div>
+                <h5 class="mt-4">Khu vực</h5>
+                <nb-select #platForm name="platForm" placeholder="Chọn khu vực" status="info" [(selected)]="commonSelectedItem">
+                    <nb-option value="miền bắc">Miền Bắc</nb-option>
+                    <nb-option value="miền trung">Miền Trung</nb-option>
+                    <nb-option value="miền nam">Miền Nam</nb-option>
+                </nb-select>
+                <div class="required">{{ this.requiredArea }}</div>
+            </div>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <button class="float-right " nbButton hero status="info" (click)="dismiss()">Cancel</button>
+        <button class="float-right mr-2 ml-0" nbButton hero status="default" (click)="submit()">Submit</button>
+    </nb-card-footer>
+</nb-card>
