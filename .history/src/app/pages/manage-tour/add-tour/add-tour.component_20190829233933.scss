@@ -1,0 +1,47 @@
+@import '../../pages.component.scss';
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+    nb-card {
+        min-width: 800px;
+        max-height: 700px;
+    }
+}
+
+.content {
+    height: 600px;
+}
+::ng-deep .completer-row {
+    display: inherit;
+    background: rgb(27, 77, 128);
+    color: white !important;
+    margin-right: 2px !important;
+}
+::ng-deep .completer-row:hover {
+    background: rgb(145, 182, 219) !important;
+    color: #01020e !important;
+}
+::ng-deep .completer-row p {
+    position: relative;
+    top: 50%;
+    transform: translateY(50%);
+}
+
+::ng-deep .completer-input {
+    padding: 0.75rem 1.125rem;
+    color: #2a2a2a;
+    background-color: #ffffff;
+    border: 2px solid #dadfe6;
+    font-family: Roboto;
+    border-radius: 0.375rem;
+    height: 33.5px;
+    width: 100%;
+}
+.location {
+    white-space: normal;
+    width: 100px;
+    margin-top: 10px;
+}
+.location a {
+    font-size: 18px;
+}
