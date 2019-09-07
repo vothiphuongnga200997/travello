@@ -1,0 +1,255 @@
+<nb-card>
+    <nb-card-header
+        >{{ title }}
+        <button type="button" class="close " aria-label="Close" (click)="dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </nb-card-header>
+    <nb-card-body class="m-4 pr-0">
+        <form [formGroup]="registerForm">
+            <div #contentLayout>
+                <div class="row mt-3">
+                    <div class="col-11">
+                        <h5>Tên tour</h5>
+                        <div class="form-group">
+                            <input
+                                type="text"
+                                [(ngModel)]="nameTour"
+                                class="form-control fileName mb-0"
+                                placeholder="Nhập tên tour"
+                                formControlName="nameTour"
+                                class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.nameTour.errors }"
+                            />
+                            <div class="required">
+                                <div *ngIf="submitted && f['nameTour'].errors">
+                                    <div class="float-right" *ngIf="f['nameTour'].errors.required">Name Tour is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">
+                        <h5>Điểm khởi hành</h5>
+                        <div class="form-group">
+                            <input
+                                type="text"
+                                [(ngModel)]="departure"
+                                class="form-control fileName mb-0"
+                                placeholder="Nhập điểm khởi hành"
+                                formControlName="departure"
+                                class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.departure.errors }"
+                            />
+                            <div class="required">
+                                <div *ngIf="submitted && f['departure'].errors">
+                                    <div class="float-right" *ngIf="f['departure'].errors.required">Departure is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5 offset-1">
+                        <h5>Thời lượng</h5>
+                        <div class="form-group">
+                            <input
+                                type="text"
+                                [(ngModel)]="duration"
+                                class="form-control fileName mb-0"
+                                placeholder="Nhập thời lượng tour"
+                                formControlName="duration"
+                                class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.duration.errors }"
+                            />
+                            <div class="required">
+                                <div *ngIf="submitted && f['duration'].errors">
+                                    <div class="float-right" *ngIf="f['duration'].errors.required">Duration is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">
+                        <h5>Ngày đi</h5>
+                        <div class="form-group">
+                            <input
+                                type="date"
+                                [(ngModel)]="startDay"
+                                class="form-control fileName mb-0"
+                                formControlName="startDay"
+                                class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.startDay.errors }"
+                            />
+                            <div class="required">
+                                <div *ngIf="submitted && f['startDay'].errors">
+                                    <div class="float-right" *ngIf="f['startDay'].errors.required">Start day is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5 offset-1 ">
+                        <h5>Ngày về</h5>
+                        <div class="form-group">
+                            <input
+                                type="date"
+                                [(ngModel)]="endDay"
+                                class="form-control fileName mb-0"
+                                formControlName="endDay"
+                                class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.endDay.errors }"
+                            />
+                            <div class="required">
+                                <div *ngIf="submitted && f['endDay'].errors">
+                                    <div class="float-right" *ngIf="f['endDay'].errors.required">End day is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">
+                        <h5>Số Lượng</h5>
+                        <div class="form-group">
+                            <input
+                                type="tel"
+                                pattern="[0-9]+"
+                                [(ngModel)]="quantity"
+                                class="form-control fileName mb-0"
+                                placeholder="Nhập số lượng"
+                                formControlName="quantity"
+                                class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.quantity.errors }"
+                            />
+                            <div class="required">
+                                <div *ngIf="submitted && f['quantity'].errors">
+                                    <div class="float-right" *ngIf="f['quantity'].errors.required">Quantity is required</div>
+                                    <div class="float-right" *ngIf="f['quantity'].errors.pattern">Quantity is't in the correct format</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5 offset-1">
+                        <h5>Khách Sạn</h5>
+                        <div class="form-group">
+                            <input
+                                type="text"
+                                [(ngModel)]="hotel"
+                                class="form-control fileName mb-0"
+                                placeholder="Nhập tên khách sạn"
+                                formControlName="hotel"
+                                class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.hotel.errors }"
+                            />
+                            <div class="required">
+                                <div *ngIf="submitted && f['hotel'].errors">
+                                    <div class="float-right" *ngIf="f['hotel'].errors.required">Hotel is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">
+                        <h5>Giá người lớn</h5>
+                        <div class="form-group">
+                            <input
+                                currencyMask
+                                [options]="{ prefix: '', thousands: '.', decimal: ',', suffix: 'đ', precision: 0 }"
+                                type="tel"
+                                type="tel"
+                                [(ngModel)]="adultPrice"
+                                class="form-control fileName mb-0"
+                                placeholder="Nhập số lượng"
+                                formControlName="adultPrice"
+                                class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.adultPrice.errors }"
+                            />
+                            <div class="required">
+                                <div *ngIf="submitted && f['adultPrice'].errors">
+                                    <div class="float-right" *ngIf="f['adultPrice'].errors.required">The adult price is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-5  offset-1">
+                        <h5>Giá trẻ em</h5>
+                        <div class="form-group">
+                            <input
+                                currencyMask
+                                [options]="{ prefix: '', thousands: '.', decimal: ',', suffix: 'đ', precision: 0 }"
+                                type="tel"
+                                [(ngModel)]="childrenPrice"
+                                class="form-control fileName mb-0"
+                                placeholder="Nhập số lượng"
+                                formControlName="childrenPrice"
+                                class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.childrenPrice.errors }"
+                            />
+                            <div class="required">
+                                <div *ngIf="submitted && f['childrenPrice'].errors">
+                                    <div class="float-right" *ngIf="f['childrenPrice'].errors.required">The children price is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-11">
+                        <h5>Hướng dẫn viên</h5>
+
+                        <nb-select
+                            #platForm
+                            name="guide"
+                            placeholder="Select Showcase"
+                            status="info"
+                            formControlName="guide"
+                            [multiple]="true"
+                            (selected)="onSelectedGuide($event)"
+                            [ngClass]="{ 'is-invalid': submitted && f.guide.errors }"
+                            [(ngModel)]="commonSelectedItem"
+                        >
+                            <nb-option *ngFor="let dataOption of getGuides" [value]="dataOption.id">{{ dataOption.fullName }}</nb-option>
+                        </nb-select>
+                        <div class="required">
+                            <div *ngIf="submitted && f['guide'].errors">
+                                <div class="float-right" *ngIf="f['guide'].errors.required">Guide is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-5">
+                        <h5>Địa điểm</h5>
+                        <ng2-completer
+                            [(ngModel)]="searchStr"
+                            [datasource]="dataService"
+                            (selected)="onSelected($event)"
+                            formControlName="location"
+                            placeholder="Chọn địa điểm"
+                            [ngClass]="{ 'is-invalid': submitted && f.location.errors }"
+                        ></ng2-completer>
+                        <div class="required">
+                            <div *ngIf="submitted && f['location'].errors">
+                                <div class="float-right" *ngIf="f['location'].errors.required">Location is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-2" *ngFor="let item of listLocations; let i = index">
+                        <div class="location">
+                            <button type="button" class="close " aria-label="Close" (click)="destroy(i)">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h5>Địa điểm {{ i + 1 }}</h5>
+                            <a>{{ item.location }} </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <button class="float-right " nbButton hero status="info" (click)="dismiss()">Cancel</button>
+                <button class="float-right mr-2 ml-0" nbButton hero status="default" (click)="onSubmit()">Submit</button>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>
