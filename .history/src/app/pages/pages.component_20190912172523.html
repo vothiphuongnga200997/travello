@@ -1,0 +1,6 @@
+<ngx-sample-layout>
+    <nb-menu *ngIf="this.status === 0" [items]="menu"></nb-menu>
+    <nb-menu *ngIf="this.status === 1" [items]="menu1"></nb-menu>
+    <router-outlet></router-outlet>
+</ngx-sample-layout>
+<app-loading-cmp></app-loading-cmp>
