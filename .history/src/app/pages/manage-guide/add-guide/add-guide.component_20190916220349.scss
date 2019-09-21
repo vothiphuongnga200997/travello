@@ -1,0 +1,53 @@
+@import '../../pages.component.scss';
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+    nb-card {
+    }
+}
+.content {
+    min-width: 450px;
+    min-height: 450px;
+}
+.required {
+    height: 10px !important;
+    color: red;
+    font-size: 12px;
+    float: right !important;
+    padding-top: 5px;
+    width: 100%;
+}
+.footer {
+    margin-top: 50px;
+    border-top: 1px solid #e3e2f3;
+    padding-top: 10px;
+}
+.content {
+    margin: 10px;
+}
+nb-card-body {
+    overflow: visible;
+    padding-top: 0;
+
+    > * {
+        margin-top: 1rem;
+    }
+}
+
+.full-name-inputs,
+.validation-checkboxes {
+    display: flex;
+    margin: 0 -0.5rem;
+
+    > * {
+        margin: 0 0.5rem;
+    }
+}
+
+.checkbox-radio {
+    display: flex;
+}
+
+.demo-items {
+    flex: 1 0 33%;
+}

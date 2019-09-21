@@ -1,0 +1,24 @@
+<span class="btn-input" (click)="openInputFile()"> <em class="icon text-info fa fa-upload mr-2 upload-icon"></em></span>
+<input class="inputFile" type="file" multiple (change)="preview(inputFile.files)" #inputFile accept="image/jpeg,image/png" />
+<div class="row">
+    <div class="col-3 mt-2 p-0" *ngFor="let item of images; let i = index">
+        <div class="frame">
+            <button type="button" class="close " aria-label="Close" (click)="destroy(i)">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="image">
+                <img class="file" [src]="item.imgURL" *ngIf="item.imgURL" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="file-field md-form">
+    <div mdbBtn rounded="true" gradient="aqua" size="md" mdbWavesEffect>
+        <span class="pt-1">Choose file</span>
+        <input type="file" mdbFileSelect />
+    </div>
+    <div class="file-path-wrapper mt-2">
+        <input class="file-path" type="text" placeholder="Upload your file" />
+    </div>
+</div>
+<button mdbBtn type="button" rounded="true" gradient="aqua" mdbWavesEffect>Start uploading</button>
