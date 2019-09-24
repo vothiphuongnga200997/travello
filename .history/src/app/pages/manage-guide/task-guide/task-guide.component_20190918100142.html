@@ -1,0 +1,22 @@
+<form [formGroup]="registerForm">
+    <div #contentLayout class="content">
+        <div class="mt-3">
+            <h6>Họ & tên</h6>
+            <div class="form-group">
+                <input
+                    [(ngModel)]="obj"
+                    type="text"
+                    class="form-control fileName mb-0"
+                    placeholder="Nhập tên họ tên"
+                    formControlName="fullName"
+                    class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }"
+                    nbInput
+                    fullWidth
+                    shape="rectangle"
+                    placeholder="Nhập họ & tên"
+                />
+            </div>
+        </div>
+    </div>
+</form>

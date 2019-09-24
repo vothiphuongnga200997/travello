@@ -1,0 +1,27 @@
+.inputFile {
+    display: none;
+}
+.frame {
+    height: 100%;
+    border: 2px solid rgb(70, 67, 67);
+    border-radius: 5px;
+    margin: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    padding: 6px;
+    float: left;
+    text-align: center;
+}
+
+.file {
+    width: auto;
+    height: auto;
+    max-width: 80%;
+    max-height: 80%;
+    margin-top: 20px;
+    margin-left: 15px;
+}
+.file:hover {
+    max-width: 100%;
+    max-height: 100%;
+}

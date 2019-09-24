@@ -1,0 +1,16 @@
+<span class="btn-input" (click)="openInputFile()"> <em class="icon text-info fa fa-upload mr-2 upload-icon"></em></span>
+<input type="text" class="form-control fileName mb-0" placeholder="Upload your file" />
+
+<input class="inputFile" type="file" multiple (change)="preview(inputFile.files)" #inputFile accept="image/jpeg,image/png" />
+<div class="row">
+    <div class="col-3 mt-2 p-0" *ngFor="let item of images; let i = index">
+        <div class="frame">
+            <button type="button" class="close " aria-label="Close" (click)="destroy(i)">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="image">
+                <img class="file" [src]="item.imgURL" *ngIf="item.imgURL" />
+            </div>
+        </div>
+    </div>
+</div>

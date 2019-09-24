@@ -1,0 +1,12 @@
+<h3>Angular 7 Image Preview before Upload:</h3>
+<span style="color:red;" *ngIf="message">{{ message }}</span>
+<input #file type="file" accept="image/*" multiple (change)="preview(file.files)" />
+<div *ngFor="let item of imgURL">
+    <img [src]="item" height="200" *ngIf="imgURL" />
+</div>
+
+<div class="input-group ">
+    <span class="btn-input" (click)="openInputFile()"> <em class="icon text-info fa fa-upload mr-2 upload-icon"></em></span>
+    <input type="text" class="form-control fileName mb-0" placeholder="Upload your file" [value]="fileName" />
+</div>
+<input class="inputFile" type="file" (change)="fileChangeEvent($event)" #inputFile />

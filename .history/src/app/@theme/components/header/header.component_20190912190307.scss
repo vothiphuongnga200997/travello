@@ -1,0 +1,51 @@
+@import '../../styles/themes';
+
+@include nb-install-component() {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    .dropbtn {
+        background-color: #fff;
+        color: white;
+        margin-top: 5px;
+        padding: 0 16px 0 19px;
+        font-size: 16px;
+        border: none;
+        min-width: 30px;
+        cursor: pointer;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+    .version {
+        font-size: 12px;
+    }
+    .dropimg {
+        width: 25px;
+        height: 25px;
+    }
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 30px;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        border: 2px solid #4ca6ff;
+        border-radius: 5px;
+        margin: 2px;
+    }
+
+    .dropdown-content .menu {
+        color: black;
+        padding: 12px 15px;
+        text-decoration: none;
+        text-align: center;
+        white-space: pre;
+    }
+
+    .dropdown-content .menu:hover {
+        background-c@include nb-install-component() {
