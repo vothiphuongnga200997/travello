@@ -1,0 +1,16 @@
+<form class="form" style="width: 900px">
+    <div class="content">
+        <nb-tabset fullWidth (changeTab)="toggleLoadingAnimation()">
+            <nb-tab tabTitle="Tab 1" [nbSpinner]="loading" nbSpinnerStatus="success" nbSpinnerSize="giant">
+                <ng2-smart-table [settings]="settings" [source]="source"> </ng2-smart-table>
+            </nb-tab>
+
+            <nb-tab tabTitle="Tab 2" [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="giant">
+                <p>
+                    Nebular's primary goal is to assemble together and connect the most awesome features and libraries creating an efficient
+                    ecosystem to speed up and simplify the development.
+                </p>
+            </nb-tab>
+        </nb-tabset>
+    </div>
+</form>

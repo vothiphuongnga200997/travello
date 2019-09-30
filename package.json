@@ -73,6 +73,7 @@
         "ngx-cron-jobs": "^7.4.10",
         "ngx-currency": "^2.0.0",
         "ngx-echarts": "^4.0.1",
+        "ngx-password-toggle": "^1.0.3",
         "ngx-socket-io": "2.1.1",
         "ngx-xml2json": "1.0.2",
         "node-sass": "^4.12.0",

@@ -1,0 +1,12 @@
+<nb-card>
+    <form class="form"></form>
+    <nb-tabset fullWidth (changeTab)="toggleLoadingAnimation()">
+        <nb-tab tabTitle="Tab 1" [nbSpinner]="loading" nbSpinnerStatus="success" nbSpinnerSize="giant">
+            <ng2-smart-table [settings]="settings" [source]="source"> </ng2-smart-table>
+        </nb-tab>
+
+        <nb-tab tabTitle="Tab 2" [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="giant">
+            <ng2-smart-table [settings]="settings" [source]="source"> </ng2-smart-table>
+        </nb-tab>
+    </nb-tabset>
+</nb-card>
