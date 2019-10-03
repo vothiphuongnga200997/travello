@@ -1,0 +1,89 @@
+<nb-card>
+    <nb-card-header
+        >{{ title }}
+        <button type="button" class="close " aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </nb-card-header>
+    <nb-card-body>
+        <div>
+            <div #contentLayout>
+                <button type="button" class="btn btn-primary mb-2" (click)="addInfo1()">Add Customer</button>
+
+                <div *ngFor="let data of info1; let i = index">
+                    <div class="row">
+                        <div class="col-6">
+                            <h6>Customer {{ i + 1 }}</h6>
+                        </div>
+                        <div class="col-6 text-right">
+                            <button type="button" class="btn btn-danger btn-sm" (click)="removeInfo1(i)">Remove</button>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <h6>Họ & tên</h6>
+                        <div class="form-group">
+                            <input
+                                [(ngModel)]="data.a1"
+                                type="text"
+                                class="form-control fileName mb-0"
+                                placeholder="Nhập tên họ tên"
+                                class="form-control"
+                                nbInput
+                                fullWidth
+                                shape="rectangle"
+                                placeholder="Nhập họ & tên"
+                            />
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <h6>Ngày sinh</h6>
+                        <div class="form-group">
+                            <input
+                                [(ngModel)]="data.a2"
+                                type="text"
+                                class="form-control fileName mb-0"
+                                class="form-control"
+                                nbInput
+                                fullWidth
+                                shape="rectangle"
+                                placeholder="Nhập ngày sinh"
+                            />
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <h6>Email</h6>
+                        <div class="form-group">
+                            <input
+                                [(ngModel)]="data.phone"
+                                type="tel"
+                                class="form-control"
+                                nbInput
+                                fullWidth
+                                shape="rectangle"
+                                placeholder="Nhập email"
+                            />
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <h6>Địa chỉ</h6>
+                        <div class="form-group">
+                            <input
+                                [(ngModel)]="data.a4"
+                                type="date"
+                                class="form-control fileName mb-0"
+                                placeholder="Nhập tên địa danh"
+                                class="form-control"
+                                nbInput
+                                fullWidth
+                                shape="rectangle"
+                                placeholder="Nhập địa chỉ"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button (click)="logValue()">Submit</button>
+            <div class="footer"></div>
+        </div>
+    </nb-card-body>
+</nb-card>
