@@ -1,0 +1,81 @@
+<div class="row dashboard-container">
+    <nb-accordion>
+        <nb-accordion-item #find>
+            <nb-accordion-item-body>
+                <h5 class="titlemng"><i class="fa fa-search"></i>&nbsp;Tìm kiếm khách hàng</h5>
+                <hr />
+                <div class="form-group row">
+                    <div class="col-4 form-group mb-0">
+                        <label for="idck">Tên khách hàng</label>
+                        <input
+                            [(ngModel)]="name"
+                            status="primary"
+                            type="text"
+                            nbInput
+                            fullWidth
+                            shape="rectangle"
+                            placeholder="Nhập họ & tên"
+                        />
+                    </div>
+                    <div class="col-4 form-group mb-0">
+                        <label for="idck">Mã khách hàng</label>
+                        <input
+                            [(ngModel)]="codeTour"
+                            status="primary"
+                            type="text"
+                            nbInput
+                            fullWidth
+                            shape="rectangle"
+                            placeholder="Mã khách hàng"
+                        />
+                    </div>
+                    <div class="col-4 form-group mb-0">
+                        <label for="idck">Tên tour</label>
+                        <input
+                            [(ngModel)]="nameTour"
+                            status="primary"
+                            type="text"
+                            id="location"
+                            nbInput
+                            fullWidth
+                            shape="rectangle"
+                            placeholder="Tên tour"
+                        />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4 form-group mb-0">
+                        <label for="idck">Số điện thoại</label>
+                        <input
+                            [(ngModel)]="phone"
+                            status="primary"
+                            type="tel"
+                            nbInput
+                            fullWidth
+                            shape="rectangle"
+                            placeholder="Nhập số điện thoại"
+                        />
+                    </div>
+                    <div class="col-4">
+                        <label for="idck">Ngày đi</label>
+                        <input [(ngModel)]="startDay" status="primary" type="date" nbInput fullWidth shape="rectangle" />
+                    </div>
+                    <div class="col-4">
+                        <label for="idck">Ngày về</label>
+                        <input [(ngModel)]="endDay" status="primary" type="date" nbInput fullWidth shape="rectangle" />
+                    </div>
+                </div>
+                <button class="float-right m-2" size="large" nbButton status="info" (click)="filter()">Filter</button>
+            </nb-accordion-item-body>
+        </nb-accordion-item></nb-accordion
+    >
+    <div class="w-100">
+        <nb-card class="own-scroll">
+            <nb-card class="mb-0">
+                <nb-card-body>
+                    <ng2-smart-table [settings]="settings" [source]="source"> </ng2-smart-table>
+                </nb-card-body>
+            </nb-card>
+        </nb-card>
+    </div>
+</div>
