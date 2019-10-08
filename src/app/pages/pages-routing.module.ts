@@ -6,7 +6,6 @@ import { ManageTourComponent } from './manage-tour/manage-tour.component';
 import { ManageGuideComponent } from './manage-guide/manage-guide.component';
 import { ManageLocationComponent } from './manage-location/manage-location.component';
 import { ContractComponent } from './contract/contract.component';
-import { BookTourComponent } from './book-tour/book-tour.component';
 const routes: Routes = [
     {
         path: '',
@@ -35,10 +34,6 @@ const routes: Routes = [
             {
                 path: 'diaDiem',
                 component: ManageLocationComponent,
-            },
-            {
-                path: 'book-tour',
-                component: BookTourComponent,
             },
             {
                 path: '',

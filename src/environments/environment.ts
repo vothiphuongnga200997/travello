@@ -6,6 +6,6 @@ export const environment = {
         JAVASCRIPT_KEY: '',
         MASTER_KEY: '',
         DASHBOARD_URL: '',
-        OAUTH_GOOGLE_CLIENT_ID: '481733480788-0lp86ce2b5s5ehhaqh5m9mdnod8kajtr.apps.googleusercontent.com',
+
     },
 };

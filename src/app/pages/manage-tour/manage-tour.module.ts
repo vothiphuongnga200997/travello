@@ -6,14 +6,12 @@ import { CommonModule } from '@angular/common';
 import { AddTourComponent } from './add-tour/add-tour.component';
 import { HttpModule } from '@angular/http';
 import { Ng2CompleterModule } from 'ng2-completer';
-import { ManageTourComponent, ButtonViewComponent, StatusTextComponent } from './manage-tour.component';
+import { ManageTourComponent, ButtonViewComponent } from './manage-tour.component';
 import { NgxCurrencyModule } from 'ngx-currency';
-import { NbCardModule, NbSelectModule, NbInputModule, NbButtonModule, NbPopoverModule, NbAccordionModule } from '@nebular/theme';
+import { NbCardModule, NbSelectModule, NbInputModule, NbButtonModule } from '@nebular/theme';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { CKEditorModule } from 'ng2-ckeditor';
-import { DialogModule } from '../../shared/modules/dialog/dialog.module';
-import { ExportAsModule } from 'ngx-export-as';
 
 @NgModule({
     imports: [
@@ -31,13 +29,9 @@ import { ExportAsModule } from 'ngx-export-as';
         NbInputModule,
         NbButtonModule,
         CKEditorModule,
-        NbPopoverModule,
-        NbAccordionModule,
-        DialogModule,
-        ExportAsModule,
     ],
     exports: [ManageTourComponent],
-    declarations: [ManageTourComponent, AddTourComponent, ButtonViewComponent, StatusTextComponent],
-    entryComponents: [ManageTourComponent, AddTourComponent, ButtonViewComponent, StatusTextComponent],
+    declarations: [ManageTourComponent, AddTourComponent, ButtonViewComponent],
+    entryComponents: [ManageTourComponent, AddTourComponent, ButtonViewComponent],
 })
 export class ManageTourModule {}

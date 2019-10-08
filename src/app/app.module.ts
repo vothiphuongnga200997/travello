@@ -17,7 +17,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from './shared/share.module';
 import { AngularMonacoEditorModule } from 'angular-monaco-editor';
 import { PagesModule } from './pages/pages.module';
-import { BookTourTourModule } from './pages/book-tour/book-tour.module';
 import {
     NbChatModule,
     NbDatepickerModule,
@@ -40,7 +39,6 @@ import {
         SharedModule.forRoot(),
         AngularMonacoEditorModule.forRoot(),
         PagesModule,
-        BookTourTourModule,
         NbSidebarModule.forRoot(),
         NbMenuModule.forRoot(),
         NbDatepickerModule.forRoot(),

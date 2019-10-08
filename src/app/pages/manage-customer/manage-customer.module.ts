@@ -3,27 +3,16 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { SharedModule } from '../../shared/share.module';
 import { RouterModule } from '@angular/router';
+import { ButtonViewModule } from '../../shared/modules/button-view/button-view.module';
+import { DialogModule } from '../../shared/modules/dialog/dialog.module';
 import { ManageCustomerComponent } from './manage-customer.component';
-import { NbCardModule, NbAccordionModule, NbInputModule, NbButtonModule } from '@nebular/theme';
-import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
-import { ExportAsModule } from 'ngx-export-as';
-
+import { NbCardModule } from '@nebular/theme';
+import { FormComponent } from './form/form.component';
+import { CKEditorModule } from 'ng2-ckeditor';
 @NgModule({
-    imports: [
-        NbInputModule,
-        NbAccordionModule,
-        ReactiveFormsModule,
-        ThemeModule,
-        SharedModule,
-        Ng2SmartTableModule,
-        RouterModule,
-        NbCardModule,
-        NbButtonModule,
-        ExportAsModule,
-    ],
+    imports: [CKEditorModule, ThemeModule, SharedModule, Ng2SmartTableModule, RouterModule, ButtonViewModule, DialogModule, NbCardModule],
     exports: [ManageCustomerComponent],
-    declarations: [ManageCustomerComponent],
-    entryComponents: [ManageCustomerComponent],
+    declarations: [ManageCustomerComponent, FormComponent],
+    entryComponents: [ManageCustomerComponent, FormComponent],
 })
 export class ManageCustomerModule {}

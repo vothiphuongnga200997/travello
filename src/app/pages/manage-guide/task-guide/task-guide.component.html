@@ -1,12 +1,7 @@
-<nb-card>
-    <form class="form"></form>
-    <nb-tabset fullWidth (changeTab)="toggleLoadingAnimation()">
-        <nb-tab tabTitle="Peding" [nbSpinner]="loading" nbSpinnerStatus="success" nbSpinnerSize="giant">
-            <ng2-smart-table [settings]="settings" [source]="source"> </ng2-smart-table>
-        </nb-tab>
+<form class="form">
+    <label for="subject">Subject:</label>
+    <input nbInput id="subject" type="text" />
 
-        <nb-tab tabTitle="End" [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="giant" (click)="getTourEnd()">
-            <ng2-smart-table [settings]="settings" [source]="source1"> </ng2-smart-table>
-        </nb-tab>
-    </nb-tabset>
-</nb-card>
+    <label class="text-label" for="text">Text:</label>
+    <textarea nbInput id="text"></textarea>
+</form>

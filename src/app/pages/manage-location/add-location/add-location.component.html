@@ -9,16 +9,16 @@
         <div #contentLayout>
             <div class="mb-3">
                 <h5>Địa điểm</h5>
-                <div class="input-group">
+                <div class="input-group ">
                     <input type="text" class="form-control fileName mb-0" placeholder="Nhập tên địa danh" [(ngModel)]="location" />
                 </div>
                 <div class="required">{{ this.requiredLocation }}</div>
                 <h5 class="mt-4">Khu vực</h5>
                 <div class="row">
                     <nb-select style="width: 100%" name="platForm" placeholder="Chọn khu vực" [(selected)]="commonSelectedItem">
-                        <nb-option value="miền bắc">Miền Bắc</nb-option>
-                        <nb-option value="miền trung">Miền Trung</nb-option>
-                        <nb-option value="miền nam">Miền Nam</nb-option>
+                        <nb-option value="miền nam">Miền Bắc</nb-option>
+                        <nb-option value="miền bắc">Miền Trung</nb-option>
+                        <nb-option value="miền trung">Miền Nam</nb-option>
                     </nb-select>
                     <div class="required">{{ this.requiredArea }}</div>
                 </div>

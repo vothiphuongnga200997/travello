@@ -2,9 +2,6 @@
 @import '../../pages/pages.component.scss';
 @import '~@nebular/theme/styles/global/breakpoints';
 @import '~bootstrap/scss/mixins/breakpoints';
-@import url(../../../../css/bootstrap.min.css);
-@import url(../../../../css/animate.css);
-
 .infinite-cards {
     nb-card {
         &.own-scroll {
@@ -30,7 +27,6 @@ nb-select {
     border-radius: 5px;
     padding: 15px;
     margin-bottom: 10px;
-    transition-delay: 3s;
 }
 .contentform {
     line-height: 35px;
@@ -92,5 +88,3 @@ a {
         }
     }
 }
-
-//status

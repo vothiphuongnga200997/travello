@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import * as Parse from 'parse';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Utils } from '../utils';
-import { environment } from '../../../environments/environment';
 
 declare var gapi: any;
 
@@ -57,7 +56,10 @@ export class AuthService {
      */
     public async login(userName: string, password: string): Promise<Parse.User> {
         try {
+            console.log('login');
             let user = await Parse.User.logIn(userName, password);
+            console.log('login');
+            this.authenticatedSubject.next(true);
             return user;
         } catch (e) {
             if (e) {
@@ -73,39 +75,11 @@ export class AuthService {
      * @returns Promise
      */
     public async logout() {
+        // this.authenticatedSubject.next(false);
         try {
             return await Parse.User.logOut();
         } catch (ex) {
             return true;
         }
-    }
-    loginWithGoogle(googleLoginButtonId: any, success: Function, error: Function) {
-        let self = this;
-        gapi.load('auth2', function() {
-            self.auth2 = gapi.auth2.init({
-                client_id: environment.config.OAUTH_GOOGLE_CLIENT_ID,
-                cookiepolicy: 'single_host_origin',
-                scope: 'https://www.googleapis.com/auth/plus.login',
-            });
-            self.auth2.attachClickHandler(document.getElementById(googleLoginButtonId), {}, async function(loggedInUser: any) {
-                let userInfo = loggedInUser.getBasicProfile();
-                let authData = {
-                    id: loggedInUser.getId(),
-                    access_token: loggedInUser.getAuthResponse().id_token,
-                    expirationDate: new Date(loggedInUser.Zi.expires_at).toJSON(),
-                };
-                try {
-                    let user = await new Parse.User()._linkWith('google', { authData: authData });
-                    user.set('fullName', userInfo.getFamilyName() + ' ' + userInfo.getGivenName());
-                    user.set('email', userInfo.U3);
-                    user.set('status', -1);
-                    await user.save();
-                    await Parse.User.become(user.get('sessionToken'));
-                    success(user);
-                } catch (ex) {
-                    error(ex);
-                }
-            });
-        });
     }
 }

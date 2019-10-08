@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { ParseService } from './parse.service';
 import * as Parse from 'parse';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { combineAll } from 'rxjs/operators';
 
 @Injectable()
 export class TourService {
     dataUpdate: Array<any> = [];
     infoTour: Array<any> = [];
-
-    data: Array<any> = [];
-
+    guide: Array<any> = [];
+    location: Array<any> = [];
     constructor(public parseService: ParseService, private http: HttpClient) {
         console.log('tour Service');
     }
@@ -19,8 +20,6 @@ export class TourService {
         let objTour = new tour();
         let dataSave: any = {};
         let dataImg: any = {};
-        let guide: Array<any> = [];
-        let location: Array<any> = [];
         dataSave.nameTour = data.nameTour;
         dataSave.duration = data.duration;
         dataSave.quantity = data.quantity;
@@ -32,23 +31,22 @@ export class TourService {
         dataSave.startDay = data.startDay;
         dataSave.itinerary = data.itinerary;
         dataSave.code = data.code;
-        if (data)
-            if (data.guide) {
-                for (let i = 0; i < data.guide.length; i++) {
-                    let classGuide = Parse.Object.extend('guide');
-                    guide[i] = classGuide.createWithoutData(data.guide[i].id);
-                }
+        if (data.guide) {
+            for (let i = 0; i < data.guide.length; i++) {
+                let classGuide = Parse.Object.extend('guide');
+                this.guide[i] = classGuide.createWithoutData(data.guide[i].id);
             }
+        }
         for (let i = 0; i < data.location.length; i++) {
             let classLocation = Parse.Object.extend('location');
-            location[i] = classLocation.createWithoutData(data.location[i].id);
+            this.location[i] = classLocation.createWithoutData(data.location[i].id);
         }
         try {
             let result = await objTour.save(dataSave);
             let guideRelation = result.relation('guide');
             let locationRelation = result.relation('locations');
-            guideRelation.add(guide);
-            locationRelation.add(location);
+            guideRelation.add(this.guide);
+            locationRelation.add(this.location);
             result.save();
             let tourObject = tour.createWithoutData(result.id);
             dataImg.idTour = tourObject;
@@ -56,133 +54,110 @@ export class TourService {
                 let objImg = new image();
                 let name = data.image[i].name;
                 dataImg.image = new Parse.File(name, data.image[i].file);
-                dataImg.nameFile = name;
                 await objImg.save(dataImg);
             }
         } catch (ex) {}
     }
-    async editTour(data) {
-        let guide: Array<any> = [];
-        let location: Array<any> = [];
 
-        let tour = Parse.Object.extend('tour');
-
-        let objTour = new tour();
-        let dataSave: any = {};
-        let dataImg: any = {};
-        dataSave.nameTour = data.nameTour;
-        dataSave.duration = data.duration;
-        dataSave.quantity = data.quantity;
-        dataSave.departure = data.departure;
-        dataSave.adultPrice = data.adultPrice;
-        dataSave.childrenPrice = data.childrenPrice;
-        dataSave.hotel = data.hotel;
-        dataSave.endDay = data.endDay;
-        dataSave.startDay = data.startDay;
-        dataSave.itinerary = data.itinerary;
-        dataSave.code = data.code;
-        dataSave.objectId = data.id;
-        if (data)
-            if (data.guide) {
-                for (let i = 0; i < data.guide.length; i++) {
-                    let classGuide = await Parse.Object.extend('guide');
-                    guide[i] = await classGuide.createWithoutData(data.guide[i].id);
-                }
-            }
-
-        for (let i = 0; i < data.location.length; i++) {
-            let classLocation = await Parse.Object.extend('location');
-            location[i] = await classLocation.createWithoutData(data.location[i].id);
-        }
-        try {
-            let result = await objTour.save(dataSave);
-            let guideRelation = result.relation('guide');
-            let locationRelation = result.relation('locations');
-            guideRelation.add(guide);
-            locationRelation.add(location);
-            result.save();
-
-            let image = Parse.Object.extend('imagesTour');
-            let tourObject = tour.createWithoutData(result.id);
-            dataImg.idTour = tourObject;
-            for (let i = 0; i < data.image.length; i++) {
-                if (data.image[i].file.size) {
-                    let objImg = new image();
-                    dataImg.image = new Parse.File(data.image[i].name, data.image[i].file);
-                    dataImg.nameFile = data.image[i].name;
-                    await objImg.save(dataImg);
-                } else {
-                    let objImg = new image();
-                    dataImg.image = data.image[i].file;
-                    dataImg.nameFile = data.image[i].name;
-                    await objImg.save(dataImg);
-                }
-            }
-        } catch (ex) {}
-    }
-    async deleteGuide(idTour, objGuide) {
+    async getTour() {
+        // let user = Parse.User.current();
+        // console.log('user', user);
         let tour = Parse.Object.extend('tour');
         const query = new Parse.Query(tour);
-        query.equalTo('objectId', idTour);
-        let result = await query.first();
-
-        let relation = await result.relation('guide');
-        relation.remove(objGuide);
-        result.save();
+        let result = await query.find();
+        // console.log(result);
+        // let relation = result[0].relation('guide');
+        // let i = relation.query().find();
         return result;
+
+        // console.log(query);
+        // let relation = query.relation('guide');
+        // console.log(relation);
+        // let i = relation.query().find();
+        // console.log(i);
+        // const tour = Parse.Object.extend('tour');
+        // const query = new Parse.Query(tour);
+        // let relation = tour.relation('guide');
+        // query.include('guide');
+        // relation.query().find({
+        //     success: function(list) {
+        //         console.log(list);
+        //     },
+        // });
+        // try {
+        //     let result = await query.find();
+        //     console.log(result);
+        //     return result;
+        // } catch (ex) {
+        //     throw ex;
+        // }
     }
-    async deleteLocation(idTour, objTour) {
-        let tour = Parse.Object.extend('tour');
+    async getInfo(res) {
+        const tour = Parse.Object.extend('infoTour');
         const query = new Parse.Query(tour);
-        query.equalTo('objectId', idTour);
-        let result = await query.first();
-
-        let relation = await result.relation('locations');
-        await relation.remove(objTour);
-        await result.save();
-        return result;
-    }
-    async deleteImg(objTour) {
-        let image = Parse.Object.extend('imagesTour');
-        const query = new Parse.Query(image);
-        query.equalTo('idTour', objTour);
-        let resultImg = await query.find();
-        for (let list of resultImg) {
-            await list.destroy();
-        }
-    }
-    async deleteTour(obj) {
+        query.equalTo('objTour', res);
         try {
-            let i = await obj.destroy();
-            await this.deleteImg(obj);
-            return i;
+            let result = await query.find();
+            if (result) {
+                for (let i = 0; i < result.length; i++) {
+                    if (result[i].attributes.objLocation) {
+                        this.infoTour.unshift({
+                            objectIdLocation: result[i].attributes.objLocation.id,
+                            location: result[i].attributes.objLocation.attributes.location,
+                        });
+                    }
+                    if (result[i].attributes.objGuide) {
+                        this.infoTour.unshift({
+                            objectIdGuide: result[i].attributes.objGuide.id,
+                            fullName: result[i].attributes.objGuide.attributes.fullName,
+                        });
+                    }
+                    if (result[i].attributes.image) {
+                        this.infoTour.unshift({ image: result[i].attributes.image });
+                    }
+                }
+                return this.infoTour;
+            }
         } catch (ex) {
             throw ex;
         }
     }
-    async getGuide(obj) {
-        let guideRelation = obj.relation('guide');
-        let guide = guideRelation.query().find();
-        return guide;
+    async editGuide(id: string, fullName: string, email: string, address: string, phone: any, birthday: any) {
+        let Location = Parse.Object.extend('guide');
+        let obj = new Location();
+        let dataSave: any = {};
+        dataSave.fullName = fullName;
+        dataSave.email = email;
+        dataSave.phone = parseFloat(phone.toString());
+        dataSave.address = address;
+        dataSave.birthday = birthday;
+        if (id) {
+            dataSave.objectId = id;
+            let result = await obj.save(dataSave);
+            return result;
+        }
     }
-    async getLocation(obj) {
-        let locationRelation = obj.relation('locations');
-        let location = locationRelation.query().find();
-        return location;
-    }
-    async getImage(obj) {
-        let image = Parse.Object.extend('imagesTour');
-        const query = new Parse.Query(image);
-        query.equalTo('idTour', obj);
+    async delete(id) {
+        const Guide = Parse.Object.extend('guide');
+        const query = new Parse.Query(Guide);
+        query.equalTo('objectId', id);
         let result = await query.find();
-        return result;
+        try {
+            await result[0].destroy();
+            return true;
+        } catch (ex) {
+            throw ex;
+        }
     }
-    async getTour() {
-        let tour = Parse.Object.extend('tour');
+    async findTour(id) {
+        const tour = Parse.Object.extend('infoTour');
         const query = new Parse.Query(tour);
-        query.include('guide');
-        query.descending('createdAt');
-        let result = await query.find();
-        return result;
+        query.equalTo('objGuide', id);
+        try {
+            let result = await query.find();
+            console.log(result);
+            return result;
+        } catch (ex) {}
     }
+    task() {}
 }

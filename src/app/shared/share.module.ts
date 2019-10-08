@@ -13,8 +13,6 @@ import { ToastrService } from './services';
 import { LocationService } from './services/location.service';
 import { GuideService } from './services/guide.service';
 import { TourService } from './services/tour.service';
-import { ContractService } from './services/contract.service';
-
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
@@ -37,7 +35,6 @@ export class SharedModule {
                 LocationService,
                 GuideService,
                 TourService,
-                ContractService,
             ],
         };
     }

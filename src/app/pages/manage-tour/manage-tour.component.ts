@@ -1,40 +1,10 @@
-import { Component, OnInit, Output, EventEmitter, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { LocalDataSource, ViewCell } from 'ng2-smart-table';
 import { ToastrService } from '../../shared/services';
 import { NbDialogService, NbWindowService } from '@nebular/theme';
 import { AddTourComponent } from './add-tour/add-tour.component';
 import { TourService } from '../../shared/services/tour.service';
-import * as moment from 'moment';
-import { LoadingService } from '../../shared/services/loading.service';
-import { ButtonStatusEnum, DialogInterface } from '../../shared/interface';
-import { DialogComponent } from '../../shared/modules/dialog/dialog.component';
-import { ExportAsService, ExportAsConfig, SupportedExtensions } from 'ngx-export-as';
-
-// Status-text
-@Component({
-    moduleId: module.id,
-    selector: 'status-text',
-    template: `
-        <div>
-            <a class="d-flex justify-content-center text-success" *ngIf="value === 'pending'"> Pending </a>
-            <a class="d-flex justify-content-center text-warning" *ngIf="value === 'done'"> Done </a>
-        </div>
-    `,
-})
-export class StatusTextComponent implements ViewCell, OnInit {
-    renderValue: string;
-
-    @Input() value: string | number;
-    @Input() rowData: any;
-
-    ngOnInit() {
-        this.renderValue = this.value.toString().toUpperCase();
-    }
-}
-// Status-text
-
-// Button view
 @Component({
     moduleId: module.id,
     selector: 'button-view',
@@ -60,8 +30,6 @@ export class ButtonViewComponent implements ViewCell, OnInit {
         this.save.emit(this.rowData);
     }
 }
-// Button view
-
 @Component({
     selector: 'ngx-manage-tour',
     templateUrl: './manage-tour.component.html',
@@ -73,24 +41,17 @@ export class ManageTourComponent implements OnInit {
     metricSource: SafeResourceUrl;
     statisticsSource: SafeResourceUrl;
     infoTour: Array<any> = [];
-    public data: any;
-    status: string;
-    dialogConfig: DialogInterface = {
-        title: '',
-        content: '',
-    };
-    @ViewChild('confirmDeleteDialog', { static: true }) deleteDialog: DialogComponent;
 
-    @ViewChild('item', { static: true }) accordion;
-
-    toggle() {
-        this.accordion.toggle();
-    }
     settings = {
-        actions: {
-            add: false,
+        // actions: {
+        //      add: false,
+        // },
+        add: {
+            addButtonContent: '<i class="nb-plus"></i>',
+            createButtonContent: '<i class="nb-checkmark"></i>',
+            cancelButtonContent: '<i class="nb-close"></i>',
+            confirmCreate: true,
         },
-
         edit: {
             editButtonContent: '<i class="nb-edit"></i>',
             saveButtonContent: '<i class="nb-checkmark"></i>',
@@ -101,168 +62,101 @@ export class ManageTourComponent implements OnInit {
             deleteButtonContent: '<i class="nb-trash"></i>',
             confirmDelete: true,
         },
-        mode: 'external',
-
         columns: {
-            code: {
-                title: 'Mã tour',
+            id: {
+                title: 'ID',
                 type: 'string',
                 editable: false,
             },
             name: {
-                title: 'Tên tour',
+                title: 'Tên Tour',
                 type: 'string',
                 editable: true,
             },
-            quantity: {
-                title: 'Số chổ',
-                type: 'number',
+            date: {
+                title: 'Trạng thái',
+                type: 'string',
                 editable: true,
             },
-            empty: {
-                title: 'Đã đặt',
-                type: 'number',
+            location: {
+                title: 'Địa điễm',
+                type: 'string',
                 editable: true,
             },
             startDay: {
                 title: 'Ngày khởi hành',
-                type: 'string',
+                type: 'date',
                 editable: true,
             },
-            status: {
-                title: 'Trạng thái',
-                type: 'custom',
-                renderComponent: StatusTextComponent,
+            endDay: {
+                title: 'Ngày kết thúc',
+                type: 'date',
+                editable: true,
+            },
+            guide: {
+                title: 'Hướng dẩn viên',
+                type: 'string',
+                editable: true,
             },
             itinerary: {
                 title: 'Chi tiết',
                 type: 'custom',
                 renderComponent: ButtonViewComponent,
                 onComponentInitFunction: instance => {
-                    instance.save.subscribe(row => {});
+                    instance.save.subscribe(row => {
+                        console.log('detail');
+                    });
                 },
                 filter: false,
             },
         },
     };
     source: LocalDataSource = new LocalDataSource();
-    config: ExportAsConfig = {
-        type: 'pdf',
-        elementId: 'mytable',
-        options: {
-            jsPDF: {
-                orientation: 'landscape',
-            },
-        },
-    };
-    constructor(
-        private exportAsService: ExportAsService,
 
-        private loadingService: LoadingService,
-        private dialogService: NbDialogService,
-        private toastrService: ToastrService,
-        private tourService: TourService,
-    ) {
+    constructor(private dialogService: NbDialogService, private toastrService: ToastrService, private tourService: TourService) {
         this.getTour();
     }
 
     ngOnInit() {}
-    exportAs(type: SupportedExtensions, opt?: string) {
-        this.config.type = type;
-        if (opt) {
-            this.config.options.jsPDF.orientation = opt;
-        }
-        this.exportAsService.save(this.config, 'myFile').subscribe(() => {});
-    }
+
     async add() {
         this.dialogService
             .open(AddTourComponent, {
                 context: {
                     title: 'Add new tour',
                 },
-                closeOnBackdropClick: false,
             })
             .onClose.subscribe(async data => {
                 try {
                     if (data) {
                         let i = await this.tourService.addTour(data);
-                        this.loadingService.start();
                         await this.getTour();
-                        this.loadingService.stop();
-                        this.toastrService.success(`Add Tour Success`, 'Create success');
+                        this.toastrService.success(`Add Location Success`, 'Create success');
+                        console.log(i);
                     }
                 } catch (ex) {
                     this.toastrService.error(ex, 'Create error');
                 }
             });
     }
-    formatDate(dateString: string) {
-        let momentObj = moment(dateString);
-        return momentObj.format('HH:mm DD/MM/YYYY');
-    }
     async getTour() {
-        this.data = await this.tourService.getTour();
-        let dateNow = new Date();
-        if (this.data && this.data) {
-            let dataSources = this.data.map(res => {
-                if (res.get('endDay') < dateNow) this.status = 'done';
-                else this.status = 'pending';
-                return {
-                    res: res,
-                    id: res.id,
-                    code: res.get('code'),
-                    name: res.get('nameTour'),
-                    startDay: this.formatDate(res.get('startDay')) + '-' + this.formatDate(res.get('endDay')),
-                    quantity: res.get('quantity'),
-                    status: this.status,
-                };
-            });
-            this.source.load(dataSources);
-        }
-    }
-    edit(event) {
-        this.dialogService
-            .open(AddTourComponent, {
-                context: {
-                    title: 'Edit',
-                    obj: event.data,
-                },
-            })
-            .onClose.subscribe(async data => {
-                if (data) {
-                    try {
-                        let i = await this.tourService.editTour(data);
-                        await this.getTour();
-                        this.toastrService.success(`Update Tour Success`, 'Update success');
-                    } catch (ex) {
-                        this.toastrService.error(ex, `Update Error`);
-                    }
-                }
-            });
-    }
-    delete(event) {
-        this.dialogConfig = {
-            title: 'Delete Tour',
-            content: `Do you want to delete tour ${event.data.code}?`,
-            data: event.data,
-            rightBtnLabel: 'OK',
-            leftBtnLabel: 'Cancel',
-            rightBtnStatus: ButtonStatusEnum.Info,
-            leftBtnStatus: ButtonStatusEnum.Hint,
-        };
-        this.deleteDialog.open();
-    }
-    async onDelete(event) {
-        try {
-            let result = await this.tourService.deleteTour(event.res);
-            if (result) {
-                this.toastrService.success(`Delete tour ${event.code} success`, `Delete tour`);
-                this.getTour();
-            } else {
-                this.toastrService.error(`Delete tour ${event.code} fail`, `Delete tour`);
-            }
-        } catch (error) {
-            this.toastrService.error(error, `Delete tour`);
-        }
+        let i = await this.tourService.getTour();
+        console.log(i);
+        // if (i && i.length) {
+        //     let dataSources = i.map(res => {
+        //         // let info = this.tourService.getInfo(res);
+        //         // this.infoTour.unshift({
+        //         //     image: info.get('obj')
+        //         // })
+        //         // console.log(info);
+        //         return {
+        //             id: res.id,
+        //             name: res.get('nameTour'),
+        //             startDay: res.get('startDay'),
+        //             endDay: res.get('endDay'),
+        //         };
+        //     });
+        //     this.source.load(dataSources);
+        // }
     }
 }
