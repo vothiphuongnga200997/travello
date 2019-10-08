@@ -1,0 +1,68 @@
+<nb-card>
+    <div class="containermng border border-crawler ">
+        <button type="button" class="btn-pages" (click)="toggle()"><i class="fas fa-filter"></i> Filter</button>
+        <button type="reset" class="btn-pages"><i class="fas fa-sync-alt"></i> Refresh</button>
+        <button type="button" class="btn-pages" (click)="addCustom()"><i class="fas fa-plus"></i> Add custom</button>
+
+        <nb-accordion>
+            <nb-accordion-item #find>
+                <nb-accordion-item-body>
+                    <form class="from col-auto" #filter="ngForm">
+                        <h5 class="titlemng"><i class="fa fa-search"></i>&nbsp;Tìm kiếm tour</h5>
+                        <hr />
+                        <div class="form-group row">
+                            <div class="col-4 form-group mb-0">
+                                <label for="idck">Tên tour</label>
+                                <input
+                                    status="primary"
+                                    type="text"
+                                    id="nameTour"
+                                    nbInput
+                                    fullWidth
+                                    shape="rectangle"
+                                    placeholder="Nhập họ & tên"
+                                />
+                            </div>
+                            <div class="col-4 form-group mb-0">
+                                <label for="idck">Địa điểm</label>
+                                <input
+                                    status="primary"
+                                    type="text"
+                                    id="location"
+                                    nbInput
+                                    fullWidth
+                                    shape="rectangle"
+                                    placeholder="Nhập họ & tên"
+                                />
+                            </div>
+                        </div>
+                    </form>
+                </nb-accordion-item-body> </nb-accordion-item
+        ></nb-accordion>
+    </div>
+    <nb-accordion multi>
+        <nb-accordion-item *ngFor="let i of this.contract">
+            <nb-accordion-item-header>
+                {{ i.representative }}/
+                {{ i.tour }}
+                ({{ i.id }})
+                <div class="price">
+                    <a class="text-primary"> VNĐ: </a>
+                    {{ i.price | number }}đ <a class="text-success  "> Quantity: </a> {{ i.quantity }}
+                    <a (click)="delete(i.id)"> <i class="fas fa-trash"></i></a>
+                </div>
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+                <div class="row m-2">
+                    <div class="col-6" *ngFor="let n of i.tourist">
+                        <div class="text-info">Họ & tên: {{ n.name }}</div>
+                        <div class="text-info">Số điện thoại: {{ n.phonecustomer }}</div>
+                        <div class="text-info">Địa chỉ: {{ n.address }}</div>
+                        <div class="text-info">Ngày sinh: {{ n.birthday }}</div>
+                    </div>
+                </div>
+            </nb-accordion-item-body>
+        </nb-accordion-item>
+    </nb-accordion>
+</nb-card>
+<dialog-cmp #confirmDeleteDialog [config]="dialogConfig" (rightBtnEventEmitter)="onDelete($event)"></dialog-cmp>

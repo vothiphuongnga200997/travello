@@ -1,0 +1,18 @@
+<form method="POST" name="login" id="login" onsubmit="return validateForm()">
+    <h2>Login</h2>
+    <label>
+        <p class="label-txt">Username</p>
+        <input type="text" name="user" id="user" [(ngModel)]="username" />
+        <div class="line-box">
+            <div class="line"></div>
+        </div>
+    </label>
+    <label>
+        <p class="label-txt">Password</p>
+        <input type="password" name="pass" id="pass" [(ngModel)]="password" passwordToggle required />
+        <div class="line-box">
+            <div class="line"></div>
+        </div>
+    </label>
+    <a class="btn-flip" data-back="Submit" data-front="Login" (click)="onLoginSubmit()"></a>
+</form>

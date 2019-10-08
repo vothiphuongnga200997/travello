@@ -1,0 +1,155 @@
+@import '../../@theme/styles/themes.scss';
+@import '../../pages/pages.component.scss';
+@import '~@nebular/theme/styles/global/breakpoints';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import url(../../../../css/bootstrap.min.css);
+@import url(../../../../css/animate.css);
+
+.infinite-cards {
+    nb-card {
+        &.own-scroll {
+            height: 50vh;
+            overflow: scroll;
+        }
+    }
+}
+nb-select {
+    width: 100%;
+}
+.nb-theme-default nb-select.appearance-outline .select-button.placeholder {
+    font-size: 15px !important;
+}
+
+.form-control {
+    height: 38px !important;
+}
+
+.containermng {
+    background-color: white;
+    box-shadow: 0 0.5rem 1rem 0 rgba(44, 51, 73, 0.418);
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+    transition-delay: 3s;
+}
+.contentform {
+    line-height: 35px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.form-group {
+    height: 60px;
+}
+input {
+    color: #999;
+}
+
+hr {
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.download {
+    width: 50px;
+}
+
+a {
+    color: #000;
+}
+@include nb-install-component() {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    .socials {
+        font-size: 2rem;
+
+        a {
+            padding: 0.4rem;
+            color: nb-theme(color-fg);
+            transition: color ease-out 0.1s;
+
+            &:hover {
+                color: nb-theme(color-fg-heading);
+            }
+        }
+    }
+
+    @include media-breakpoint-down(is) {
+        .socials {
+            font-size: 1.5rem;
+        }
+    }
+}
+
+:host /deep/ ng2-smart-table {
+    a.ng2-smart-action-add-add {
+        background: #1c548b !important;
+    }
+    ng2-smart-table-pager /deep/ {
+        li.ng2-smart-page-item span.ng2-smart-page-link {
+            background-color: #1c548b !important;
+        }
+    }
+}
+
+.wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.link_wrapper {
+    position: relative;
+}
+
+a {
+    display: block;
+    width: 250px;
+    height: 50px;
+    line-height: 50px;
+    font-weight: bold;
+    text-decoration: none;
+    background: #333;
+    text-align: center;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 3px solid #333;
+    transition: all 0.35s;
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    border: 3px solid transparent;
+    position: absolute;
+    transform: rotate(45deg);
+    right: 0;
+    top: 0;
+    z-index: -1;
+    transition: all 0.35s;
+}
+
+.icon svg {
+    width: 30px;
+    position: absolute;
+    top: calc(50% - 15px);
+    left: calc(50% - 15px);
+    transform: rotate(-45deg);
+    fill: #2ecc71;
+    transition: all 0.35s;
+}
+
+a:hover {
+    width: 200px;
+    border: 3px solid #2ecc71;
+    background: transparent;
+    color: #2ecc71;
+}
+
+a:hover + .icon {
+    border: 3px solid #2ecc71;
+    right: -25%;
+}

@@ -1,0 +1,13 @@
+@import '../../@theme/styles/themes';
+@import '~@nebular/theme/styles/themes';
+@import '~@nebular/theme/styles/global/breakpoints';
+@import '~@nebular/theme/styles/theming';
+@import '../../@theme/styles/styles.scss';
+:host ::ng-deep nb-stepper .step-content {
+    text-align: center;
+
+    button {
+        cursor: pointer;
+        margin: 0.5rem;
+    }
+}

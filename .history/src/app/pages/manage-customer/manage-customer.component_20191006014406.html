@@ -1,0 +1,38 @@
+<div class=" containermng row dashboard-container">
+    <button type="button" class="btn-pages" (click)="toggle()"><i class="fas fa-filter"></i> Filter</button>
+    <button type="reset" class="btn-pages"><i class="fas fa-sync-alt"></i> Refresh</button>
+
+    <nb-accordion>
+        <nb-accordion-item #find>
+            <nb-accordion-item-body>
+                <h5 class="titlemng"><i class="fa fa-search"></i>&nbsp;Danh sách khách hàng theo tour</h5>
+                <hr />
+                <div class="form-group row">
+                    <div class="col-4 form-group mb-0">
+                        <label for="idck">Mã tour </label>
+                        <input status="primary" type="text" id="location" nbInput fullWidth shape="rectangle" placeholder="Mã tour" />
+                    </div>
+                    <div class="col-4 form-group mb-0">
+                        <label for="idck">Ngày giờ bắt đầu</label>
+                        <input status="primary" type="datetime" nbInput fullWidth shape="rectangle" placeholder="Nhập số điện thoại" />
+                    </div>
+                    <div class="col-4 form-group mb-0">
+                        <label for="idck">Ngày giờ kết thucs</label>
+                        <input status="primary" type="datetime" nbInput fullWidth shape="rectangle" placeholder="Nhập số điện thoại" />
+                    </div>
+                </div>
+                <button class="float-right m-2" size="large" nbButton status="danger"><i class="fas fa-file-excel"></i> Export</button>
+                <button class="float-right m-2" size="large" nbButton status="info" (click)="filter()">Filter</button>
+            </nb-accordion-item-body>
+        </nb-accordion-item></nb-accordion
+    >
+    <div class="w-100">
+        <nb-card class="own-scroll">
+            <nb-card class="mb-0">
+                <nb-card-body>
+                    <ng2-smart-table [settings]="settings" [source]="source"> </ng2-smart-table>
+                </nb-card-body>
+            </nb-card>
+        </nb-card>
+    </div>
+</div>

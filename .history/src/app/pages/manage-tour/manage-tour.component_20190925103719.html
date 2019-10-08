@@ -1,0 +1,64 @@
+<div class="row dashboard-container">
+    <div class="w-100">
+        <nb-card class="own-scroll">
+            <nb-card class="mb-0">
+                <nb-card-body>
+                    <div class="containermng border border-crawler ">
+                        <button nbButton nbPopoverPlacement="bottom" status="warning" [nbPopover]="formComponent">With form</button>
+                        <button nbButton (click)="toggle()">Toggle First Item</button>
+                        <nb-accordion>
+                            <nb-accordion-item #item>
+                                <nb-accordion-item-body>
+                                    <form class="from col-auto" #filter="ngForm" data-wow-delay="300ms">
+                                        <h5 class="titlemng"><i class="fa fa-search"></i>&nbsp;Tìm kiếm tour</h5>
+                                        <hr />
+                                        <div class="form-group row">
+                                            <div class="col-4 form-group mb-0">
+                                                <label for="idck">Tên tour</label>
+                                                <input
+                                                    status="primary"
+                                                    type="text"
+                                                    id="nameTour"
+                                                    nbInput
+                                                    fullWidth
+                                                    shape="rectangle"
+                                                    placeholder="Nhập họ & tên"
+                                                />
+                                            </div>
+                                            <div class="col-4 form-group mb-0">
+                                                <label for="idck">Địa điểm</label>
+                                                <input
+                                                    status="primary"
+                                                    type="text"
+                                                    id="location"
+                                                    nbInput
+                                                    fullWidth
+                                                    shape="rectangle"
+                                                    placeholder="Nhập họ & tên"
+                                                />
+                                            </div>
+
+                                            <div class="col-4 form-group">
+                                                <label for="sourceck">Khu vực</label>
+                                                <nb-select status="primary" placeholder="Chọn khu vực">
+                                                    <nb-option>1</nb-option>
+                                                </nb-select>
+                                            </div>
+                                        </div>
+
+                                        <button type="button" class="btn-pages"><i class="fas fa-search"></i> Find</button>
+                                        <button type="reset" class="btn-pages"><i class="fas fa-sync-alt"></i> Refresh</button>
+                                        <button (click)="add()" type="button" class="btn-pages">
+                                            <i class="fas fa-plus"></i> Add new tour
+                                        </button>
+                                    </form>
+                                </nb-accordion-item-body>
+                            </nb-accordion-item></nb-accordion
+                        >
+                    </div>
+                    <ng2-smart-table [settings]="settings" [source]="source"> </ng2-smart-table>
+                </nb-card-body>
+            </nb-card>
+        </nb-card>
+    </div>
+</div>

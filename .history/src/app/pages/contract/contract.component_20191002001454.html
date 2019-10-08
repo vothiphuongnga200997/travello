@@ -1,0 +1,128 @@
+<nb-card>
+    <div class="containermng border border-crawler ">
+        <button type="button" class="btn-pages" (click)="toggle()"><i class="fas fa-filter"></i> Filter</button>
+        <button type="reset" class="btn-pages"><i class="fas fa-sync-alt"></i> Refresh</button>
+        <button type="button" class="btn-pages"><i class="fas fa-plus"></i> Add new tour</button>
+
+        <nb-accordion>
+            <nb-accordion-item #find>
+                <nb-accordion-item-body>
+                    <form class="from col-auto" #filter="ngForm">
+                        <h5 class="titlemng"><i class="fa fa-search"></i>&nbsp;Tìm kiếm tour</h5>
+                        <hr />
+                        <div class="form-group row">
+                            <div class="col-4 form-group mb-0">
+                                <label for="idck">Tên tour</label>
+                                <input
+                                    status="primary"
+                                    type="text"
+                                    id="nameTour"
+                                    nbInput
+                                    fullWidth
+                                    shape="rectangle"
+                                    placeholder="Nhập họ & tên"
+                                />
+                            </div>
+                            <div class="col-4 form-group mb-0">
+                                <label for="idck">Địa điểm</label>
+                                <input
+                                    status="primary"
+                                    type="text"
+                                    id="location"
+                                    nbInput
+                                    fullWidth
+                                    shape="rectangle"
+                                    placeholder="Nhập họ & tên"
+                                />
+                            </div>
+                        </div>
+                    </form>
+                </nb-accordion-item-body> </nb-accordion-item
+        ></nb-accordion>
+    </div>
+    <nb-accordion multi>
+        <nb-accordion-item>
+            <nb-accordion-item-header>
+                Product Details
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+                A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases. Originally, nebula was a name for any
+                diffuse astronomical object, including galaxies beyond the Milky Way.
+            </nb-accordion-item-body>
+        </nb-accordion-item>
+
+        <nb-accordion-item>
+            <nb-accordion-item-header>
+                Reviews
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+                A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases. Originally, nebula was a name for any
+                diffuse astronomical object, including galaxies beyond the Milky Way.
+            </nb-accordion-item-body>
+        </nb-accordion-item>
+
+        <nb-accordion-item>
+            <nb-accordion-item-header>
+                Edit
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+                A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases. Originally, nebula was a name for any
+                diffuse astronomical object, including galaxies beyond the Milky Way.
+            </nb-accordion-item-body>
+        </nb-accordion-item>
+    </nb-accordion>
+    <form #addressForm="ngForm" class="container mt-3" (ngSubmit)="logValue()">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <button type="button" class="btn btn-primary mb-2" (click)="addAddress()">Add Address</button>
+                <section class="container border mb-4 p-3" *ngFor="let address of addresses; let i = index">
+                    <div class="row">
+                        <div class="col-6">
+                            <h4>Address {{ i + 1 }}</h4>
+                        </div>
+                        <div class="col-6 text-right">
+                            <button type="button" class="btn btn-danger btn-sm" (click)="removeAddress(i)">Remove</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Address</label>
+                                <input type="text" class="form-control" [(ngModel)]="address.address" placeholder="St. Thomas Apartment" />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Street</label>
+                                <input type="text" class="form-control" [(ngModel)]="address.street" placeholder="South Street" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" class="form-control" [(ngModel)]="address.city" placeholder="Mumbai" />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Country</label>
+                                <select class="form-control" [(ngModel)]="address.country" placeholder="India">
+                                    <option value="india">India</option>
+                                    <option value="usa">USA</option>
+                                    <option value="england">England</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="text-right">
+                    <input type="submit" class="btn btn-success" value="Submit" />
+                </div>
+            </div>
+        </div>
+    </form>
+</nb-card>

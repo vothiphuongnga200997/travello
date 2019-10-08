@@ -1,0 +1,23 @@
+@import '../pages.component.scss';
+@import '../../@theme/styles/themes';
+
+@include nb-install-component() {
+    nb-card {
+        width: 350px;
+        height: 180px;
+    }
+}
+.footer {
+    margin-top: 20px;
+    border-top: 1px solid #e3e2f3;
+    padding-top: 10px;
+}
+button {
+    margin-left: 1em;
+    width: 100px;
+}
+
+.btn-hint {
+    background: #ebeff5;
+    color: #2a2a2a;
+}
