@@ -1,4 +1,4 @@
-import { ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { NgModule, ElementRef, ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CompleterService, CompleterData, CompleterItem } from 'ng2-completer';
@@ -6,8 +6,7 @@ import { Router } from '@angular/router';
 import { NbDialogRef } from '@nebular/theme';
 import { GuideService } from '../../../shared/services/guide.service';
 import { LocationService } from '../../../shared/services/location.service';
-import * as moment from 'moment';
-import { TourService } from '../../../shared/services/tour.service';
+
 @Component({
     selector: 'ngx-add-tour',
     templateUrl: './add-tour.component.html',
@@ -17,14 +16,10 @@ export class AddTourComponent implements OnInit {
     protected captain: string;
     protected selectedLocaion: string;
     protected dataService: CompleterData;
-    protected dataService1: CompleterData;
-
-    protected dataGuide: CompleterData;
     @ViewChild('inputFile', { static: false }) inputFile: ElementRef;
     listLocations: Array<any> = [];
     getLocations: Array<any> = [];
     getGuides: Array<any> = [];
-    listGuides: Array<any> = [];
     registerForm: FormGroup;
     title: string;
     stateForm: FormGroup;
@@ -42,6 +37,7 @@ export class AddTourComponent implements OnInit {
     quantity: number;
     departure: string = '';
     context: string;
+    guide: any;
     fileName: string;
     public imagePath;
     images: Array<any> = [];
@@ -50,16 +46,6 @@ export class AddTourComponent implements OnInit {
     ckeConfig: any;
     mycontent: string;
     log: string = '';
-    obj: any;
-    guide: Array<any> = [];
-    requiredLocation = '';
-    requiredImage = '';
-    objId = '';
-    queryGuide: any;
-    queryLocation: any;
-    provisional: any;
-    checkDay: Array<any> = [];
-    numberRun: number = 0;
     @ViewChild('myckeditor', { static: true }) ckeditor: any;
     constructor(
         private completerService: CompleterService,
@@ -68,9 +54,9 @@ export class AddTourComponent implements OnInit {
         private formBuilder: FormBuilder,
         private locationService: LocationService,
         private guideService: GuideService,
-        private tourService: TourService,
     ) {
         this.getLocation();
+        this.getGuide();
         this.dataService = completerService.local(this.getLocations, 'location', 'location');
         this.ckeConfig = {
             allowedContent: false,
@@ -78,72 +64,76 @@ export class AddTourComponent implements OnInit {
             forcePasteAsPlainText: true,
         };
     }
+    protected onSelected(item: CompleterItem) {
+        if (item) {
+            this.listLocations.push({
+                id: item.originalObject.id,
+                location: item.originalObject.location,
+            });
+        }
+    }
 
-    async ngOnInit() {
+    ngOnInit() {
         this.registerForm = this.formBuilder.group({
             code: ['', Validators.required],
             nameTour: ['', Validators.required],
             duration: ['', Validators.required],
             hotel: ['', Validators.required],
+            guide: ['', Validators.required],
             childrenPrice: ['', Validators.required],
             adultPrice: ['', Validators.required],
             startDay: ['', Validators.required],
             endDay: ['', Validators.required],
             quantity: ['', Validators.required],
             departure: ['', Validators.required],
+            location: ['', Validators.required],
             itinerary: ['', Validators.required],
-            guide: ['', Validators.required],
+            image: ['', Validators.required],
             note: [''],
         });
-        if (this.obj) {
-            (this.nameTour = this.obj.res.get('nameTour')), (this.code = this.obj.res.get('code'));
-            (this.duration = this.obj.res.get('duration')),
-                (this.hotel = this.obj.res.get('hotel')),
-                (this.childrenPrice = this.obj.res.get('childrenPrice')),
-                (this.adultPrice = this.obj.res.get('adultPrice')),
-                (this.departure = this.obj.res.get('departure')),
-                (this.quantity = this.obj.res.get('quantity')),
-                (this.startDay = this.formatDate(this.obj.res.get('startDay'))),
-                (this.endDay = this.formatDate(this.obj.res.get('endDay'))),
-                (this.mycontent = this.obj.res.get('itinerary'));
-            this.queryGuide = await this.tourService.getGuide(this.obj.res);
-            for (let i = 0; i < this.queryGuide.length; i++) {
-                this.guide.push({
-                    id: this.queryGuide[i].id,
-                    fullname: this.queryGuide[i].get('fullname'),
-                });
-            }
-            this.queryLocation = await this.tourService.getLocation(this.obj.res);
-            for (let i = 0; i < this.queryLocation.length; i++) {
-                this.listLocations.push({
-                    id: this.queryLocation[i].id,
-                    location: this.queryLocation[i].get('location'),
-                });
-            }
-            let images = await this.tourService.getImage(this.obj.res);
-            for (let i = 0; i < images.length; i++) {
-                this.images.push({
-                    imgURL: images[i].get('image').url(),
-                    name: images[i].get('nameFile'),
-                    file: images[i].get('image'),
-                });
-            }
-        }
-    }
-    get f() {
-        return this.registerForm.controls;
-    }
-
-    formatDate(dateString: string) {
-        let momentObj = moment(dateString);
-        return momentObj.format('YYYY-MM-DDTkk:mm');
     }
     dismiss() {
         this.ref.close();
     }
-    // funtion location start
     destroy(location) {
         this.listLocations.splice(location, 1);
+    }
+    get f() {
+        return this.registerForm.controls;
+    }
+    onSubmit() {
+        this.submitted = true;
+        if (this.registerForm.invalid) {
+            return;
+        }
+        this.ref.close({
+            code: this.code,
+            nameTour: this.nameTour,
+            duration: this.duration,
+            departure: this.departure,
+            location: this.listLocations,
+            guide: this.guide,
+            startDay: new Date(this.startDay),
+            endDay: new Date(this.endDay),
+            quantity: this.quantity,
+            hotel: this.hotel,
+            childrenPrice: this.childrenPrice,
+            adultPrice: this.adultPrice,
+            image: this.images,
+            note: this.note,
+            itinerary: this.mycontent,
+        });
+    }
+
+    async getGuide() {
+        let results = await this.guideService.getListGuides();
+        for (let i = 0; i < results.length; i++) {
+            const obj = results[i];
+            this.getGuides.push({
+                id: obj.id,
+                fullName: obj.get('fullName'),
+            });
+        }
     }
     async getLocation() {
         let results = await this.locationService.getListLocations();
@@ -155,17 +145,6 @@ export class AddTourComponent implements OnInit {
             });
         }
     }
-    protected onSelected(item: CompleterItem) {
-        if (item) {
-            this.listLocations.push({
-                id: item.originalObject.id,
-                location: item.originalObject.location,
-            });
-        }
-    }
-    // funtion location end
-
-    // function image start
     preview(files) {
         this.fileName = files.length + 'files';
         if (files.length === 0) return;
@@ -196,106 +175,4 @@ export class AddTourComponent implements OnInit {
     openInputFile() {
         this.inputFile.nativeElement.click();
     }
-    // function image end
-
-    // function guide start
-    go: any;
-    end: any;
-    async checkDate() {
-        if (this.numberRun === 0 && this.startDay && this.endDay) {
-            let result = await this.guideService.findTour(this.startDay, this.endDay);
-            for (let n of result) {
-                this.getGuides.push({
-                    id: n.id,
-                    fullname: n.id + ': ' + n.get('fullname'),
-                });
-            }
-            this.go = this.startDay;
-            this.end = this.endDay;
-            this.numberRun = 1;
-        } else {
-            if (this.startDay && this.endDay) {
-                if (Date.parse(this.end) !== Date.parse(this.endDay)) {
-                    this.go = this.startDay;
-                    this.end = this.endDay;
-                    this.getGuides = [];
-                    this.listGuides = [];
-                    let result = await this.guideService.findTour(this.startDay, this.endDay);
-                    this.provisional = result;
-                    for (let n of result) {
-                        this.getGuides.push({
-                            id: n.id,
-                            fullname: n.id + ': ' + n.get('fullname'),
-                        });
-                    }
-                } else {
-                    console.log('kbang');
-                }
-            }
-        }
-        this.dataService1 = this.completerService.local(this.getGuides, 'fullname', 'fullname');
-    }
-    protected onSelectedGuide(item: CompleterItem) {
-        console.log(item);
-        if (item) {
-            this.listGuides.push({
-                id: item.originalObject.id,
-                fullname: item.originalObject.fullname,
-            });
-        }
-    }
-
-    // function guide end
-
-    // submit start
-    async onSubmit() {
-        this.submitted = true;
-        console.log(this.guide);
-        // if (this.registerForm.invalid) {
-        //     if (this.listLocations.length === 0) this.requiredLocation = 'Location is required';
-        //     else {
-        //         this.requiredLocation = '';
-        //     }
-        //     if (this.images.length === 0) this.requiredImage = 'Image is required';
-        //     else this.requiredImage = '';
-        //     return;
-        // } else {
-        //     if (this.listLocations.length === 0) this.requiredLocation = 'Location is required';
-        //     else {
-        //         this.requiredLocation = '';
-        //     }
-
-        //     if (this.images.length === 0) this.requiredImage = 'Image is required';
-        //     else this.requiredImage = '';
-        // }
-        // if (this.obj) {
-        //     await this.tourService.deleteImg(this.obj.res);
-        //     for (let g of this.queryGuide) await this.tourService.deleteGuide(this.obj.res.id, g);
-        //     for (let l of this.queryLocation) await this.tourService.deleteLocation(this.obj.res.id, l);
-        // }
-
-        // if (this.listLocations.length > 0 && this.guide.length > 0 && this.images.length > 0) {
-        //     if (this.obj) this.objId = this.obj.res.id;
-        //     this.ref.close({
-        //         id: this.objId,
-        //         code: this.code,
-        //         nameTour: this.nameTour,
-        //         duration: this.duration,
-        //         departure: this.departure,
-        //         location: this.listLocations,
-        //         guide: this.listGuides,
-        //         startDay: new Date(this.startDay),
-        //         endDay: new Date(this.endDay),
-        //         quantity: this.quantity,
-        //         hotel: this.hotel,
-        //         childrenPrice: this.childrenPrice,
-        //         adultPrice: this.adultPrice,
-        //         image: this.images,
-        //         note: this.note,
-        //         itinerary: this.mycontent,
-        //     });
-        // }
-    }
-
-    // submit end
 }

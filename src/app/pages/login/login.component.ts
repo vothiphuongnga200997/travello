@@ -17,19 +17,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         console.log('ngOnInit');
-        this.fetchAndGetUser();
-    }
-    async fetchAndGetUser() {
-        let currentUser = this.authService.getCurrentUser();
-        if (currentUser) {
-            if (currentUser.get('status') > 0) {
-                this.router.navigate(['pages']);
-            } else {
-                this.router.navigate(['home']);
-            }
-        }
     }
     async onLoginSubmit() {
+        alert('login');
         this.requestPassword = '';
         this.requestUser = '';
         if (this.username === '') this.requestUser = 'Username is required';
@@ -37,12 +27,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
         if (this.password !== '' && this.username !== '') {
             try {
                 let login = await this.authService.login(this.username, this.password);
-                if (login.get('status') > 0) {
+                if (login) {
+                    alert('succes');
                     this.router.navigate(['pages']);
-                } else {
-                    this.router.navigate(['home']);
                 }
             } catch (ex) {
+                alert(ex);
                 if (ex && ex.message) {
                     this.requestPassword = ex.message;
                 } else {
@@ -52,27 +42,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
         }
     }
 
-    ngAfterViewInit() {
-        this.logInWithGoogle('google-login-button-sign-in');
-    }
+    ngAfterViewInit() {}
 
-    logInWithGoogle(buttonId) {
-        this.authService.loginWithGoogle(
-            buttonId,
-            data => {
-                if (data) {
-                    this.ngZone.run(() => {
-                        if (data.get('status') > 0) {
-                            this.router.navigate(['pages']);
-                        } else {
-                            this.router.navigate(['home']);
-                        }
-                    });
-                }
-            },
-            error => {
-                this.requestPassword = (error && error.message) || 'Login error';
-            },
-        );
-    }
+    // async logInWithMicrosoft() {
+    //     try {
+    //         let data = await this.authService.logInWithMicrosoft();
+    //         console.log(data);
+    //     } catch (ex) {
+    //         this.requestPassword = (ex && ex.message) || 'Login error';
+    //     }
+    // }
 }

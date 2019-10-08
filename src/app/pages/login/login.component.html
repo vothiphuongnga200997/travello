@@ -1,29 +1,21 @@
-<form name="login" id="login">
-    <span class="login-form">ACCOUNT LOGIN</span>
-    <label>
-        <p class="label-txt">USERNAME</p>
-        <input type="text" name="user" id="user" [(ngModel)]="username" />
-        <div class="line-box">
-            <div class="line"></div>
+<div class="row">
+    <div class="col-4 offset-4 mt-5 containerLogin">
+        <div class="text-center">
+            <h2 class="titleLogin">Login 1</h2>
         </div>
-        <div class="required">
-            <div class="float-right">{{ this.requestUser }}</div>
-        </div>
-    </label>
-    <label class="mt-20">
-        <p class="label-txt">PASSWORD</p>
-        <input type="password" name="pass" id="pass" [(ngModel)]="password" passwordToggle required />
-        <div class="line-box">
-            <div class="line"></div>
-        </div>
-        <div class="required">
-            <div class="float-right">{{ this.requestPassword }}</div>
-        </div>
-    </label>
 
-    <button class="btn-google" (click)="onLoginSubmit()"><i class="fas fa-sign-in-alt"></i> Login</button>
-    <button class="btn-google" (click)="logInWithGoogle('google-login-button-sign-in')" id="google-login-button-sign-in">
-        <img class="spring-social" src="../../../assets/images/google.png" />
-        Google
-    </button>
-</form>
+        <div class="form-group row">
+            <label class="col-md-4 text-light">ID: </label>
+            <div class="col-md-8"><input type="text" placeholder="username" [(ngModel)]="username" /></div>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-4 text-light">Password:</label>
+            <div class="col-md-8"><input type="password" placeholder="password" [(ngModel)]="password" /></div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-12" style="margin-left: 34%">
+                <button type="submit" class="btn btn-crawler" (click)="onLoginSubmit()">Login</button>
+            </div>
+        </div>
+    </div>
+</div>

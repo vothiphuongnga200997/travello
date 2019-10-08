@@ -14,7 +14,7 @@ export class AddGuideComponent implements OnInit {
     submitted = false;
     title = '';
     context = '';
-    fullname = '';
+    fullName = '';
     phone: number;
     email = '';
     address = '';
@@ -26,7 +26,7 @@ export class AddGuideComponent implements OnInit {
     constructor(protected ref: NbDialogRef<AddGuideComponent>, private formBuilder: FormBuilder) {}
     ngOnInit() {
         if (this.obj) {
-            this.fullname = this.obj.fullname;
+            this.fullName = this.obj.fullName;
             this.email = this.obj.email;
             this.phone = this.obj.phone;
             this.address = this.obj.address;
@@ -34,7 +34,7 @@ export class AddGuideComponent implements OnInit {
             this.date = momentObj.format('YYYY-MM-DD');
         }
         this.registerForm = this.formBuilder.group({
-            fullname: ['', Validators.required],
+            fullName: ['', Validators.required],
             birthday: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
             address: ['', Validators.required],
@@ -56,7 +56,7 @@ export class AddGuideComponent implements OnInit {
         if (this.obj) {
             this.ref.close({
                 id: this.obj.id,
-                fullname: this.fullname,
+                fullName: this.fullName,
                 birthday: this.birthday,
                 address: this.address,
                 email: this.email,
@@ -64,7 +64,7 @@ export class AddGuideComponent implements OnInit {
             });
         }
         this.ref.close({
-            fullname: this.fullname,
+            fullName: this.fullName,
             birthday: this.birthday,
             address: this.address,
             email: this.email,

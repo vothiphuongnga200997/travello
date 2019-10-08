@@ -11,8 +11,6 @@ import { ManageGuideModule } from './manage-guide/manage-guide-module';
 import { ManageTourModule } from './manage-tour/manage-tour.module';
 import { ManageLocationModule } from './manage-location/manage-location.module';
 import { ContractModule } from './contract/contract.module';
-import { SelectTourModule } from './select-tour/select-tour.module';
-import { BookTourTourModule } from './book-tour/book-tour.module';
 const PAGES_COMPONENTS = [PagesComponent];
 
 @NgModule({
@@ -28,8 +26,6 @@ const PAGES_COMPONENTS = [PagesComponent];
         ManageCustomerModule,
         ManageGuideModule,
         ManageTourModule,
-        SelectTourModule,
-        BookTourTourModule,
     ],
     exports: [PagesComponent],
 

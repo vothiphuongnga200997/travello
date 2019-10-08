@@ -13,7 +13,6 @@
                         <h6>Tên tour</h6>
                         <div class="form-group">
                             <input
-                                status="info"
                                 type="text"
                                 [(ngModel)]="nameTour"
                                 class="form-control fileName mb-0"
@@ -36,7 +35,6 @@
                     <div class="col-5 ">
                         <h6>Mã tour</h6>
                         <input
-                            status="info"
                             type="text"
                             [(ngModel)]="code"
                             class="form-control fileName mb-0"
@@ -58,7 +56,6 @@
                         <h6>Số Lượng</h6>
                         <div class="form-group">
                             <input
-                                status="info"
                                 type="number"
                                 [(ngModel)]="quantity"
                                 class="form-control fileName mb-0"
@@ -82,7 +79,6 @@
                         <h6>Điểm khởi hành</h6>
                         <div class="form-group">
                             <input
-                                status="info"
                                 type="text"
                                 [(ngModel)]="departure"
                                 class="form-control fileName mb-0"
@@ -104,7 +100,6 @@
                         <h6>Thời lượng</h6>
                         <div class="form-group">
                             <input
-                                status="info"
                                 type="text"
                                 [(ngModel)]="duration"
                                 class="form-control fileName mb-0"
@@ -129,8 +124,7 @@
                         <h6>Ngày đi</h6>
                         <div class="form-group">
                             <input
-                                status="info"
-                                type="datetime-local"
+                                type="date"
                                 [(ngModel)]="startDay"
                                 class="form-control fileName mb-0"
                                 formControlName="startDay"
@@ -151,8 +145,7 @@
                         <h6>Ngày về</h6>
                         <div class="form-group">
                             <input
-                                status="info"
-                                type="datetime-local"
+                                type="date"
                                 [(ngModel)]="endDay"
                                 class="form-control fileName mb-0"
                                 formControlName="endDay"
@@ -176,9 +169,9 @@
                         <h6>Giá người lớn</h6>
                         <div class="form-group">
                             <input
-                                status="info"
                                 currencyMask
                                 [options]="{ prefix: '', thousands: '.', decimal: ',', suffix: 'đ', precision: 0 }"
+                                type="tel"
                                 type="tel"
                                 [(ngModel)]="adultPrice"
                                 class="form-control fileName mb-0"
@@ -200,7 +193,6 @@
                         <h6>Giá trẻ em</h6>
                         <div class="form-group">
                             <input
-                                status="info"
                                 currencyMask
                                 [options]="{ prefix: '', thousands: '.', decimal: ',', suffix: 'đ', precision: 0 }"
                                 type="tel"
@@ -226,22 +218,24 @@
                     <div class="col-5">
                         <h6>Địa điểm</h6>
                         <ng2-completer
-                            status="info"
                             [datasource]="dataService"
                             [minSearchLength]="0"
                             [minSearchLength]="0"
                             (selected)="onSelected($event)"
+                            formControlName="location"
+                            [ngClass]="{ 'is-invalid': submitted && f.location.errors }"
                             placeholder="Chọn địa điểm"
                         ></ng2-completer>
                         <div class="required">
-                            <div class="float-right">{{ this.requiredLocation }}</div>
+                            <div *ngIf="submitted && f['location'].errors">
+                                <div class="float-right" *ngIf="f['location'].errors.required">Location is required</div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-5 offset-1">
                         <h6>Khách Sạn</h6>
                         <div class="form-group">
                             <input
-                                status="info"
                                 type="text"
                                 [(ngModel)]="hotel"
                                 class="form-control fileName mb-0"
@@ -261,50 +255,43 @@
                     </div>
                 </div>
             </div>
-            <div class="row ">
+            <div class="row">
                 <div class="col-2" *ngFor="let item of listLocations; let i = index">
                     <div class="location">
                         <button type="button" class="close " aria-label="Close" (click)="destroy(i)">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <div class="text-info pb-3">Địa điểm {{ i + 1 }}</div>
+                        <h6>Địa điểm {{ i + 1 }}</h6>
                         <a>{{ item.location }} </a>
                     </div>
                 </div>
             </div>
-            <div class="row mt-3">
-                <div class="col-5" (click)="checkDate()">
+            <div class="row mt-2">
+                <div class="col-11">
                     <h6>Hướng dẫn viên</h6>
-                    <ng2-completer
-                        status="info"
-                        [datasource]="dataService1"
-                        [minSearchLength]="0"
-                        [minSearchLength]="0"
-                        (selected)="onSelectedGuide($event)"
-                        placeholder="Chọn địa điểm"
-                    ></ng2-completer>
+                    <nb-select
+                        style="width: 100%; max-width: 1000px"
+                        #platForm
+                        name="guide"
+                        placeholder="Select Showcase"
+                        formControlName="guide"
+                        [multiple]="true"
+                        [ngClass]="{ 'is-invalid': submitted && f.guide.errors }"
+                        [(ngModel)]="guide"
+                    >
+                        <nb-option *ngFor="let dataOption of getGuides" [value]="dataOption">{{ dataOption.fullName }}</nb-option>
+                    </nb-select>
                     <div class="required">
                         <div *ngIf="submitted && f['guide'].errors">
                             <div class="float-right" *ngIf="f['guide'].errors.required">Guide is required</div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-2" *ngFor="let item of listGuides; let i = index">
-                    <div class="location">
-                        <button type="button" class="close " aria-label="Close" (click)="destroy(i)">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <div class="text-info pb-3">Địa điểm {{ i + 1 }}</div>
-                        <a>{{ item.fullname }} </a>
-                    </div>
-                </div>
             </div>
-
             <div class="row mt-2">
                 <div class="col-11">
                     <h6>Mô tả</h6>
-                    <textarea status="info" nbInput fullWidth [(ngModel)]="note" formControlName="note"></textarea>
+                    <textarea nbInput fullWidth [(ngModel)]="note" formControlName="note"></textarea>
                 </div>
             </div>
             <div class="row mt-3 ">
@@ -318,14 +305,17 @@
                             (change)="preview(inputFile.files)"
                             #inputFile
                             accept="image/jpeg,image/png"
+                            formControlName="image"
                         />
                     </div>
                     <div class="required">
-                        <div class="float-right">{{ this.requiredImage }}</div>
+                        <div *ngIf="submitted && f['image'].errors">
+                            <div class="float-right" *ngIf="f['image'].errors.required">Image is required</div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row mt-3">
+            <div class="row">
                 <div class="col-11 ">
                     <div class="row">
                         <div class="col-3 mt-2 p-0" *ngFor="let item of images; let i = index">

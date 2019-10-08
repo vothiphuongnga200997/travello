@@ -9,7 +9,8 @@ import { ManageGuideComponent, ButtonViewComponent } from './manage-guide.compon
 import { AddGuideComponent } from './add-guide/add-guide.component';
 import { TaskGuideComponent } from './task-guide/task-guide.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NbCardModule, NbButtonModule, NbInputModule, NbIconModule, NbTabsetModule, NbSpinnerModule } from '@nebular/theme';
+import { NbCardModule, NbButtonModule, NbInputModule } from '@nebular/theme';
+
 @NgModule({
     imports: [
         NbInputModule,
@@ -23,9 +24,6 @@ import { NbCardModule, NbButtonModule, NbInputModule, NbIconModule, NbTabsetModu
         NbCardModule,
         FormsModule,
         ReactiveFormsModule,
-        NbIconModule,
-        NbTabsetModule,
-        NbSpinnerModule,
     ],
     exports: [ManageGuideComponent, ButtonViewComponent],
     declarations: [ManageGuideComponent, ButtonViewComponent, AddGuideComponent, TaskGuideComponent],

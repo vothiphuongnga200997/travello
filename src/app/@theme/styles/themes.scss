@@ -91,22 +91,33 @@ $nb-themes: nb-register-theme(
     content: '' !important;
 }
 
+.btn-login .btn-fill {
+    background: white;
+    color: #0e385f;
+}
+
+.tabset .tab a::before {
+    background: #073563 !important;
+}
 .btn-pages {
     color: white;
-    background: #0e7cb8;
+    background: #1b4d80;
+    font-size: 12px;
     line-height: 25px;
+    font-size: 13px;
     vertical-align: middle;
     width: 130px;
     height: 40px;
     margin-right: 10px;
+    margin-top: 15px;
     padding: 5px;
-    transition: all 0.3s ease-in;
-    border-radius: 2px;
+    transition: all 0.2s ease-in;
+    border-radius: 4px;
     font-size: 15px;
     border: none;
 }
 .btn-pages:hover {
-    color: #0e7cb8;
+    color: #1b4d80;
     background: white;
-    border: 1px solid #0e7cb8;
+    border: 1px solid #1b4d80;
 }

@@ -12,21 +12,21 @@
                     <h6>Họ & tên</h6>
                     <div class="form-group">
                         <input
-                            [(ngModel)]="fullname"
+                            [(ngModel)]="fullName"
                             type="text"
                             class="form-control fileName mb-0"
                             placeholder="Nhập tên họ tên"
-                            formControlName="fullname"
+                            formControlName="fullName"
                             class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f.fullname.errors }"
+                            [ngClass]="{ 'is-invalid': submitted && f.fullName.errors }"
                             nbInput
                             fullWidth
                             shape="rectangle"
                             placeholder="Nhập họ & tên"
                         />
                         <div class="required">
-                            <div *ngIf="submitted && f['fullname'].errors">
-                                <div class="float-right" *ngIf="f['fullname'].errors.required">Full Name is required</div>
+                            <div *ngIf="submitted && f['fullName'].errors">
+                                <div class="float-right" *ngIf="f['fullName'].errors.required">Full Name is required</div>
                             </div>
                         </div>
                     </div>

@@ -72,6 +72,11 @@ export class ManageGuideComponent implements OnInit {
         },
         mode: 'external',
         columns: {
+            id: {
+                title: 'ID',
+                type: 'string',
+                editable: false,
+            },
             fullName: {
                 title: 'Họ & tên',
                 type: 'string',
@@ -98,7 +103,7 @@ export class ManageGuideComponent implements OnInit {
                 editable: true,
             },
             task: {
-                title: 'Lịch tour',
+                title: 'Công việc',
                 type: 'custom',
                 renderComponent: ButtonViewComponent,
                 onComponentInitFunction: instance => {
@@ -139,6 +144,7 @@ export class ManageGuideComponent implements OnInit {
             .onClose.subscribe(async (data: { fullName: string; email: string; phone: any; address: string; birthday: any }) => {
                 if (data) {
                     try {
+                        console.log(data);
                         let i = await this.guideService.addGuide(data.fullName, data.email, data.address, data.phone, data.birthday);
                         await this.getGuides();
                         this.toastrService.success(`Add Location Success`, 'Create success');

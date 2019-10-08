@@ -59,6 +59,7 @@ export class AddLocationComponent implements OnInit {
         this.requiredArea = '';
         if (this.location === '') this.requiredLocation = 'Location is required';
         if (this.commonSelectedItem === '') this.requiredArea = 'Area is required';
+        console.log(this.commonSelectedItem);
         if (this.location !== '' && this.commonSelectedItem !== '') {
             this.ref.close({
                 location: this.location,
