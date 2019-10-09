@@ -9,3 +9,9 @@
 @import '../pages.component.scss';
 @import '../../@theme/styles/themes';
 @import '../../@theme/styles/travello.scss';
+.dropdown-menu{
+    left: 15px;
+    padding: 10px 5px 0;
+    width: 720px;
+    background: white;
+}

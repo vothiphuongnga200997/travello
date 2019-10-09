@@ -1,0 +1,12 @@
+version: '3'
+services:
+    spiderium_studio:
+        container_name: spiderium_studio
+        restart: always
+        build:
+            context: .
+            dockerfile: ./.docker/Dockerfile_dev
+        image: spiderium-studio
+        command: angular-http-server -p 4200
+        ports:
+            - 4200:4200
