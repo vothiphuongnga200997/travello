@@ -1,0 +1,49 @@
+<header class="header-area">
+    <!-- Navbar Area -->
+    <div class="palatin-main-menu" style="position: fixed">
+        <!-- Menu -->
+        <!-- <nav class="classy-navbar justify-content-between" id="palatinNav"> -->
+        <!-- Nav brand -->
+
+        <!-- Navbar Toggler -->
+
+        <!-- Menu -->
+        <nav class="classy-navbar justify-content-between">
+            <img class="ml-5" src="../../../assets/img/core-img/logo.png" alt="" />
+
+            <ul>
+                <li><a>Home</a></li>
+                <li class="drop">
+                    <a href="#">Miền Bắc</a>
+
+                    <div class="dropdownContain">
+                        <div class="dropOut">
+                            <div class="triangle"></div>
+                            <ul>
+                                <li *ngFor="let one of this.one">{{ one.location }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="#">Miền Nam</a>
+                    <div class="dropdownContain">
+                        <div class="dropOut">
+                            <div class="triangle"></div>
+                            <ul>
+                                <li>Plan</li>
+
+                                <li>Switch Account</li>
+                                <li>Sign Out</li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="#">Liên hệ</a></li>
+            </ul>
+        </nav>
+
+        <!-- Nav End -->
+        <!-- </nav> -->
+    </div>
+</header>
