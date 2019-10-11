@@ -1,0 +1,114 @@
+<div class="steppers-container row">
+    <nb-card>
+        <nb-card-body>
+            <nb-stepper #stepper>
+                <nb-step [stepControl]="firstForm" label="Đăng nhập">
+                    <form [formGroup]="firstForm" (ngSubmit)="onFirstSubmit()" class="step-container">
+                        <p class="lorem">
+                            Khách hàng đăng nhập
+                        </p>
+                        <a class="btn-flip mr-5 " data-back="Submit" data-front="Login" (click)="checkForm1()"></a>
+                        <a class="btn-flip" data-back="Submit" data-front="Registration" (click)="checkForm2()"></a>
+
+                        <div class="login">
+                            <div class="input-group row" *ngIf="this.form1">
+                                <div class="col-6">
+                                    <input
+                                        type="text"
+                                        placeholder="Username"
+                                        class="form-control"
+                                        formControlName="username"
+                                        [ngClass]="{
+                                            'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)
+                                        }"
+                                    />
+                                </div>
+                                <div class="col-6">
+                                    <input
+                                        type="password"
+                                        placeholder="Password"
+                                        class="form-control"
+                                        formControlName="password"
+                                        [ngClass]="{
+                                            'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)
+                                        }"
+                                    />
+                                </div>
+                                <button nbButton nbStepperNext>next</button>
+                            </div>
+                        </div>
+                    </form>
+                    <form [formGroup]="firstFormRegistration" (ngSubmit)="onfirstFormRegistrationSubmit()" class="step-container">
+                        <div class="registration" *ngIf="this.form2">
+                            <input
+                                type="text"
+                                placeholder="Username"
+                                class="form-control"
+                                formControlName="username"
+                                [ngClass]="{
+                                    'form-control-danger':
+                                        firstFormRegistration.invalid && (firstFormRegistration.dirty || firstFormRegistration.touched)
+                                }"
+                            />
+
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                class="form-control"
+                                formControlName="password"
+                                [ngClass]="{
+                                    'form-control-danger':
+                                        firstFormRegistration.invalid && (firstFormRegistration.dirty || firstFormRegistration.touched)
+                                }"
+                            />
+                            <button nbButton nbStepperNext>next</button>
+                        </div>
+                    </form>
+                </nb-step>
+                <nb-step [stepControl]="secondForm" label="Second step">
+                    <form [formGroup]="secondForm" (ngSubmit)="onSecondSubmit()" class="step-container">
+                        <p class="lorem">
+                            Pellentesque we gonna chung tortor. Sizzle pizzle. Fizzle izzle dolor dapibus fo shizzle mah nizzle fo rizzle,
+                            mah home g-dizzle tempus tempor. Maurizzle cool nibh owned turpizzle. My shizz fo shizzle tortor.
+                        </p>
+                        <div class="input-group">
+                            <input
+                                type="text"
+                                placeholder="Enter favorite movie"
+                                class="form-control"
+                                formControlName="secondCtrl"
+                                [ngClass]="{ 'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched) }"
+                            />
+                        </div>
+                        <button nbButton nbStepperPrevious>prev</button>
+                        <button nbButton nbStepperNext>next</button>
+                    </form>
+                </nb-step>
+                <nb-step [stepControl]="thirdForm" label="Third step">
+                    <form [formGroup]="thirdForm" (ngSubmit)="onThirdSubmit()" class="step-container">
+                        <p class="lorem">
+                            Things boom shackalack rhoncus yo. In fo shizzle my nizzle gangsta platea dictumst. Check it out pot.
+                        </p>
+                        <div class="input-group">
+                            <input
+                                type="text"
+                                placeholder="Enter something"
+                                class="form-control"
+                                formControlName="thirdCtrl"
+                                [ngClass]="{ 'form-control-danger': thirdForm.invalid && (thirdForm.dirty || thirdForm.touched) }"
+                            />
+                        </div>
+                        <button nbButton nbStepperPrevious>prev</button>
+                        <button nbButton nbStepperNext>Confirm</button>
+                    </form>
+                </nb-step>
+                <nb-step [stepControl]="thirdForm" [hidden]="true" label="Third step">
+                    <div class="step-container">
+                        <h3>Wizard completed!</h3>
+                        <button nbButton (click)="stepper.reset()">Try again</button>
+                    </div>
+                </nb-step>
+            </nb-stepper>
+        </nb-card-body>
+    </nb-card>
+</div>

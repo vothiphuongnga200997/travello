@@ -1,0 +1,46 @@
+@import url(../../../../css/bootstrap.min.css);
+@import url(../../../../css/classy-nav.css);
+@import url(../../../../css/animate.css);
+@import url(../../../../css/magnific-popup.css);
+@import url(../../../../css/font-awesome.min.css);
+@import url(../../../../css/nice-select.css);
+@import url(../../../../css/travel-icon.scss);
+@import '../pages.component.scss';
+@import '../../@theme/styles/themes';
+@import '../../@theme/styles/travello.scss';
+.container {
+    position: relative;
+}
+.background-description {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    background-color: #04263d7c;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 15px 25px;
+    max-height: 160px;
+    z-index: 100;
+    border-left: 12px solid #0e7cb8;
+}
+.tour-banner-title1 {
+    text-align: left;
+    color: #ffffff;
+    font-size: 42px;
+    width: 100%;
+    margin: 15px 0px;
+}
+// images tour start /////////
+.imagesTour-content {
+    margin: 50px;
+}
+.imagesTour {
+    height: 200px;
+    width: 100%;
+}
+
+// images tour end /////////

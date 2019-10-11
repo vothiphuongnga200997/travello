@@ -1,0 +1,15 @@
+<div>
+    <div class="slide-img bg-img" style="background-image: url(../../../assets/img/bg-img/bg-7.jpg); height: 480px;"></div>
+    <div class="container">
+        <div class="background-description">
+            <h1 class="tour-banner-title1">Tour Phan Thiết</h1>
+        </div>
+    </div>
+</div>
+<section class="wow pulse" data-wow-delay="0.3s">
+    <div class="row m-5">
+        <div class="col-4 mt-2" *ngFor="let image of albums; let i = index">
+            <img class="" [src]="image.thumb" (click)="open(i)" />
+        </div>
+    </div>
+</section>

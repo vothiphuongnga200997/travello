@@ -1,0 +1,9 @@
+<ngx-carousel class="banner mt-" [inputs]="carouselBanner" (carouselLoad)="carouselBannerLoad()">
+    <ngx-item NgxCarouselItem *ngFor="let tile of carouselBannerItems; let i = index">
+        <div (click)="open(i)" class="bannerStyle" [style.background]="'url(' + tile + ')'">
+            <h1>{{ i }}</h1>
+        </div>
+    </ngx-item>
+    <button NgxCarouselPrev class="leftRs">&lt;</button>
+    <button NgxCarouselNext class="rightRs">&gt;</button>
+</ngx-carousel>

@@ -1,0 +1,40 @@
+<!-- Menu -->
+<ngx-menu></ngx-menu>
+<!-- Menu end -->
+
+<ngx-carousel class="banner" [inputs]="carouselBanner" (carouselLoad)="carouselBannerLoad()">
+    <ngx-item NgxCarouselItem *ngFor="let tile of carouselBannerItems; let i = index">
+        <div (click)="open(i)" class="bannerStyle" [style.background]="'url(' + tile + ')'">
+            <h1>{{ i }}</h1>
+        </div>
+    </ngx-item>
+    <button NgxCarouselPrev class="leftRs">&lt;</button>
+    <button NgxCarouselNext class="rightRs">&gt;</button>
+</ngx-carousel>
+<div class="row info-tour">
+    <div class="left-detail col-9">
+        <div class="row mt-1">
+            <a class="text-info"> Thời lượng: </a>
+            <a> 3 ngày 2 đêm</a>
+        </div>
+        <div class="row mt-1">
+            <a class="text-info"> Điểm khởi hành: </a>
+            <a> 3 ngày 2 đêm</a>
+        </div>
+        <div class="row mt-1">
+            <a class="text-info"> Phương tiện: </a>
+            <a> 3 ngày 2 đêm</a>
+        </div>
+        <div class="row mt-1">
+            <a class="text-info"> Điểm đến: </a>
+            <a> 3 ngày 2 đêm</a>
+        </div>
+
+        <!-- image tour start -->
+
+        <!-- image tour end -->
+    </div>
+    <div class="col-2 right-detail">
+        <div class="">Ngaaa</div>
+    </div>
+</div>
