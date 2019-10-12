@@ -18,6 +18,7 @@ export class ContractService {
         query.select('code', 'startDay', 'endDay', 'childrenPrice', 'adultPrice');
         try {
             let result = await query.find();
+            console.log(result);
             return result;
         } catch (ex) {
             throw ex;
@@ -75,19 +76,6 @@ export class ContractService {
     async getContrat() {
         const contract = Parse.Object.extend('contract');
         const query = new Parse.Query(contract);
-        query.include('objTour');
-        query.include('objUser');
-        try {
-            let result = await query.find();
-            return result;
-        } catch (ex) {
-            throw ex;
-        }
-    }
-    async getContractId(id) {
-        const contract = Parse.Object.extend('contract');
-        const query = new Parse.Query(contract);
-        query.equalTo('objectId', id);
         query.include('objTour');
         query.include('objUser');
         try {

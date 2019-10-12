@@ -186,17 +186,5 @@ export class TourService {
         return result;
     }
 
-    async checkCode(code) {
-        const Tour = Parse.Object.extend('tour');
-        const query = new Parse.Query(Tour);
-        query.select('code');
-        query.equalTo('code', code);
-
-        try {
-            let result = await query.find();
-            return result;
-        } catch (ex) {
-            throw ex;
-        }
-    }
+    async check() {}
 }

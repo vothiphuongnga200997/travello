@@ -140,17 +140,24 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="label-txt">Người lớn (*)</div>
-                        <input class="form-control" min="1" formControlName="adult" type="number" (change)="pay()" />
+                        <input
+                            class="form-control"
+                            min="1"
+                            formControlName="adult"
+                            type="number"
+                            [(ngModel)]="this.numberAdult"
+                            (change)="pay()"
+                        />
                         <div class="required">
-                            <div *ngIf="submitted && form.controls['adult'].hasError('required')" class="float-right">
+                            <div *ngIf="submitted && form.controls['adult'].hasError('pattern')" class="float-right">
                                 Quantity is greater than zero
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-6" *ngIf="this.form1">
                         <div class="label-txt">Trẻ em</div>
-                        <input (change)="pay()" class="form-control" formControlName="kids" type="text" />
+                        <input (change)="pay()" class="form-control" formControlName="kids" type="text" [(ngModel)]="this.numberkids" />
                     </div>
                 </div>
                 <div class="text-info" *ngIf="this.price > 0">Tổng tiền : {{ this.price | number }}đ</div>

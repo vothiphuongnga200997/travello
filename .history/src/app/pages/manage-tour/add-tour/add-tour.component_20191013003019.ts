@@ -112,7 +112,7 @@ export class AddTourComponent implements OnInit {
             quantity: ['', Validators.required],
             departure: ['', Validators.required],
             itinerary: ['', Validators.required],
-            vehicle: ['', Validators.required],
+            vahicle: ['', Validators.required],
             note: [''],
         });
         if (this.obj) {

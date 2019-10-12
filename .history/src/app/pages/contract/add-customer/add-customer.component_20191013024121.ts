@@ -74,30 +74,29 @@ export class AddCustomerComponent implements OnInit {
                 tour: [result[0].attributes.objTour.attributes.code],
                 adult: [null],
                 kids: [null],
-                contacts: this.fb.array([]),
+                contacts: this.fb.array([this.createContact()]),
             });
             this.contactList = this.form.get('contacts') as FormArray;
-            for (let i of this.objCustomEdit) {
-                try {
-                    this.contactList.push(
-                        this.fb.group({
-                            name: [i.name],
-                            phonecustomer: [i.phonecustomer],
-                            address: [i.address],
-                            gender: [i.gender],
-                        }),
-                    );
-                } catch (ex) {
-                    console.log(ex);
-                }
-            }
         }
     }
 
     // part customer
     createContact(): FormGroup {
+        if (this.objCustomEdit) {
+            for (let i of this.objCustomEdit) {
+                try {
+                    return this.fb.group({
+                        name: [i.name],
+                        phonecustomer: [i.phonecustomer],
+                        address: [i.address],
+                        gender: [i.gender],
+                    });
+                } catch (ex) {
+                    console.log(ex);
+                }
+            }
+        }
         this.price = 0;
-
         try {
             return this.fb.group({
                 name: [null, Validators.compose([Validators.required])],

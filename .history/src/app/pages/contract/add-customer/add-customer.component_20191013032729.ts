@@ -74,7 +74,7 @@ export class AddCustomerComponent implements OnInit {
                 tour: [result[0].attributes.objTour.attributes.code],
                 adult: [null],
                 kids: [null],
-                contacts: this.fb.array([]),
+                contacts: this.fb.array([this.createContact()]),
             });
             this.contactList = this.form.get('contacts') as FormArray;
             for (let i of this.objCustomEdit) {

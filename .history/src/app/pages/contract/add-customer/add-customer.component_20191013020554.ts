@@ -4,7 +4,6 @@ import { NbDialogRef } from '@nebular/theme';
 import { ContractService } from '../../../shared/services/contract.service';
 import * as moment from 'moment';
 import { CompleterData, CompleterService } from 'ng2-completer';
-import { timingSafeEqual } from 'crypto';
 @Component({
     selector: 'ngx-add-customer',
     templateUrl: './add-customer.component.html',
@@ -13,7 +12,6 @@ import { timingSafeEqual } from 'crypto';
 export class AddCustomerComponent implements OnInit {
     protected dataService: CompleterData;
     objUser: Array<any> = [];
-    objCustomEdit: Array<any> = [];
     title: String;
     idEdit: any;
     submitted = false;
@@ -63,41 +61,15 @@ export class AddCustomerComponent implements OnInit {
         });
         this.contactList = this.form.get('contacts') as FormArray;
         if (this.idEdit) {
+            console.log(this.idEdit);
             let result = await this.contractService.getContractId(this.idEdit);
             console.log(result);
-            this.objCustomEdit = result[0].attributes.infoCustom;
-            this.form = this.fb.group({
-                representative: [result[0].attributes.objUser.attributes.fullname],
-                phone: [result[0].attributes.objUser.attributes.phone],
-                email: [null],
-                username: [result[0].attributes.objUser.attributes.username],
-                tour: [result[0].attributes.objTour.attributes.code],
-                adult: [null],
-                kids: [null],
-                contacts: this.fb.array([]),
-            });
-            this.contactList = this.form.get('contacts') as FormArray;
-            for (let i of this.objCustomEdit) {
-                try {
-                    this.contactList.push(
-                        this.fb.group({
-                            name: [i.name],
-                            phonecustomer: [i.phonecustomer],
-                            address: [i.address],
-                            gender: [i.gender],
-                        }),
-                    );
-                } catch (ex) {
-                    console.log(ex);
-                }
-            }
         }
     }
 
     // part customer
     createContact(): FormGroup {
         this.price = 0;
-
         try {
             return this.fb.group({
                 name: [null, Validators.compose([Validators.required])],
@@ -158,6 +130,8 @@ export class AddCustomerComponent implements OnInit {
                 this.form = this.fb.group({
                     representative: [event.originalObject.fullname],
                     phone: [event.originalObject.phone],
+                    email: [null],
+                    text: [event.originalObject.username],
                     username: [null, Validators.compose([Validators.required])],
                     tour: [null, Validators.compose([Validators.required])],
                     adult: [null, Validators.compose([Validators.required])],

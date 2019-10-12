@@ -62,42 +62,25 @@ export class AddCustomerComponent implements OnInit {
             contacts: this.fb.array([this.createContact()]),
         });
         this.contactList = this.form.get('contacts') as FormArray;
-        if (this.idEdit) {
-            let result = await this.contractService.getContractId(this.idEdit);
-            console.log(result);
-            this.objCustomEdit = result[0].attributes.infoCustom;
-            this.form = this.fb.group({
-                representative: [result[0].attributes.objUser.attributes.fullname],
-                phone: [result[0].attributes.objUser.attributes.phone],
-                email: [null],
-                username: [result[0].attributes.objUser.attributes.username],
-                tour: [result[0].attributes.objTour.attributes.code],
-                adult: [null],
-                kids: [null],
-                contacts: this.fb.array([]),
-            });
-            this.contactList = this.form.get('contacts') as FormArray;
+    }
+
+    // part customer
+    createContact(): FormGroup {
+        if (this.objCustomEdit.length > 0) {
             for (let i of this.objCustomEdit) {
                 try {
-                    this.contactList.push(
-                        this.fb.group({
-                            name: [i.name],
-                            phonecustomer: [i.phonecustomer],
-                            address: [i.address],
-                            gender: [i.gender],
-                        }),
-                    );
+                    this.fb.group({
+                        name: [i.name],
+                        phonecustomer: [i.phonecustomer],
+                        address: [i.address],
+                        gender: [i.gender],
+                    });
                 } catch (ex) {
                     console.log(ex);
                 }
             }
         }
-    }
-
-    // part customer
-    createContact(): FormGroup {
         this.price = 0;
-
         try {
             return this.fb.group({
                 name: [null, Validators.compose([Validators.required])],

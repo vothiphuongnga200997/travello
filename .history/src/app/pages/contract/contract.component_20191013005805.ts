@@ -116,29 +116,6 @@ export class ContractComponent implements OnInit {
                 }
             });
     }
-    edit(event) {
-        console.log(event);
-        try {
-            this.dialogService
-                .open(AddCustomerComponent, {
-                    context: {
-                        title: 'Create',
-                        idEdit: event,
-                    },
-                })
-                .onClose.subscribe(async data => {
-                    if (data) {
-                        try {
-                            this.toastrService.success(`Add Success`, 'Add success');
-                        } catch (ex) {
-                            this.toastrService.error(ex, `Add Error`);
-                        }
-                    }
-                });
-        } catch (ex) {
-            this.toastrService.error(ex, `Add Error`);
-        }
-    }
     async filter() {
         this.contract = [];
         this.loadingService.start();

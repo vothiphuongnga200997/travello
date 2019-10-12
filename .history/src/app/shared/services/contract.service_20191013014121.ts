@@ -84,19 +84,6 @@ export class ContractService {
             throw ex;
         }
     }
-    async getContractId(id) {
-        const contract = Parse.Object.extend('contract');
-        const query = new Parse.Query(contract);
-        query.equalTo('objectId', id);
-        query.include('objTour');
-        query.include('objUser');
-        try {
-            let result = await query.find();
-            return result;
-        } catch (ex) {
-            throw ex;
-        }
-    }
     async getUser() {
         // const contract = Parse.Object.extend('User');
         const query = new Parse.Query(Parse.User);

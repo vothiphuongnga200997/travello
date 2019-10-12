@@ -47,7 +47,7 @@
                             nbInput
                             fullWidth
                             shape="rectangle"
-                            (change)="checkIdCode(code)"
+                            (change)="checkIdCode(code)";
                         />
                         <div class="required">
                             <div *ngIf="submitted && f['code'].errors">
@@ -292,33 +292,9 @@
                     ></ng2-completer>
                     <div class="required">
                             <div class="float-right">{{ this.requiredLocation }}</div>
-                    </div>  
-                </div>
-                <div class="col-5 offset-1">
-                    <h6>Phương tiện</h6>
-                    <div class="form-group">
-                        <input
-                            status="info"
-                            type="text"
-                            [(ngModel)]="vehicle"
-                            class="form-control fileName mb-0"
-                            formControlName="vehicle"
-                            class="form-control"
-                            [ngClass]="{ 'is-invalid': submitted && f.vehicle.errors }"
-                            nbInput
-                            fullWidth
-                            shape="rectangle"
-                        />
-                        <div class="required">
-                            <div *ngIf="submitted && f['vehicle'].errors">
-                                <div class="float-right" *ngIf="f['vehicle'].errors.required">Vehicle is required</div>
-                            </div>
                         </div>
-                    </div>
                 </div>
 
-            </div>
-            <div class="row">
                 <div class="col-2" *ngFor="let item of listGuide; let i = index">
                     <div class="location">
                         <button type="button" class="close " aria-label="Close" (click)="destroy(i)">
@@ -329,9 +305,10 @@
                     </div>
                 </div>
             </div>
+
             <div class="row mt-2">
                 <div class="col-11">
-                    <h6>Ghi chú</h6>
+                    <h6>Mô tả</h6>
                     <textarea status="info" nbInput fullWidth [(ngModel)]="note" formControlName="note"></textarea>
                 </div>
             </div>

@@ -117,7 +117,6 @@ export class ContractComponent implements OnInit {
             });
     }
     edit(event) {
-        console.log(event);
         try {
             this.dialogService
                 .open(AddCustomerComponent, {

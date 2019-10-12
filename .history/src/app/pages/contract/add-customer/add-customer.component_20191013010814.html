@@ -142,7 +142,7 @@
                         <div class="label-txt">Người lớn (*)</div>
                         <input class="form-control" min="1" formControlName="adult" type="number" (change)="pay()" />
                         <div class="required">
-                            <div *ngIf="submitted && form.controls['adult'].hasError('required')" class="float-right">
+                            <div *ngIf="submitted && form.controls['adult'].hasError('pattern')" class="float-right">
                                 Quantity is greater than zero
                             </div>
                         </div>

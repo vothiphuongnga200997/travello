@@ -38,7 +38,6 @@ export class AddTourComponent implements OnInit {
     endDay: any;
     quantity: number;
     departure: string = '';
-    vehicle: string;
     context: string;
     fileName: string;
     public imagePath;
@@ -112,7 +111,6 @@ export class AddTourComponent implements OnInit {
             quantity: ['', Validators.required],
             departure: ['', Validators.required],
             itinerary: ['', Validators.required],
-            vehicle: ['', Validators.required],
             note: [''],
         });
         if (this.obj) {
@@ -316,8 +314,5 @@ export class AddTourComponent implements OnInit {
         }
         this.dataService1 = this.completerService.local(this.getGuides, 'fullname', 'fullname');
     }
-    async checkIdCode(code) {
-        let i = await this.tourService.checkCode(code);
-        console.log(i);
-    }
+    async checkIdCode(code) {}
 }

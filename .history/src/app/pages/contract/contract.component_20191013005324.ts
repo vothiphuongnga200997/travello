@@ -98,6 +98,8 @@ export class ContractComponent implements OnInit {
         }
     }
     delete(event) {
+        console.log(event);
+
         this.dialogService
             .open(DeleteComponent, {
                 context: {
@@ -115,29 +117,6 @@ export class ContractComponent implements OnInit {
                     this.toastrService.error(ex, `Update Error`);
                 }
             });
-    }
-    edit(event) {
-        console.log(event);
-        try {
-            this.dialogService
-                .open(AddCustomerComponent, {
-                    context: {
-                        title: 'Create',
-                        idEdit: event,
-                    },
-                })
-                .onClose.subscribe(async data => {
-                    if (data) {
-                        try {
-                            this.toastrService.success(`Add Success`, 'Add success');
-                        } catch (ex) {
-                            this.toastrService.error(ex, `Add Error`);
-                        }
-                    }
-                });
-        } catch (ex) {
-            this.toastrService.error(ex, `Add Error`);
-        }
     }
     async filter() {
         this.contract = [];
@@ -174,6 +153,7 @@ export class ContractComponent implements OnInit {
             query.equanTo('objectId', this.idCustom);
         }
         let result = await query.find();
+        console.log(result);
         if (result) {
             result.map(data => {
                 this.contract.push({

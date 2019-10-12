@@ -87,7 +87,7 @@ export class ContractService {
     async getContractId(id) {
         const contract = Parse.Object.extend('contract');
         const query = new Parse.Query(contract);
-        query.equalTo('objectId', id);
+        query.equalTo('objetcId', id);
         query.include('objTour');
         query.include('objUser');
         try {
