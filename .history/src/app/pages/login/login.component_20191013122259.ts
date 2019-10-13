@@ -1,7 +1,8 @@
 import { Component, OnInit, AfterViewInit, NgZone } from '@angular/core';
 import { AuthService } from '../../shared/services';
 import { Router } from '@angular/router';
-import { Parse } from 'parse';
+import {Parse} from 'parse';
+declare var FB: any;
 
 @Component({
     moduleId: module.id,
@@ -19,6 +20,33 @@ export class LoginComponent implements OnInit, AfterViewInit {
     ngOnInit() {
         console.log('ngOnInit');
         this.fetchAndGetUser();
+        (window as any).fbAsyncInit = function() {
+            /*FB.init({
+                appId: '2310348899094477',
+                cookie: true,
+                xfbml: true,
+                version: 'v3.1',
+            });*/
+            Parse.FacebookUtils.init({
+                appId      : '2310348899094477', // Facebook App ID
+                status     : true,  // check Facebook Login status
+                cookie     : true,  // enable cookies to allow Parse to access the session
+                xfbml      : true,  // initialize Facebook social plugins on the page
+                version    : 'v3.1', // point to the latest Facebook Graph API version
+            });
+            FB.AppEvents.logPageView();
+        };
+        (function(d, s, id) {
+            let js,
+                fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        })(document, 'script', 'facebook-jssdk');
     }
     async fetchAndGetUser() {
         let currentUser = this.authService.getCurrentUser();
@@ -43,16 +71,14 @@ export class LoginComponent implements OnInit, AfterViewInit {
         });*/
         try {
             const users = await Parse.FacebookUtils.logIn();
-            console.log(users);
             if (!users.existed()) {
-                alert('User signed up and logged in through Facebook!');
+              alert('User signed up and logged in through Facebook!');
             } else {
-                alert('User logged in through Facebook!');
-                this.router.navigate(['pages']);
+              alert("User logged in through Facebook!");
             }
-        } catch (error) {
-            alert('User cancelled the Facebook login or did not fully authorize.');
-        }
+          } catch (error) {
+            alert("User cancelled the Facebook login or did not fully authorize.");
+          }
     }
 
     async onLoginSubmit() {
@@ -63,13 +89,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
         if (this.password !== '' && this.username !== '') {
             try {
                 let login = await this.authService.login(this.username, this.password);
-                this.router.navigate(['pages']);
-
-                // if (login.get('status') > 0) {
-                //     this.router.navigate(['pages']);
-                // } else {
-                //     this.router.navigate(['home']);
-                // }
+                if (login.get('status') > 0) {
+                    this.router.navigate(['pages']);
+                } else {
+                    this.router.navigate(['home']);
+                }
             } catch (ex) {
                 if (ex && ex.message) {
                     this.requestPassword = ex.message;
@@ -90,13 +114,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
             data => {
                 if (data) {
                     this.ngZone.run(() => {
-                        this.router.navigate(['pages']);
-
-                        // if (data.get('status') > 0) {
-                        //     this.router.navigate(['pages']);
-                        // } else {
-                        //     this.router.navigate(['home']);
-                        // }
+                        if (data.get('status') > 0) {
+                            this.router.navigate(['pages']);
+                        } else {
+                            this.router.navigate(['home']);
+                        }
                     });
                 }
             },

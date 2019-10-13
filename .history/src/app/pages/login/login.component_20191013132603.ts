@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit, AfterViewInit {
         });*/
         try {
             const users = await Parse.FacebookUtils.logIn();
-            console.log(users);
             if (!users.existed()) {
                 alert('User signed up and logged in through Facebook!');
             } else {

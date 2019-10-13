@@ -43,12 +43,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
         });*/
         try {
             const users = await Parse.FacebookUtils.logIn();
-            console.log(users);
             if (!users.existed()) {
                 alert('User signed up and logged in through Facebook!');
             } else {
                 alert('User logged in through Facebook!');
-                this.router.navigate(['pages']);
             }
         } catch (error) {
             alert('User cancelled the Facebook login or did not fully authorize.');
@@ -63,13 +61,11 @@ export class LoginComponent implements OnInit, AfterViewInit {
         if (this.password !== '' && this.username !== '') {
             try {
                 let login = await this.authService.login(this.username, this.password);
-                this.router.navigate(['pages']);
-
-                // if (login.get('status') > 0) {
-                //     this.router.navigate(['pages']);
-                // } else {
-                //     this.router.navigate(['home']);
-                // }
+                if (login.get('status') > 0) {
+                    this.router.navigate(['pages']);
+                } else {
+                    this.router.navigate(['home']);
+                }
             } catch (ex) {
                 if (ex && ex.message) {
                     this.requestPassword = ex.message;

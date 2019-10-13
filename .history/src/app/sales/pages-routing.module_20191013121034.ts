@@ -11,6 +11,7 @@ const routes: Routes = [
         path: '',
         component: PagesComponent,
         children: [
+            { path: 'login', component: LoginComponent },
             {
                 path: 'book-tour',
                 component: BookTourComponent,

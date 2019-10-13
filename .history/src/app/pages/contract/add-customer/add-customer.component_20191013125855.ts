@@ -158,7 +158,7 @@ export class AddCustomerComponent implements OnInit {
                 this.form = this.fb.group({
                     representative: [event.originalObject.fullname],
                     phone: [event.originalObject.phone],
-                    username: [event.originalObject.username],
+                    username: [null, event.originalObject.username],
                     tour: [null, Validators.compose([Validators.required])],
                     adult: [null, Validators.compose([Validators.required])],
                     kids: [null],
