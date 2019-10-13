@@ -1,0 +1,119 @@
+<header class="header-area">
+    <!-- Navbar Area -->
+    <div class="palatin-main-menu" style="position: fixed">
+        <!-- Menu -->
+        <!-- <nav class="classy-navbar justify-content-between" id="palatinNav"> -->
+        <!-- Nav brand -->
+
+        <!-- Navbar Toggler -->
+
+        <!-- Menu -->
+        <nav class="classy-navbar justify-content-between">
+            <img class="ml-5" src="../../../assets/img/core-img/logo.png" alt="" />
+            <section class="wow fadeInUp">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li class="drop">
+                        <a>Miền Bắc</a>
+
+                        <div class="dropdownContain" data-wow-delay="500ms">
+                            <div class="dropOut">
+                                <div class="triangle"></div>
+                                <ul>
+                                    <li (click)="showTour(one.id)" *ngFor="let one of this.one">{{ one.location }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a>Miền Trung</a>
+                        <div class="dropdownContain">
+                            <div class="dropOut">
+                                <div class="triangle"></div>
+                                <ul>
+                                    <li (click)="showTour(two.id)" *ngFor="let two of this.two">{{ two.location }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a>Miền Nam</a>
+                        <div class="dropdownContain">
+                            <div class="dropOut">
+                                <div class="triangle"></div>
+                                <ul>
+                                    <li (click)="showTour(three.id)" *ngFor="let three of this.three">{{ three.location }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="#">Liên hệ</a></li>
+                    <li *ngIf="this.menuLogin">
+                        <a>Login</a>
+                        <div class="dropdownContain1">
+                            <div class="dropOut1">
+                                <div class="triangle"></div>
+                                <ul>
+                                    <li (click)="openVerticallyCentered(content)">Đăng nhập</li>
+                                    <li (click)="openVerticallyCentered(content1)">Tạo tài khoản</li>
+                                    <li (click)="loginFB()">
+                                        <i class="fab fa-facebook-square text-primary icon mr-2 "></i>Login Facebook
+                                    </li>
+                                    <li (click)="loginGoogle('google-login-button-sign-in')" id="google-login-button-sign-in">
+                                        <i class="fab fa-google-plus-square text-danger icon mr-2"></i>Login Google
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li *ngIf="this.menuLogout">
+                        <a>Xin chào: {{ this.user }}</a>
+                        <div class="dropdownContain1">
+                            <div class="dropOut1">
+                                <div class="triangle"></div>
+                                <ul>
+                                    <li (click)="logout()">Log out</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </nav>
+
+        <!-- Nav End -->
+        <!-- </nav> -->
+    </div>
+</header>
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Login</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        Username
+        <input type="text" />
+        Password
+        <input type="password" />
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="login()">Login</button>
+    </div>
+</ng-template>
+<ng-template #content1 let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Modal title</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>One fine body&hellip;</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+<div id="root"></div>

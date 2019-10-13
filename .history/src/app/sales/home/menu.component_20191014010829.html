@@ -1,0 +1,69 @@
+<header class="header-area">
+    <!-- Navbar Area -->
+    <div class="palatin-main-menu" style="position: fixed">
+        <!-- Menu -->
+        <!-- <nav class="classy-navbar justify-content-between" id="palatinNav"> -->
+        <!-- Nav brand -->
+
+        <!-- Navbar Toggler -->
+
+        <!-- Menu -->
+        <nav class="classy-navbar justify-content-between">
+            <img class="ml-5" src="../../../assets/img/core-img/logo.png" alt="" />
+            <section class="wow fadeInUp">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li class="drop">
+                        <a>Miền Bắc</a>
+
+                        <div class="dropdownContain" data-wow-delay="500ms">
+                            <div class="dropOut">
+                                <div class="triangle"></div>
+                                <ul>
+                                    <li (click)="showTour(one.id)" *ngFor="let one of this.one">{{ one.location }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a>Miền Trung</a>
+                        <div class="dropdownContain">
+                            <div class="dropOut">
+                                <div class="triangle"></div>
+                                <ul>
+                                    <li (click)="showTour(two.id)" *ngFor="let two of this.two">{{ two.location }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a>Miền Nam</a>
+                        <div class="dropdownContain">
+                            <div class="dropOut">
+                                <div class="triangle"></div>
+                                <ul>
+                                    <li (click)="showTour(three.id)" *ngFor="let three of this.three">{{ three.location }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="#">Liên hệ</a></li>
+                    <li>
+                        <a>Login</a>
+                        <div class="dropdownContain">
+                            <div class="dropOut">
+                                <div class="triangle"></div>
+                                <ul>
+                                    <li (click)="showTour(three.id)" *ngFor="let three of this.three">{{ three.location }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </nav>
+
+        <!-- Nav End -->
+        <!-- </nav> -->
+    </div>
+</header>
