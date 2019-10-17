@@ -1,0 +1,57 @@
+<!-- image tour start -->
+<ngx-carousel class="banner" [inputs]="carouselBanner" (carouselLoad)="carouselBannerLoad()">
+    <ngx-item NgxCarouselItem *ngFor="let tile of carouselBannerItems; let i = index">
+        <div (click)="open(i)" class="bannerStyle" [style.background]="'url(' + tile + ')'">
+            <h1>{{ i }}</h1>
+        </div>
+    </ngx-item>
+    <button NgxCarouselPrev class="leftRs">&lt;</button>
+    <button NgxCarouselNext class="rightRs">&gt;</button>
+</ngx-carousel>
+<!-- image tour end -->
+
+<div class="row info-tour" *ngFor="let i of this.infoTour">
+    <h2 class="text-uppercase font-weight-bold">{{ i.name }}</h2>
+    <!-- form left start -->
+    <div class="left-detail col-9">
+        <div class="row m-3">
+            <div class="col-6">
+                <span class=" text-uppercase"> Thời lượng: </span>
+                <span class="text-strong font-weight-bold">{{ i.duration }}</span
+                ><br />
+                <span class="text-uppercase"> Điểm khởi hành: </span>
+                <span class="text-strong font-weight-bold">{{ i.departure }}</span>
+            </div>
+
+            <div class="col-6">
+                <span class="text-uppercase"> Phương tiện: </span>
+                <span class="text-strong font-weight-bold">{{ i.vehicle }}</span
+                ><br />
+                <span class="text-uppercase"> Điểm đến: </span>
+                <span class="text-strong text-capitalize font-weight-bold" *ngFor="let n of this.location"> {{ n.location }} </span>
+            </div>
+        </div>
+        <p>{{ i.highlights }}</p>
+
+        <!-- <nb-card> -->
+        <nb-tabset>
+            <nb-tab tabTitle="Chương trình tour">
+                {{ i.itinerary }}
+            </nb-tab>
+            <nb-tab tabTitle="Chính sách tour">
+                <span>Content #2</span>
+            </nb-tab>
+            <nb-tab tabTitle="Simple Tab #3">
+                <span>Content #3</span>
+            </nb-tab>
+        </nb-tabset>
+        <!-- </nb-card> -->
+    </div>
+    <!-- form left end -->
+
+    <!-- form right start -->
+    <div class="col-2 right-detail">
+        <div class="">Ngaaa</div>
+    </div>
+    <!-- form right end -->
+</div>

@@ -1,0 +1,37 @@
+<!-- image tour start -->
+<ngx-carousel class="banner" [inputs]="carouselBanner" (carouselLoad)="carouselBannerLoad()">
+    <ngx-item NgxCarouselItem *ngFor="let tile of carouselBannerItems; let i = index">
+        <div (click)="open(i)" class="bannerStyle" [style.background]="'url(' + tile + ')'">
+            <h1>{{ i }}</h1>
+        </div>
+    </ngx-item>
+    <button NgxCarouselPrev class="leftRs">&lt;</button>
+    <button NgxCarouselNext class="rightRs">&gt;</button>
+</ngx-carousel>
+<!-- image tour end -->
+
+<div class="row info-tour" *ngFor="let i of this.infoTour">
+    <h1 class="text-uppercase font-weight-bold">{{ i.name }}</h1>
+    <div class="left-detail col-9">
+        <div class="row">
+            <div class="col-6">
+                <span class="text-info text-uppercase"> Thời lượng: </span>
+                <a>{{ i.duration }}</a
+                ><br />
+                <span class="text-info text-uppercase"> Điểm khởi hành: </span>
+                <span class="text-strong">{{ i.departure }}</span>
+            </div>
+
+            <div class="col-6">
+                <span class="text-info text-uppercase"> Phương tiện: </span>
+                <span class="text-strong">{{ i.vehicle }}</span
+                ><br />
+                <span class="text-info text-uppercase"> Điểm đến: </span>
+                <span class="text-strong text-capitalize" *ngFor="let n of this.location"> {{ n.location }} </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-2 right-detail">
+        <div class="">Ngaaa</div>
+    </div>
+</div>
