@@ -1,0 +1,164 @@
+@import '../../@theme/styles/themes';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/breakpoints';
+@import '../../@theme/styles/styles.scss';
+@import '../../@theme/styles/styles';
+
+@include nb-install-component() {
+    /deep/ router-outlet + * {
+        display: block;
+        animation: fade 1s;
+
+        @keyframes fade {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    }
+}
+@include nb-install-component() {
+    nb-card {
+        width: 100%;
+    }
+}
+
+:host ::ng-deep nb-stepper .step-content {
+    text-align: center;
+
+    button {
+        cursor: pointer;
+        margin: 0.5rem;
+    }
+}
+
+.test {
+    background: red;
+}
+
+// ngu
+
+.steppers-container {
+    margin-top: 90px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+.form-right {
+    margin-left: 30px;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
+}
+// button a start
+$speed: 0.5s;
+
+.btn-flip {
+    opacity: 1;
+    outline: 0;
+    color: #fff;
+    width: 170px;
+    line-height: 40px;
+    position: relative;
+    text-align: center;
+    letter-spacing: 1px;
+    display: inline-block;
+    text-decoration: none;
+    font-family: 'Open Sans';
+    text-transform: uppercase;
+    margin-bottom: 50px;
+    &:hover {
+        &:after {
+            opacity: 1;
+            transform: translateY(0) rotateX(0);
+        }
+
+        &:before {
+            opacity: 0;
+            transform: translateY(50%) rotateX(90deg);
+        }
+    }
+
+    &:after {
+        top: 0;
+        left: 0;
+        opacity: 0;
+        width: 100%;
+        color: #094b7a;
+        display: block;
+        transition: $speed;
+        position: absolute;
+        background: #fcfcfc;
+        content: attr(data-back);
+        transform: translateY(-50%) rotateX(90deg);
+        border: 1px solid #094b7a;
+    }
+
+    &:before {
+        top: 0;
+        left: 0;
+        opacity: 1;
+        color: white;
+        display: block;
+        padding: 0 30px;
+        line-height: 40px;
+        transition: $speed;
+        position: relative;
+        background: #094b7a;
+        content: attr(data-front);
+        transform: translateY(0) rotateX(0);
+    }
+}
+// button a end
+.rule {
+    width: 100%;
+    height: 250px;
+    overflow-y: scroll;
+    padding: 10px;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-right: 2px solid #ccc;
+}
+.required {
+    height: 15px;
+    color: red;
+    font-size: 12px;
+    float: right !important;
+    padding-top: 5px;
+    width: 100%;
+}
+// sale
+.promotion-tour {
+    position: absolute;
+    background: #ff002c;
+    line-height: 30px;
+    max-width: 80%;
+    margin-left: -23px;
+}
+
+.promotion-tour .text-promotion-tour {
+    position: relative;
+    padding: 0 25px 0 15px;
+    font-size: 13px;
+    color: #fff;
+    font-weight: 600;
+    line-height: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+.promotion-tour:after {
+    left: calc(100% - 15px);
+    top: 50%;
+    border: solid #ff002c;
+    content: ' ';
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: #ff002c;
+    border-right-color: transparent;
+    border-width: 15px;
+    margin-top: -15px;
+}

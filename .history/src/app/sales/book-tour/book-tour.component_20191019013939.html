@@ -1,0 +1,287 @@
+<div class="steppers-container row">
+    <nb-card>
+        <nb-card-body>
+            <nb-stepper #stepper>
+                 <nb-step [stepControl]="firstForm" label="Chọn dịch vụ">
+                    <form [formGroup]="firstForm" class="step-container">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h2>Số lượng hành khách</h2>
+                                        <div>
+                                            <b class="float-left mb-2">Người lớn<b class="text-danger">(*)</b> </b>
+                                            <input (blur)="pay()" type="number" class="form-control" formControlName="adult" />
+                                            <div class="required">
+                                                <div
+                                                    *ngIf="submitted && firstForm.controls['adult'].hasError('required')"
+                                                    class="float-right"
+                                                >
+                                                    Quantity is greater than zero
+                                                </div>
+                                            </div>
+                                            <div class="required">
+                                                <div *ngIf="submitted && firstForm.controls['adult'].hasError('min')" class="float-right">
+                                                    Quantity
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <b class="float-left mb-2"> Trẻ em</b>
+                                            <input (blur)="pay()" type="number" class="form-control" formControlName="children" />
+                                            <i>(Áp dụng từ 2 đến dưới 10 tuổi)</i>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <h2>Mã khuyến mãi</h2>
+                                        <div>
+                                            <div class="float-left mb-2 text-info">Mã khuyến mãi</div>
+                                            <input
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="Nhập mã khuyến mãi (Nếu có)"
+                                                formControlName="sales"
+                                                [ngClass]="{
+                                                    'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)
+                                                }"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 form-right">
+                                <div *ngFor="let i of this.infoTour">
+                                    <h3 class="mt-2">{{ i.name }}</h3>
+                                    <div class="float-left text-left p-3">
+                                        <div *ngIf="this.infoTour[0].saleoff > 0">
+                                            <div class="promotion-tour">
+                                                <div class="text-promotion-tour">Giảm giá: {{ i.saleoff | number }} đ</div>
+                                            </div>
+                                            <div class="pt-5">
+                                                <a>Code: </a><b>{{ i.code }}</b
+                                                ><br />
+                                                <a>Ngày đi: </a><b>{{ i.startDay }}</b
+                                                ><br />
+                                                <a>Ngày về: </a><b>{{ i.endDay }}</b
+                                                ><br />
+                                                <a>Thời gian: </a><b>{{ i.duration }}</b
+                                                ><br />
+                                                <a>Người lớn </a><del>{{ i.adultPrice | number }}đ </del> <b> {{ i.price | number }}đ</b
+                                                ><br />
+                                                <a>Trẻ em: </a><b>{{ i.childrenPrice | number }}đ</b><br />
+                                                <a>Tống giá: </a><b *ngIf="this.price">{{ this.price | number }}đ</b><br />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button nbButton nbStepperNext (click)="onFirstSubmit()">Next</button>
+                    </form>
+                </nb-step>
+
+                <!--   <nb-step [stepControl]="secondForm" label="Second step">
+                    <form [formGroup]="secondForm" (ngSubmit)="onSecondSubmit()" class="step-container">
+                            <h6>Thông tin liên lạc: {{this.fullname}}</h6>
+                            <div class="row">
+                                    <div class="col-6">
+                                            <div class="label-txt">Phone</div>
+                                            <input class="form-control" formControlName="phone" type="tel" />
+                                            <div class="required">
+                                            <div *ngIf="submitted && secondForm.controls['phone'].hasError('required')" class="float-right">
+                                                    Phone is required!
+                                                </div>
+                                            </div>
+                                            <div class="required">
+                                                <div *ngIf="submitted && secondForm.controls['phone'].hasError('pattern')" class="float-right">
+                                                        Phone no. is not valid!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="col-6">
+                                            <div class="label-txt">Email</div>
+                                            <input class="form-control" formControlName="email" type="email" />
+                                            <div class="required">
+                                            <div *ngIf="submitted && secondForm.controls['email'].hasError('required')" class="float-right">
+                                                    Email is required!
+                                                </div>
+                                            </div>
+                                            <div class="required">
+                                                <div *ngIf="submitted && secondForm.controls['email'].hasError('email')" class="float-right">
+                                                    Email is not valid!
+                                                </div>
+                                            </div>
+                                        </div>
+                                </div>   
+                               
+                            <hr>
+                        <div class="input-group">
+                                <div class="card-body" formArrayName="contacts">
+                                       
+                                    <div *ngFor="let contact of contactFormGroup.controls; let i = index">
+                                            <div [formGroupName]="i">
+                                                <h6>Thông tin khách hàng: {{ i + 1 }}</h6>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="label-txt">Họ & tên {{i + 1}}</div>
+                                                        <input class="form-control" formControlName="name" type="text" />
+                                                        <div class="required">
+                                                                <div
+                                                                    *ngIf="submitted && getContactsFormGroup(i).controls['name'].hasError('required')"
+                                                                    class="float-right"
+                                                                >
+                                                                    Fullname is required!
+                                                                </div>
+                                                            </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="label-txt">Giới tính</div>
+                                                        <nb-select formControlName="gender" name="platForm" placeholder="Chọn giới tính" >
+                                                                <nb-option value="nam">Nam</nb-option>
+                                                                <nb-option value="nữ">Nữ</nb-option>
+                                                        </nb-select>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-3">
+                                                    <div class=" col-6">
+                                                        <div class="label-txt">Phone</div>
+                                                        <input class="form-control" formControlName="phonecustomer" type="text" />
+                                                       
+                                                        
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="label-txt">Địa chỉ</div>
+                                                        <input class="form-control" formControlName="address" type="text" />
+                                                       
+                                                    </div>
+                                                </div>
+                                                <hr />
+                                            </div>
+                                        </div>
+                                    </div>
+                    
+                                  
+                        </div>
+                        <button nbButton nbStepperPrevious>prev</button>
+                        <button nbButton nbStepperNext>next</button>
+                    </form>
+                </nb-step>  -->
+
+                <!-- Step 3 start-->
+
+                <nb-step [stepControl]="thirdForm" label="Third step">
+                    <form [formGroup]="thirdForm" (ngSubmit)="onThirdSubmit()" class="step-container">
+                        <div class="bill">
+                        <div class="detail" >Tổng tiền: <b class="text-info">{{this.price | number }}đ </b> </div>
+                        <div class="detail">Số lượng người lớn:<b> {{this.firstForm.value.adult}}/KH </b></div>
+                        <div class="detail">Số lượng trẻ em: <b>{{this.firstForm.value.children}} </b></div> 
+                        </div>
+
+                        <div class="input-group">
+                        <button class="btn" (click)="paymentAmount(1)"> <div  *ngIf="this.form1"><a class="fas fa-check-double text-danger"></a></div> Thanh toán 50% </button>
+                        <button class="btn" (click)="paymentAmount(2)">
+                            <div class="row">
+                                <div class="col-10">Thanh toán 100% </div>
+                            <div class="col-2" *ngIf="this.form2"><a *ngIf="this.form2" class="fas fa-check-double text-danger"></a></div> 
+                            </div>
+                        </button>
+                    </div>
+                        <div class="input-group">
+                                <nb-radio-group (checked)='payments'>
+                                        <nb-radio
+                                          [value]="'atm'">
+                                         Thanh toán ATM 
+                                        </nb-radio>
+                                        <nb-radio
+                                          [value]="'paypal'">
+                                          Thanh toán trực tuyến PayPal
+                                        </nb-radio>
+                                        <nb-radio
+                                          [value]="'This is value 3'">
+                                          Radio 3
+                                        </nb-radio>
+                                      </nb-radio-group>
+                           
+                        </div>
+                        <div class="rule">
+                                <p class="text-left">
+                                        Điều khoản này là sự thoả thuận đồng ý của quý khách khi sử dụng dịch vụ thanh toán trên trang web www.saigontourist.net của Công ty Dịch vụ Lữ hành  (Lữ hành ) và những trang web của bên thứ ba. Việc quý khách đánh dấu vào ô “Đồng ý” và nhấp chuột vào thanh “Chấp nhận” nghĩa là quý khách đồng ý tất cả các điều khoản thỏa thuận trong các trang web này.
+
+                                        Giải thích từ ngữ
+                                        
+                                        Điều khoản: là những điều quy định giữa Lữ hành  và quý khách
+                                        
+                                        Bên thứ ba: là những đơn vị liên kết với Lữ hành  (OnePay, Vietcombank) nhằm hỗ trợ việc thanh toán qua mạng cho quý khách
+                                        
+                                        Vé điện tử: là những thông tin và hành trình của quý khách cho chuyến đi được thể hiện trên một trang giấy mà quý khách có thể in ra được
+                                        
+                                        Về sở hữu bản quyền
+                                        
+                                        Trang web www.saigontourist.net thuộc quyền sở hữu của Lữ hành  và được bảo vệ theo luật bản quyền, quý khách chỉ được sử dụng trang web này với mục đích xem thông tin và đăng ký thanh toán online cho cá nhân chứ không được sử dụng cho bất cứ mục đích thương mại nào khác.
+                                        
+                                        Việc lấy nội dung để tham khảo, làm tài liệu cho nghiên cứu phải ghi rõ ràng nguồn lấy từ nội dung trang web Lữ hành . Không được sử dụng các logo, các nhãn hiệu Lữ hành Lữ hành  dưới mọi hình thức nếu chưa có sự đồng ý của Lữ hành  bằng văn bản.
+                                        
+                                        Về thông tin khách hàng
+                                        
+                                        Khi đăng ký thanh toán qua mạng, quý khách sẽ được yêu cầu cung cấp một số thông tin cá nhân và thông tin tài khoản.
+                                        
+                                        Đối với thông tin cá nhân: Những thông tin này chỉ để phục vụ cho nhu cầu xác nhận sự mua dịch vụ của quý khách và sẽ hiển thị những nội dung cần thiết trên vé điện tử. Lữ hành  cũng sẽ sử dụng những thông tin liên lạc này để gửi đến quý khách những sự kiện, những tin tức khuyến mãi và những ưu đãi đặc biệt nếu quý khách đồng ý. Những thông tin này của quý khách sẽ được Lữ hành  bảo mật và không tiết lộ cho bên thứ ba biết ngoại trừ sự đồng ý của quý khách hoặc là phải tiết lộ theo sự tuân thủ luật pháp quy định.
+                                        
+                                        Đối với thông tin tài khoản: Những thông tin này sẽ được Lữ hành  và bên thứ ba áp dụng những biện pháp bảo mật cao nhất do các hệ thống thanh toán nổi tiếng trên thế giới như Visa và MasterCard cung cấp nhằm đảm bảo sự an toàn tuyệt đối của thông tin tài khoản quý khách.
+                                        
+                                        Về trang web liên kết
+                                        
+                                        Các trang web của Lữ hành  có chứa những liên hệ kết nối với trang web của bên thứ ba. Việc liên kết trang web của bên thứ ba này nhằm chỉ cung cấp những sự tiện lợi cho quý khách chứ không phải là sự tán thành, chấp nhận những nội dung, thông tin sản phẩm của những trang web bên thứ ba. Lữ hành  sẽ không chiu trách nhiệm về bất cứ trách nhiệm pháp lý nào liên quan đến những thông tin gì trong các trang web bên thứ ba.
+                                        
+                                        Về hủy tour
+                                        
+                                        Trong trường hợp hủy tour, quý khách vui lòng gửi email thông báo hủy tour đến Lữ hành . Lữ hành  sẽ trao đổi và xác nhận lại tất cả các thông tin của quý khách. Khi hoàn tất việc xác nhận thông tin, Lữ hành  sẽ hoàn tiền vào đúng tài khoản quý khách đã thanh toán sau khi trừ các khoản lệ phí hủy tour. Lệ phí hủy tour sẽ tùy thuộc vào từng tour tuyến quý khách đăng ký.
+                                        
+                                        Trách nhiệm của Lữ hành 
+                                        
+                                        Lữ hành  có nhiệm vụ bảo mật và lưu trữ an toàn các thông tin của quý khách với sự nghiêm túc cao nhất.
+                                        
+                                        Giải quyết những thắc mắc, sai sót, vi phạm mà quý khách gặp phải trong quá trình thanh toán nếu do lỗi của Lữ hành .
+                                        
+                                        Đảm bảo thực hiện đầy đủ mọi dịch vụ theo đúng chương trình mà quý khách đăng ký. Tuy nhiên chúng tôi có toàn quyền thay đổi lộ trình hoặc hủy bỏ chuyến đi du lịch bất cứ lúc nào mà chúng tôi thấy cần thiết vì sự an toàn cho quý khách.
+                                        
+                                        Mọi thay đổi nếu có sẽ được thông báo nhanh chóng cho quý khách ngay trước ngày khởi hành hoặc ngay sau khi phát hiện những phát sinh.
+                                        
+                                        Trường hợp miễm trách nhiệm đối với Lữ hành 
+                                        
+                                        Lữ hành  không chịu trách nhiệm về tất cả những thông tin mà quý khách cung cấp bởi chúng tôi không dễ dàng xác nhận chính xác quý khách nào đăng ký thông tin.
+                                        
+                                        Lữ hành  không chịu trách nhiệm về việc thông tin của quý khách bị lấy cắp nếu như việc lấy cắp được thực hiện từ máy của quý khách do bị nhiễm virus máy tính hay do nguyên nhân nào khác.
+                                        
+                                        Lữ hành  không chịu trách nhiệm đối với quý khách nếu xảy ra việc hệ thống máy tính của quý khách bị hư hại trong khi đang thanh toán hoặc bị can thiệp liên quan tới việc sử dụng một trang bên ngoài.
+                                        
+                                        Lữ hành  không chịu trách nhiệm về việc mất dữ liệu thông tin của quý khách do sự cố khách quan như: thiên tai, hạn hán, hỏa hoạn, chiến tranh,…
+                                        
+                                        Trách nhiệm của khách hàng
+                                        
+                                        Quý khách cam kết hoàn toàn chịu trách nhiệm về các thông tin cá nhân, thông tin thẻ tín dụng đã được khai báo là trung thực, chính xác. Nếu có sai sót, giả mạo hay tranh chấp phát sinh thì Lữ hành  có quyền hủy tour đã mua của quý khách.
+                                        
+                                        Quý khách có nhiệm vụ kiểm tra thông tin tài khoản để kịp thời để báo cho Lữ hành  nếu có những sự cố. Thời hạn trong vòng 30 ngày tính từ ngày thanh toán, Lữ hành  sẽ không nhận giải quyết bất cứ kiếu nại nào từ việc thanh toán.
+                                        
+                                        Quý khách không sử dụng các nội dung của trang web do Lữ hành  quản lý cho mục đích thương mại nếu như chưa có sự đồng ý.
+                                        
+                                        Quý khách cần tự áp dụng cài đặt các biện pháp phòng ngừa để bảo đảm rằng bất cứ lựa chọn nào của quý khách khi sử dụng các trang web của Lữ hành  không bị virus hoặc bất cứ mối đe dọa nào khác từ ngoài có thể can thiệp hoặc gây hư hại cho hệ thống máy tính của quý khách.
+                                </p>
+                              </div>
+                              <nb-checkbox [value]="false">Tôi đồng ý điều khoản</nb-checkbox>
+
+                        <button nbButton nbStepperPrevious>prev</button>
+                        <button nbButton nbStepperNext>Confirm</button>
+                    </form>
+                </nb-step>
+                <!-- step 3 end -->
+                <nb-step [stepControl]="thirdForm" [hidden]="true" label="Third step">
+                    <div class="step-container">
+                        <h3>Wizard completed!</h3>
+                        <button nbButton (click)="stepper.reset()">Try again</button>
+                    </div>
+                </nb-step>
+            </nb-stepper>
+        </nb-card-body>
+    </nb-card>
+</div>
