@@ -1,0 +1,29 @@
+<div class="content" style="height: 500px;">
+    <div class="row justify-content-center">
+        <a class="btn-flip" data-back="Change information" data-front="Thay đổi thông tin"></a>
+        <a class="btn-flip" data-back="Cancel Ticket" data-front="Hủy vé tour"></a>
+        <a class="btn-flip" data-back="Buy Ticket" data-front="Mua thêm vé"></a>
+    </div>
+    <div class="row">
+        <div class="col-4">Tour</div>
+        <div class="col-8">
+            <div class="text-info"><h1>Hợp đồng của tôi</h1></div>
+            <div class="info">
+                <div *ngFor="let info of this.pending">
+                    <span class=" text-uppercase"> Mã hợp đồng: </span>
+                    <span class="text-strong font-weight-bold">{{ info.id }}</span>
+
+                    <div class="info">
+                        <span class=" text-uppercase"> Ngày giao dịch: </span>
+                        <span class="text-strong font-weight-bold">{{ info.startDay | date: 'shortTime' }} </span>
+                    </div>
+                    <div class="info">
+                        <span class=" text-uppercase"> Tổng tiền: </span>
+                        <span class="text-strong font-weight-bold">fsdfsdf</span>
+                    </div>
+                    <button (click)="getContract()">get</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

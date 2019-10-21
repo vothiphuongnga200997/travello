@@ -1,0 +1,60 @@
+<div class="content" style="height: 500px;">
+    <div class="row justify-content-center">
+        <a class="btn-flip" data-back="Change information" data-front="Thay đổi thông tin"></a>
+        <a class="btn-flip" data-back="Cancel Ticket" data-front="Hủy vé tour"></a>
+        <a class="btn-flip" data-back="Buy Ticket" data-front="Mua thêm vé"></a>
+    </div>
+    <div class="text-info"><h1>Hợp đồng của tôi</h1></div>
+
+    <div class="row">
+        <!-- thông tin hợp đồng chưa khởi hành  start-->
+        <div class="product-info row" *ngFor="let info of this.pending">
+            <div class="col-4"></div>
+            <div class="col-8">
+                <div class="info">
+                    <span class=" text-uppercase"> Mã hợp đồng: </span>
+                    <span class="text-strong font-weight-bold">{{ info.id }}</span>
+                </div>
+
+                <div class="info">
+                    <span class=" text-uppercase"> Ngày giao dịch: </span>
+                    <span class="text-strong font-weight-bold">{{ info.startDay | date: 'short' }} </span>
+                </div>
+                <div class="info">
+                    <span class=" text-uppercase"> Tổng tiền: </span>
+                    <span class="text-strong font-weight-bold">{{ info.price | number }}đ</span>
+                </div>
+                <div class="info">
+                    <span class=" text-uppercase">Mã tour: </span>
+                    <span class="text-strong font-weight-bold">{{ info.idTour }}</span>
+                </div>
+            </div>
+        </div>
+        <!-- thông tin hợp đồng chưa khởi hành  end-->
+        <!-- giao dịch thành công start -->
+        <div class="product-info row" *ngFor="let info of this.end">
+            <div class="col-4"></div>
+            <div class="col-8">
+                <div class="info">
+                    <span class=" text-uppercase"> Mã hợp đồng: </span>
+                    <span class="text-strong font-weight-bold">{{ info.id }}</span>
+                </div>
+
+                <div class="info">
+                    <span class=" text-uppercase"> Ngày giao dịch: </span>
+                    <span class="text-strong font-weight-bold">{{ info.startDay | date: 'short' }} </span>
+                </div>
+                <div class="info">
+                    <span class=" text-uppercase"> Tổng tiền: </span>
+                    <span class="text-strong font-weight-bold">{{ info.price | number }}đ</span>
+                </div>
+                <div class="info">
+                    <span class=" text-uppercase">Mã tour: </span>
+                    <span class="text-strong font-weight-bold">{{ info.idTour }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- giao dịch thành công end -->
+    </div>
+</div>
