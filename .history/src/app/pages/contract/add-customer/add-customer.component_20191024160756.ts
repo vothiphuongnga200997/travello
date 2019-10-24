@@ -251,17 +251,17 @@ export class AddCustomerComponent implements OnInit {
         this.submitted = true;
         console.log(this.existUser);
         console.log(this.form.value);
-        if (this.form.invalid) {
-            return;
-        } else {
-            this.pay();
-            this.ref.close({
-                info: this.form.value,
-                idUser: this.idUser,
-                price: this.price,
-                empty: this.empty,
-                quantity: this.quantity,
-            });
-        }
+        // if (this.form.invalid) {
+        //     return;
+        // } else {
+        //     this.pay();
+        //     this.ref.close({
+        //         info: this.form.value,
+        //         idUser: this.idUser,
+        //         price: this.price,
+        //         empty: this.empty,
+        //         quantity: this.quantity,
+        //     });
+        // }
     }
 }

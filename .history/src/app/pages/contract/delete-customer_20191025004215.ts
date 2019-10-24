@@ -56,7 +56,7 @@ export class DeleteComponent implements OnInit {
             this.info.createAt = new Date();
             dataSave.objectId = this.idContract;
             dataSave.infoCustom = [];
-            dataSave.cancelContract = this.info;
+            dataSave.cancelContrack = this.info;
             dataSave.numberAdult = 0;
             dataSave.numberKids = 0;
             dataSave.indemnification = this.price / 2;

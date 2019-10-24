@@ -15,7 +15,7 @@ import * as Parse from 'parse';
                 </h6>
             </nb-card-header>
             <nb-card-body>
-                <div>Bạn muốn xóa hợp đồng {{ this.idContract }}</div>
+                <div>Bạn muốn xóa hợp đồng {{ this.id }}</div>
                 <div class="footer">
                     <button class="float-right btn btn-info" (click)="delete()">OK</button>
                     <button class="float-right  btn btn-hint" (click)="dismiss()">Cancel</button>
@@ -25,74 +25,31 @@ import * as Parse from 'parse';
     `,
 })
 export class DeleteComponent implements OnInit {
-    idContract: String;
+    id: String;
     title: String;
     idTour: string;
     quantity: number;
     tourist: any;
     startDay: any;
-    info: any;
-    price: number;
     constructor(protected ref: NbDialogRef<DeleteComponent>, private contractService: ContractService) {}
     ngOnInit() {}
     dismiss() {
         this.ref.close();
     }
     async delete() {
-        let startDate = moment(this.startDay, 'DD/MM/YYYY');
-        let currenDate = moment(new Date()).format('DD/MM/YYYY');
-        let endDate = moment(currenDate, 'DD/MM/YYYY');
-        let diffInDays = startDate.diff(endDate, 'days');
-        if (diffInDays < 7 && diffInDays >= 0) {
-            let tour = Parse.Object.extend('tour');
-            let ObjectTour = new tour();
-
-            const contract = Parse.Object.extend('contract');
-            let obj = new contract();
-            const query = new Parse.Query(contract);
-            query.equalTo('objectId', this.idContract);
-            let dataSave: any = {};
-            let dataTour: any = {};
-            this.info.createAt = new Date();
-            dataSave.objectId = this.idContract;
-            dataSave.infoCustom = [];
-            dataSave.cancelContract = this.info;
-            dataSave.numberAdult = 0;
-            dataSave.numberKids = 0;
-            dataSave.indemnification = this.price / 2;
-
-            try {
-                let result = await obj.save(dataSave);
-                if (result) {
-                    dataTour.empty = await this.contractService.setEmpty(this.idTour, this.quantity);
-                    dataTour.objectId = this.idTour;
-                    await ObjectTour.save(dataTour);
-                }
-                // get so tien
-            } catch (ex) {
-                throw ex;
-            }
-        } else {
-            const contract = Parse.Object.extend('contract');
-            const query = new Parse.Query(contract);
-            let tour = Parse.Object.extend('tour');
-            let ObjectTour = new tour();
-            let dataTour: any = {};
-            query.equalTo('objectId', this.idContract);
-            try {
-                let result = await query.first();
-                console.log(result);
-                let deleteC = await result.destroy();
-                if (deleteC) {
-                    dataTour.objectId = this.idTour;
-                    dataTour.empty = await this.contractService.setEmpty(this.idTour, this.quantity);
-                    let objTour = await ObjectTour.save(dataTour);
-                }
-                return true;
-            } catch (ex) {
-                throw ex;
-            }
-        }
+        let currentDay = moment(Date()).format('YYYY/MM/DD');
+        let startDay = moment(this.startDay).format('YYYY/MM/DD');
+        let firstDate = moment(startDay);
+        let diffInDays = moment.duration(firstDate.diff(currentDay)).asDays();
+        console.log(diffInDays);
+        this.ref.close({
+            pennant: true,
+        });
+        // console.log(this.id, this.idTour, this.quantity, this.tourist);
+        // let i = await this.contractService.deleteContract(this.id, this.idTour, this.quantity, this.tourist);
+        // if (i) {
+        //
+        // }
     }
 }
 @Component({
@@ -134,12 +91,11 @@ export class DeleteTicketComponent implements OnInit {
         this.ref.close();
     }
     async delete() {
-        let startDate = moment(this.startDay, 'DD/MM/YYYY');
-        let currenDate = moment(new Date()).format('DD/MM/YYYY');
-        let endDate = moment(currenDate, 'DD/MM/YYYY');
-        let diffInDays = startDate.diff(endDate, 'days');
-        console.log(diffInDays);
-        if (diffInDays < 7 && diffInDays >= 0) {
+        let currentDay = moment(Date()).format('YYYY/MM/DD');
+        let startDay = moment(this.startDay).format('YYYY/MM/DD');
+        let firstDate = moment(startDay);
+        let diffInDays = moment.duration(firstDate.diff(currentDay)).asDays();
+        if (diffInDays < 7) {
             let tour = Parse.Object.extend('tour');
             let ObjectTour = new tour();
 

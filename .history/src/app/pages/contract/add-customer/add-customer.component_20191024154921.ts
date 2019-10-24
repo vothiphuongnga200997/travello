@@ -110,12 +110,12 @@ export class AddCustomerComponent implements OnInit {
         }
     }
     async addInfo() {
-        if (this.empty > this.numberAdult + this.numberKids) {
-            for (let i = 0; i < this.numberAdult; i++) {
+        if (this.empty > this.form.value.adult + this.form.value.kids) {
+            for (let i = 0; i < this.form.value.adult; i++) {
                 await this.contactList.push(this.createContactAdult());
                 this.empty--;
             }
-            for (let i = 0; i < this.numberKids; i++) {
+            for (let i = 0; i < this.form.value.kids; i++) {
                 await this.contactList.push(this.createContactKids());
                 this.empty--;
             }
@@ -192,7 +192,7 @@ export class AddCustomerComponent implements OnInit {
                     username: [event.originalObject.username],
                     email: [event.originalObject.email],
                     tour: [null, Validators.compose([Validators.required])],
-                    adult: [0],
+                    adult: [0, Validators.compose([Validators.required])],
                     kids: [0],
                     paid: [0],
                     contacts: this.fb.array([]),

@@ -39,6 +39,7 @@ export class DeleteComponent implements OnInit {
         this.ref.close();
     }
     async delete() {
+        console.log(this.info);
         let startDate = moment(this.startDay, 'DD/MM/YYYY');
         let currenDate = moment(new Date()).format('DD/MM/YYYY');
         let endDate = moment(currenDate, 'DD/MM/YYYY');
@@ -56,11 +57,10 @@ export class DeleteComponent implements OnInit {
             this.info.createAt = new Date();
             dataSave.objectId = this.idContract;
             dataSave.infoCustom = [];
-            dataSave.cancelContract = this.info;
+            dataSave.cancelContrack = this.info;
             dataSave.numberAdult = 0;
             dataSave.numberKids = 0;
-            dataSave.indemnification = this.price / 2;
-
+            dataSave.indemnification = this.price / 2 ;
             try {
                 let result = await obj.save(dataSave);
                 if (result) {

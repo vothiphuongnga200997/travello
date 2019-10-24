@@ -53,7 +53,7 @@ export class ContractService {
         dataSave.numberAdult = data.info.adult;
         dataSave.numberKids = data.info.kids;
         dataSave.paid = data.info.paid;
-        dataSave.cancelContract = [];
+        dataSave.objectId = data.id;
         if (data.info.kids === null) dataSave.numberKids = 0;
         else {
         }
@@ -117,19 +117,6 @@ export class ContractService {
         query.include('objTour');
         query.include('objUser');
         query.notEqualTo('infoCustom', []);
-        try {
-            let result = await query.find();
-            return result;
-        } catch (ex) {
-            throw ex;
-        }
-    }
-    async getContratCancel() {
-        const contract = Parse.Object.extend('contract');
-        const query = new Parse.Query(contract);
-        query.include('objTour');
-        query.include('objUser');
-        query.notEqualTo('cancelContract', []);
         try {
             let result = await query.find();
             return result;

@@ -53,7 +53,7 @@ export class ContractService {
         dataSave.numberAdult = data.info.adult;
         dataSave.numberKids = data.info.kids;
         dataSave.paid = data.info.paid;
-        dataSave.cancelContract = [];
+        dataSave.objectId = data.id;
         if (data.info.kids === null) dataSave.numberKids = 0;
         else {
         }

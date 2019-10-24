@@ -111,11 +111,11 @@ export class AddCustomerComponent implements OnInit {
     }
     async addInfo() {
         if (this.empty > this.numberAdult + this.numberKids) {
-            for (let i = 0; i < this.numberAdult; i++) {
+            for (let i = 0; i < this.form.value.adult; i++) {
                 await this.contactList.push(this.createContactAdult());
                 this.empty--;
             }
-            for (let i = 0; i < this.numberKids; i++) {
+            for (let i = 0; i < this.form.value.kids; i++) {
                 await this.contactList.push(this.createContactKids());
                 this.empty--;
             }
@@ -251,17 +251,17 @@ export class AddCustomerComponent implements OnInit {
         this.submitted = true;
         console.log(this.existUser);
         console.log(this.form.value);
-        if (this.form.invalid) {
-            return;
-        } else {
-            this.pay();
-            this.ref.close({
-                info: this.form.value,
-                idUser: this.idUser,
-                price: this.price,
-                empty: this.empty,
-                quantity: this.quantity,
-            });
-        }
+        // if (this.form.invalid) {
+        //     return;
+        // } else {
+        //     this.pay();
+        //     this.ref.close({
+        //         info: this.form.value,
+        //         idUser: this.idUser,
+        //         price: this.price,
+        //         empty: this.empty,
+        //         quantity: this.quantity,
+        //     });
+        // }
     }
 }

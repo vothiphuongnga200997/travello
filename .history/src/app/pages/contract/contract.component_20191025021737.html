@@ -85,7 +85,7 @@
     </div>
     <!-- phần con -->
     <nb-accordion multi>
-        <nb-accordion-item *ngFor="let i of this.contract | filter: searchText; let c = index">
+        <nb-accordion-item *ngFor="let i of this.contract | slice: (page - 1) * pageSize:(page - 1) * pageSize + pageSize">
             <nb-accordion-item-header>
                 <a class="mr-3" (click)="edit(i.id)"><i class="fas fa-pencil-alt"></i></a>
                 <a class="mr-3" (click)="delete(i.id, i.idTour, i.tourQuantity, i.tourist, i.startDay, i.tourist, i.price)">
@@ -138,4 +138,13 @@
             </nb-accordion-item-body>
         </nb-accordion-item>
     </nb-accordion>
+    <ngb-pagination
+        [collectionSize]="(this.contract.length / pageSize) * 10"
+        [(page)]="page"
+        [maxSize]="3"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        class="d-flex justify-content-end"
+    >
+    </ngb-pagination>
 </nb-card>

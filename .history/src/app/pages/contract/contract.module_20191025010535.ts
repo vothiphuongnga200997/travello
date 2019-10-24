@@ -15,10 +15,8 @@ import { ExportAsModule } from 'ngx-export-as';
 import { EditContractComponent } from './add-customer/edit-contract.component';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { ContractCancelComponent } from './contractCancel.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
     imports: [
-        NgbModule,
         NgbModalModule,
         NbCheckboxModule,
         NbSelectModule,

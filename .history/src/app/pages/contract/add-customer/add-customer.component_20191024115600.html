@@ -150,6 +150,7 @@
                         <input
                             [attr.disabled]="disabled ? '' : null"
                             class="form-control"
+                            min="1"
                             formControlName="adult"
                             [(ngModel)]="this.numberAdult"
                             type="number"
@@ -265,7 +266,7 @@
                                 </div>
                                 <div class="col-6">
                                     <div class="label-txt">Địa chỉ</div>
-                                    <input class="form-control text-capitalize" formControlName="address" type="text" />
+                                    <input class="form-control" formControlName="address" type="text" />
                                     <div class="required">
                                         <div
                                             *ngIf="submitted && getContactsFormGroup(i).controls['address'].hasError('required')"

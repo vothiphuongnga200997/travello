@@ -105,7 +105,7 @@
             <nb-accordion-item-body>
                 {{ i.nameTour }}
                 <a class="pl-5 pr-3">Go: {{ i.startDay }} </a> End: {{ i.endDay }}
-                <div class="row m-2 info">
+                <div class="row m-2">
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -122,7 +122,7 @@
                             <tr *ngFor="let n of i.tourist; let t = index">
                                 <th scope="row">{{ t }}</th>
                                 <th>
-                                    <a (click)="deleteTicket(i.id, i.startDay, c, t, n, i.idTour, i.tourQuantity)">
+                                    <a class="mr-3" (click)="deleteTicket(i.id, i.startDay, c, t, n, i.idTour, i.tourQuantity)">
                                         <i class="fas fa-trash"></i
                                     ></a>
                                 </th>

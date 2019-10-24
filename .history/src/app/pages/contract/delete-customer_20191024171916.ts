@@ -32,13 +32,13 @@ export class DeleteComponent implements OnInit {
     tourist: any;
     startDay: any;
     info: any;
-    price: number;
     constructor(protected ref: NbDialogRef<DeleteComponent>, private contractService: ContractService) {}
     ngOnInit() {}
     dismiss() {
         this.ref.close();
     }
     async delete() {
+        console.log(this.info);
         let startDate = moment(this.startDay, 'DD/MM/YYYY');
         let currenDate = moment(new Date()).format('DD/MM/YYYY');
         let endDate = moment(currenDate, 'DD/MM/YYYY');
@@ -49,50 +49,47 @@ export class DeleteComponent implements OnInit {
 
             const contract = Parse.Object.extend('contract');
             let obj = new contract();
-            const query = new Parse.Query(contract);
-            query.equalTo('objectId', this.idContract);
             let dataSave: any = {};
             let dataTour: any = {};
             this.info.createAt = new Date();
-            dataSave.objectId = this.idContract;
-            dataSave.infoCustom = [];
-            dataSave.cancelContract = this.info;
-            dataSave.numberAdult = 0;
-            dataSave.numberKids = 0;
-            dataSave.indemnification = this.price / 2;
-
-            try {
-                let result = await obj.save(dataSave);
-                if (result) {
-                    dataTour.empty = await this.contractService.setEmpty(this.idTour, this.quantity);
-                    dataTour.objectId = this.idTour;
-                    await ObjectTour.save(dataTour);
-                }
-                // get so tien
-            } catch (ex) {
-                throw ex;
-            }
-        } else {
-            const contract = Parse.Object.extend('contract');
-            const query = new Parse.Query(contract);
-            let tour = Parse.Object.extend('tour');
-            let ObjectTour = new tour();
-            let dataTour: any = {};
-            query.equalTo('objectId', this.idContract);
-            try {
-                let result = await query.first();
-                console.log(result);
-                let deleteC = await result.destroy();
-                if (deleteC) {
-                    dataTour.objectId = this.idTour;
-                    dataTour.empty = await this.contractService.setEmpty(this.idTour, this.quantity);
-                    let objTour = await ObjectTour.save(dataTour);
-                }
-                return true;
-            } catch (ex) {
-                throw ex;
-            }
+            console.log(this.info);
+            // try {
+            //     this.info.createAt = new Date();
+            //     dataSave.objectId = this.idContract;
+            //     // dataSave.cancelContract = this.info;
+            //     let save = await obj.save(dataSave);
+            //     if (save) {
+            //         dataTour.empty = await this.contractService.setEmpty(this.idTour, this.quantity);
+            //         dataTour.objectId = this.idTour;
+            //         await ObjectTour.save(dataTour);
+            //     }
+            //     this.ref.close({
+            //         pennant: true,
+            //     });
+            // } catch (ex) {
+            //     throw ex;
+            // }
         }
+        //  else {
+        //     let tour = Parse.Object.extend('tour');
+        //     let ObjectTour = new tour();
+
+        //     const contract = Parse.Object.extend('contract');
+        //     let obj = new contract();
+        //     const query = new Parse.Query(contract);
+        //     query.equalTo('objectId', this.idContract);
+        //     let dataSave: any = {};
+        //     let dataTour: any = {};
+
+        //     try {
+        //         let result = await query.first();
+        //         this.info.createAt = new Date();
+        //         dataSave.objectId = this.idContract;
+        //         // get so tien
+        //     } catch (ex) {
+        //         throw ex;
+        //     }
+        // }
     }
 }
 @Component({

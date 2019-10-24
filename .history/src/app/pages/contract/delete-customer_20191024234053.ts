@@ -32,13 +32,13 @@ export class DeleteComponent implements OnInit {
     tourist: any;
     startDay: any;
     info: any;
-    price: number;
     constructor(protected ref: NbDialogRef<DeleteComponent>, private contractService: ContractService) {}
     ngOnInit() {}
     dismiss() {
         this.ref.close();
     }
     async delete() {
+        console.log(this.info);
         let startDate = moment(this.startDay, 'DD/MM/YYYY');
         let currenDate = moment(new Date()).format('DD/MM/YYYY');
         let endDate = moment(currenDate, 'DD/MM/YYYY');
@@ -56,11 +56,7 @@ export class DeleteComponent implements OnInit {
             this.info.createAt = new Date();
             dataSave.objectId = this.idContract;
             dataSave.infoCustom = [];
-            dataSave.cancelContract = this.info;
-            dataSave.numberAdult = 0;
-            dataSave.numberKids = 0;
-            dataSave.indemnification = this.price / 2;
-
+            dataSave.cancelContrack = this.info;
             try {
                 let result = await obj.save(dataSave);
                 if (result) {
@@ -82,12 +78,12 @@ export class DeleteComponent implements OnInit {
             try {
                 let result = await query.first();
                 console.log(result);
-                let deleteC = await result.destroy();
-                if (deleteC) {
-                    dataTour.objectId = this.idTour;
-                    dataTour.empty = await this.contractService.setEmpty(this.idTour, this.quantity);
-                    let objTour = await ObjectTour.save(dataTour);
-                }
+                // let deleteC = await result.destroy();
+                // if (deleteC) {
+                //     dataTour.objectId = this.idTour;
+                //     dataTour.empty = await this.contractService.setEmpty(this.idTour, this.quantity);
+                //     let objTour = await ObjectTour.save(dataTour);
+                // }
                 return true;
             } catch (ex) {
                 throw ex;

@@ -15,7 +15,7 @@ import * as Parse from 'parse';
                 </h6>
             </nb-card-header>
             <nb-card-body>
-                <div>Bạn muốn xóa hợp đồng {{ this.idContract }}</div>
+                <div>Bạn muốn xóa hợp đồng {{ this.id }}</div>
                 <div class="footer">
                     <button class="float-right btn btn-info" (click)="delete()">OK</button>
                     <button class="float-right  btn btn-hint" (click)="dismiss()">Cancel</button>
@@ -32,7 +32,6 @@ export class DeleteComponent implements OnInit {
     tourist: any;
     startDay: any;
     info: any;
-    price: number;
     constructor(protected ref: NbDialogRef<DeleteComponent>, private contractService: ContractService) {}
     ngOnInit() {}
     dismiss() {
@@ -49,46 +48,62 @@ export class DeleteComponent implements OnInit {
 
             const contract = Parse.Object.extend('contract');
             let obj = new contract();
-            const query = new Parse.Query(contract);
-            query.equalTo('objectId', this.idContract);
             let dataSave: any = {};
             let dataTour: any = {};
-            this.info.createAt = new Date();
-            dataSave.objectId = this.idContract;
-            dataSave.infoCustom = [];
-            dataSave.cancelContract = this.info;
-            dataSave.numberAdult = 0;
-            dataSave.numberKids = 0;
-            dataSave.indemnification = this.price / 2;
-
+            
             try {
-                let result = await obj.save(dataSave);
-                if (result) {
+                this.info.createAt = new Date();
+                dataSave.objectId = this.idContract;
+                let save = await obj.save(dataSave);
+                if (save) {
                     dataTour.empty = await this.contractService.setEmpty(this.idTour, this.quantity);
                     dataTour.objectId = this.idTour;
                     await ObjectTour.save(dataTour);
                 }
-                // get so tien
+                this.ref.close({
+                    pennant: true,
+                });
             } catch (ex) {
                 throw ex;
             }
         } else {
-            const contract = Parse.Object.extend('contract');
-            const query = new Parse.Query(contract);
             let tour = Parse.Object.extend('tour');
             let ObjectTour = new tour();
-            let dataTour: any = {};
+
+            const contract = Parse.Object.extend('contract');
+            let obj = new contract();
+            const query = new Parse.Query(contract);
             query.equalTo('objectId', this.idContract);
+            let dataSave: any = {};
+            let dataTour: any = {};
+
             try {
                 let result = await query.first();
-                console.log(result);
-                let deleteC = await result.destroy();
-                if (deleteC) {
-                    dataTour.objectId = this.idTour;
-                    dataTour.empty = await this.contractService.setEmpty(this.idTour, this.quantity);
-                    let objTour = await ObjectTour.save(dataTour);
+                this.info.createAt = new Date();
+                dataSave.objectId = this.idContract;
+                dataSave.infoCustom = this.array;
+                // get so tien
+                let kids = result.attributes.objTour.attributes.childrenPrice;
+                let adult = result.attributes.objTour.attributes.adultPrice - result.attributes.objTour.attributes.saleoff;
+                let price = result.attributes.price;
+                if (this.info.type === 'Người lớn') {
+                    dataSave.numberAdult = result.attributes.numberAdult - 1;
+                    dataSave.price = price - adult;
                 }
-                return true;
+                if (this.info.type === 'Trẻ em') {
+                    dataSave.numberKids = result.attributes.numberKids - 1;
+                    dataSave.price = price - kids;
+                }
+                let save = await obj.save(dataSave);
+                if (save) {
+                    dataTour.empty = await this.contractService.setEmpty(this.idTour, this.quantity);
+                    dataTour.objectId = this.idTour;
+                    await ObjectTour.save(dataTour);
+                    this.pennant = true;
+                }
+                this.ref.close({
+                    pennant: this.pennant,
+                });
             } catch (ex) {
                 throw ex;
             }

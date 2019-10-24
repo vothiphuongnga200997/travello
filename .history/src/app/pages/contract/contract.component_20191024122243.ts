@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NbDialogService, NbWindowService } from '@nebular/theme';
+import { NbDialogService } from '@nebular/theme';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { ContractService } from '../../shared/services/contract.service';
 import { ToastrService } from '../../shared/services';
@@ -7,7 +7,6 @@ import { DeleteComponent, DeleteTicketComponent } from './delete-customer';
 import { ExportAsService, ExportAsConfig, SupportedExtensions } from 'ngx-export-as';
 import { LoadingService } from '../../shared/services/loading.service';
 import { EditContractComponent } from './add-customer/edit-contract.component';
-import { ContractCancelComponent } from './contractCancel.component';
 import * as moment from 'moment';
 import * as Parse from 'parse';
 @Component({
@@ -38,14 +37,12 @@ export class ContractComponent implements OnInit {
             },
         },
     };
-
     constructor(
         private exportAsService: ExportAsService,
         private toastrService: ToastrService,
         private dialogService: NbDialogService,
         private contractService: ContractService,
         private loadingService: LoadingService,
-        private windowService: NbWindowService,
     ) {
         console.log('dgdg');
         this.getContract();
@@ -106,18 +103,16 @@ export class ContractComponent implements OnInit {
             });
         }
     }
-    delete(idContract, idTour, quantity, tourist, startDay, info, price) {
+    delete(event, idTour, quantity, tourist, startDay) {
         this.dialogService
             .open(DeleteComponent, {
                 context: {
                     title: 'Delete',
-                    idContract: idContract,
+                    id: event,
                     idTour: idTour,
                     quantity: quantity,
                     tourist: tourist,
                     startDay: startDay,
-                    info: info,
-                    price: price,
                 },
             })
             .onClose.subscribe(async data => {
@@ -149,14 +144,12 @@ export class ContractComponent implements OnInit {
                 },
             })
             .onClose.subscribe(async data => {
-                if (data) {
-                    if (data.pennant) {
-                        await this.getContract();
-                        this.toastrService.success(`Delete Success`, 'Delete success');
-                    } else {
-                        await this.getContract();
-                        this.toastrService.error(`Delete Error`);
-                    }
+                if (data.pennant) {
+                    await this.getContract();
+                    this.toastrService.success(`Delete Success`, 'Delete success');
+                } else {
+                    await this.getContract();
+                    this.toastrService.error(`Delete Error`);
                 }
             });
     }
@@ -251,12 +244,5 @@ export class ContractComponent implements OnInit {
         //   console.log(content);
         // });
     }
-    openContractCancel() {
-        this.windowService
-            .open(ContractCancelComponent, {
-                title: `Work schedules`,
-                context: {},
-            })
-            .onClose.subscribe();
-    }
+    async checkQuantity(idTour) {}
 }

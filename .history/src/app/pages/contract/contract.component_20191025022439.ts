@@ -38,6 +38,7 @@ export class ContractComponent implements OnInit {
             },
         },
     };
+  
 
     constructor(
         private exportAsService: ExportAsService,

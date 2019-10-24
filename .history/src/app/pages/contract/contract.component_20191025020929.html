@@ -138,4 +138,13 @@
             </nb-accordion-item-body>
         </nb-accordion-item>
     </nb-accordion>
+    <ngb-pagination 
+    [collectionSize]="this.contract.length / pageSize * 10" 
+    [(page)]="page" 
+    [maxSize]="3" 
+    [rotate]="true" 
+    [boundaryLinks]="true" 
+    class="d-flex justify-content-end"
+    >
+  </ngb-pagination>
 </nb-card>

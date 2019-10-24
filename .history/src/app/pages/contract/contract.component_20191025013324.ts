@@ -38,6 +38,8 @@ export class ContractComponent implements OnInit {
             },
         },
     };
+    page = 1;
+    pageSize = 4;
 
     constructor(
         private exportAsService: ExportAsService,
