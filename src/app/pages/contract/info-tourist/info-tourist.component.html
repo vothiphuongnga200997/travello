@@ -1,0 +1,30 @@
+<nb-card>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Họ & tên</th>
+                <th scope="col">Số điện thoại</th>
+                <th scope="col">Giới tính</th>
+                <th scope="col">Địa chỉ</th>
+                <th scope="col">Loại vé</th>
+                <th scope="col">Hủy vé</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let info of this.data; index as i">
+                <th scope="row">{{ i + 1 }}</th>
+                <td class="text-capitalize">
+                    {{ info.name }}
+                </td>
+                <td>{{ info.phonecustomer }}</td>
+                <td>{{ info.gender }}</td>
+                <td>{{ info.address }}</td>
+                <td>{{ info.type }}</td>
+                <td>
+                    <a (click)="deleteTicket(this.event, i)"> <i class="fas fa-trash"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</nb-card>

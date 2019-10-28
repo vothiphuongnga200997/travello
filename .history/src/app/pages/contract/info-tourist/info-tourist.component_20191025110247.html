@@ -1,0 +1,23 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Họ & tên</th>
+            <th scope="col">Số điện thoại</th>
+            <th scope="col">Giới tính</th>
+            <th scope="col">Địa chỉ</th>
+            <th scope="col">Loại vé</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let info of event.tourist; index as i">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>
+                {{ info.name }}
+            </td>
+            <td>{{ info.phonecustomer }}</td>
+            <td>{{ info.gender }}</td>
+            <td>{{ info.address }}</td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,11 @@
+@import '../../pages.component.scss';
+@import '../../../@theme/styles/themes';
+@include nb-install-component() {
+    nb-card {
+        width: 900px;
+        height: 500px;
+    }
+}
+.info {
+    margin-top: 10px;
+}

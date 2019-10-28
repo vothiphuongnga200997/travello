@@ -1,0 +1,16 @@
+<nb-card>
+    <div class="containermng border border-crawler ">
+        <button type="button" class="btn-pages" (click)="toggle()"><i class="fas fa-filter"></i>Lọc</button>
+        <button type="reset" class="btn-pages" (click)="getContract()"><i class="fas fa-sync-alt"></i>Làm mới</button>
+        <button type="button" class="btn-pages" (click)="addCustom()"><i class="fas fa-plus"></i>Thêm hợp đồng</button>
+        <button type="button" class="btn-pages" (click)="openContractCancel()"><i class="fas fa-plus"></i>Hợp đồng đã hủy</button>
+
+        <label>
+            <input class="search" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search..." />
+            <div class="line-box">
+                <div class="line"></div>
+            </div>
+        </label>
+    </div>
+    <ng2-smart-table [settings]="settings" [source]="source" (edit)="edit($event)" (delete)="delete($event)"> </ng2-smart-table>
+</nb-card>

@@ -1,0 +1,8 @@
+<nb-card>
+    <form class="form"></form>
+    <nb-tabset fullWidth (changeTab)="toggleLoadingAnimation()">
+        <nb-tab tabTitle="Thông tin tour" [nbSpinner]="loading" nbSpinnerStatus="success" nbSpinnerSize="giant"> </nb-tab>
+        <nb-tab tabTitle="Chương trình tour" [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="giant"> </nb-tab>
+        <nb-tab tabTitle="Danh sách hành khách" [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="giant"> </nb-tab>
+    </nb-tabset>
+</nb-card>
