@@ -1,0 +1,10 @@
+<form [formGroup]="secondForm" class="step-container">
+    <div class="card-body" formArrayName="contacts">
+        <div *ngFor="let contact of contactFormGroup.controls; let i = index">
+            <div [formGroupName]="i">
+                <input class="form-control text-capitalize" formControlName="name" type="text" />
+                <input class="form-control" formControlName="phonecustomer" type="text" />
+            </div>
+        </div>
+    </div>
+</form>

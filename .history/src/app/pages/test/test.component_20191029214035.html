@@ -1,0 +1,12 @@
+<form [formGroup]="form">
+    <input type="checkbox" formControlName="published" /> Published
+    <h2>Credentials</h2>
+    <button (click)="addCreds()">Add</button>
+
+    <div formArrayName="credentials" *ngFor="let creds of form.controls.credentials?.value; let i = index">
+        <ng-container [formGroupName]="i">
+            <input placeholder="Username" formControlName="username" />
+            <input placeholder="Password" formControlName="password" />
+        </ng-container>
+    </div>
+</form>

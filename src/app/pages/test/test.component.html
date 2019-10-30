@@ -1,0 +1,16 @@
+<form [formGroup]="formPrivate" class="step-container">
+    <div class="card-body" formArrayName="listSchedule">
+        <div *ngFor="let contact of contactFormPrivate.controls; let i = index">
+            <button (click)="addContactSchedule()"></button>
+            <div [formGroupName]="i">
+                <input class="form-control text-capitalize" formControlName="name" type="text" />
+                <div class="required">
+                    <div *ngIf="getListSchedule(i).controls['name'].hasError('required')" class="float-right">
+                        Fullname is required!
+                    </div>
+                </div>
+                <input class="form-control" formControlName="phonecustomer" type="text" />
+            </div>
+        </div>
+    </div>
+</form>

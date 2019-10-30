@@ -1,0 +1,11 @@
+<form [formGroup]="formPrivate" class="step-container">
+    <div class="card-body" formArrayName="listSchedule">
+        <div *ngFor="let contact of contactFormPrivate.controls; let i = index">
+            <button (click)="addContactSchedule()"></button>
+            <div [formGroupName]="i">
+                <input class="form-control text-capitalize" formControlName="name" type="text" />
+                <input class="form-control" formControlName="phonecustomer" type="text" />
+            </div>
+        </div>
+    </div>
+</form>
