@@ -78,6 +78,7 @@
                                 ></ng2-completer>
                               
                                 <div class="required">
+                                    <div class="float-right">{{ this.requiredGuide }}</div>
                                 </div>
                             </div>
                             <div class="col-5 offset-1">
@@ -102,6 +103,16 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-8">
+
+                                <input [(ngModel)]="arrayListGuide[i]"   formControlName="guide">
+                                <div class="required">
+                                        <div class="float-right" *ngIf="this.error.isError">{{ this.error.errorMessage }}</div>
+                                        <div *ngIf="getListSchedule(i).controls['guide'].hasError('required')" class="float-right">
+                                            Guide is required!  
+                                        </div>
+                                    </div>
+                            </div>
                             <div class="col-2" *ngFor="let item of arrayListGuide[i]; let n = index">
                                 <div class="location">
                                     <button type="button" class="close " aria-label="Close" (click)="destroyGuide(n, i)">

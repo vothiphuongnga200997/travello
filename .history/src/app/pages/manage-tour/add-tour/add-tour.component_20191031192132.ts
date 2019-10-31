@@ -44,6 +44,7 @@ export class AddTourComponent implements OnInit {
     name = 'ng2-ckeditor';
     ckeConfig: any;
     requiredLocation = '';
+    requiredGuide = '';
     requiredImage = '';
     queryGuide: any;
     queryLocation: any;
@@ -52,6 +53,7 @@ export class AddTourComponent implements OnInit {
     numberRun: number; // kiem tra so lan run ham Date
     provisional: any; // bien tam ham checkDate
     sale: boolean = false;
+    guideFirst: Array<any> = []; // mang huong dan vien ban dau
     locationFirst: Array<any> = []; // mang dia diem ban dau
     get contactFormGroup() {
         return this.registerForm.get('contacts') as FormArray;
@@ -87,10 +89,17 @@ export class AddTourComponent implements OnInit {
     }
     protected onSelectedGuide(item: CompleterItem, i) {
         if (item) {
+            //     this.arrayListGuide1[i][0].push({
+            //         id: item.originalObject.id,
+            //         fullname: item.originalObject.fullname,
+            //     });
+
             this.arrayListGuide[i].push({ id: item.originalObject.id, fullname: item.originalObject.fullname });
             console.log(item.originalObject.id, item.originalObject.fullname);
             this.arrayListGuide1[i] = this.arrayListGuide[i];
         }
+        console.log(typeof i);
+        console.log(this.arrayListGuide);
     }
 
     async ngOnInit() {
@@ -100,6 +109,7 @@ export class AddTourComponent implements OnInit {
             code: ['', Validators.required],
             nameTour: ['', Validators.required],
             duration: ['', Validators.required],
+            hotel: ['', Validators.required],
             childrenPrice: ['', Validators.required],
             adultPrice: ['', Validators.required],
             quantity: ['', Validators.required],
@@ -192,30 +202,42 @@ export class AddTourComponent implements OnInit {
     }
     async onSubmit() {
         this.submitted = true;
-        // if (this.registerForm.invalid && this.formPrivate.invalid) {
-        //     return;
-        // }
-        // if (this.listLocations.length === 0) {
-        //     this.requiredLocation = 'Location is required';
-        //     return;
-        // } else {
-        //     this.requiredLocation = '';
-        // }
+        if (this.registerForm.invalid && this.formPrivate.invalid) {
+            if (this.listLocations.length === 0) this.requiredLocation = 'Location is required';
+            else {
+                this.requiredLocation = '';
+            }
+            if (this.listGuide.length === 0) this.requiredGuide = 'Guide is required';
+            else {
+                this.requiredGuide = '';
+            }
+            if (this.images.length === 0) this.requiredImage = 'Image is required';
+            else this.requiredImage = '';
+            return;
+        } else {
+            if (this.listLocations.length === 0) this.requiredLocation = 'Location is required';
+            else {
+                this.requiredLocation = '';
+            }
+            if (this.listGuide.length === 0) this.requiredGuide = 'Guide is required';
+            else {
+                this.requiredGuide = '';
+            }
+            if (this.images.length === 0) this.requiredImage = 'Image is required';
+            else this.requiredImage = '';
+        }
 
-        // if (this.images.length === 0) {
-        //     this.requiredImage = 'Image is required';
-        //     return;
-        // } else this.requiredImage = '';
-
-        // if (this.listLocations.length > 0 && this.images.length > 0 && this.checkCode === '') {
-        this.ref.close({
-            value: this.registerForm.value,
-            location: this.listLocations,
-            schedule: this.formPrivate,
-            listGuide: this.arrayListGuide,
-            image: this.images,
-        });
-        // }
+        if (!this.sale) this.registerForm.value.saleoff = null;
+        if (this.listLocations.length > 0 && this.listGuide.length > 0 && this.images.length > 0 && this.checkCode === '') {
+            this.ref.close({
+                guideFirst: this.guideFirst,
+                locationFirst: this.locationFirst,
+                value: this.registerForm.value,
+                location: this.listLocations,
+                guide: this.listGuide,
+                image: this.images,
+            });
+        }
     }
     destroy(location) {
         this.listLocations.splice(location, 1);

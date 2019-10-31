@@ -27,7 +27,7 @@ export class TourService {
         let objTour = new tour();
         let dataTour: any = {};
         let dataImg: any = {};
-        let guide: Array<any> = []; // chua tung gia tri class guide
+        let guide: any = {}; // chua tung gia tri class guide
         let objGuide: Array<any> = []; // chua objGuide
         let location: Array<any> = [];
         // dataTour.departure = this.capital_letter(data.value.departure);
@@ -47,12 +47,14 @@ export class TourService {
         dataTour.empty = data.value.quantity;
         if (data.listGuide.length > 0) {
             for (let i = 0; i < data.listGuide.length; i++) {
-                guide = [];
+                guide[i] = new Array();
+
                 for (let n = 0; n < data.listGuide[i].length; n++) {
                     let classGuide = Parse.Object.extend('guide');
-                    guide[n] = classGuide.createWithoutData(data.listGuide[i][n].id);
+                    guide[i].push({
+                        obj: classGuide.createWithoutData(data.listGuide[i][n].id),
+                    });
                 }
-                objGuide[i] = guide;
             }
         }
         if (data.location.length > 0) {

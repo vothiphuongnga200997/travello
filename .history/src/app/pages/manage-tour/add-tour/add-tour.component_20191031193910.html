@@ -74,10 +74,9 @@
                                     [minSearchLength]="0"
                                     (selected)="onSelectedGuide($event, i)"
                                     placeholder="Chọn địa điểm"
-                                  
                                 ></ng2-completer>
-                              
                                 <div class="required">
+                                    <div class="float-right">{{ this.requiredLocation }}</div>
                                 </div>
                             </div>
                             <div class="col-5 offset-1">
@@ -513,5 +512,12 @@
                     </div>
                 </div>
             </form>
+    
+    
+    
+    
+
+                    
+          
     </nb-card-body>
 </nb-card>

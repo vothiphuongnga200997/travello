@@ -195,17 +195,17 @@ export class AddTourComponent implements OnInit {
         // if (this.registerForm.invalid && this.formPrivate.invalid) {
         //     return;
         // }
-        // if (this.listLocations.length === 0) {
-        //     this.requiredLocation = 'Location is required';
-        //     return;
-        // } else {
-        //     this.requiredLocation = '';
-        // }
+        if (this.listLocations.length === 0) {
+            this.requiredLocation = 'Location is required';
+            return;
+        } else {
+            this.requiredLocation = '';
+        }
 
-        // if (this.images.length === 0) {
-        //     this.requiredImage = 'Image is required';
-        //     return;
-        // } else this.requiredImage = '';
+        if (this.images.length === 0) {
+            this.requiredImage = 'Image is required';
+            return;
+        } else this.requiredImage = '';
 
         // if (this.listLocations.length > 0 && this.images.length > 0 && this.checkCode === '') {
         this.ref.close({

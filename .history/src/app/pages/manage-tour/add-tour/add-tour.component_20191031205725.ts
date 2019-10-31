@@ -192,30 +192,30 @@ export class AddTourComponent implements OnInit {
     }
     async onSubmit() {
         this.submitted = true;
-        // if (this.registerForm.invalid && this.formPrivate.invalid) {
-        //     return;
-        // }
-        // if (this.listLocations.length === 0) {
-        //     this.requiredLocation = 'Location is required';
-        //     return;
-        // } else {
-        //     this.requiredLocation = '';
-        // }
+        if (this.registerForm.invalid && this.formPrivate.invalid) {
+            return;
+        }
+        if (this.listLocations.length === 0) {
+            this.requiredLocation = 'Location is required';
+            return;
+        } else {
+            this.requiredLocation = '';
+        }
 
-        // if (this.images.length === 0) {
-        //     this.requiredImage = 'Image is required';
-        //     return;
-        // } else this.requiredImage = '';
+        if (this.images.length === 0) {
+            this.requiredImage = 'Image is required';
+            return;
+        } else this.requiredImage = '';
 
-        // if (this.listLocations.length > 0 && this.images.length > 0 && this.checkCode === '') {
-        this.ref.close({
-            value: this.registerForm.value,
-            location: this.listLocations,
-            schedule: this.formPrivate,
-            listGuide: this.arrayListGuide,
-            image: this.images,
-        });
-        // }
+        if (this.listLocations.length > 0 && this.listGuide.length > 0 && this.images.length > 0 && this.checkCode === '') {
+            this.ref.close({
+                value: this.registerForm.value,
+                location: this.listLocations,
+                schedule: this.formPrivate,
+                listGuide: this.arrayListGuide,
+                image: this.images,
+            });
+        }
     }
     destroy(location) {
         this.listLocations.splice(location, 1);

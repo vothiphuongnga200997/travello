@@ -47,12 +47,10 @@ export class TourService {
         dataTour.empty = data.value.quantity;
         if (data.listGuide.length > 0) {
             for (let i = 0; i < data.listGuide.length; i++) {
-                guide = [];
                 for (let n = 0; n < data.listGuide[i].length; n++) {
                     let classGuide = Parse.Object.extend('guide');
-                    guide[n] = classGuide.createWithoutData(data.listGuide[i][n].id);
+                    guide[i] = classGuide.createWithoutData(data.listGuide[i][n].id);
                 }
-                objGuide[i] = guide;
             }
         }
         if (data.location.length > 0) {

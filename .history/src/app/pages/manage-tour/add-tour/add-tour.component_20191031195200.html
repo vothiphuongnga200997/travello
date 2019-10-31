@@ -74,10 +74,10 @@
                                     [minSearchLength]="0"
                                     (selected)="onSelectedGuide($event, i)"
                                     placeholder="Chọn địa điểm"
-                                  
+                                    formControlName="guide"
                                 ></ng2-completer>
-                              
                                 <div class="required">
+                                    <div class="float-right">{{ this.requiredGuide }}</div>
                                 </div>
                             </div>
                             <div class="col-5 offset-1">

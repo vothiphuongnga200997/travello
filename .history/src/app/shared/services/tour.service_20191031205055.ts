@@ -25,74 +25,60 @@ export class TourService {
         let tour = Parse.Object.extend('tour');
         let image = Parse.Object.extend('imagesTour');
         let objTour = new tour();
-        let dataTour: any = {};
+        let dataSave: any = {};
         let dataImg: any = {};
-        let guide: Array<any> = []; // chua tung gia tri class guide
-        let objGuide: Array<any> = []; // chua objGuide
+        let guide: Array<any> = [];
         let location: Array<any> = [];
-        // dataTour.departure = this.capital_letter(data.value.departure);
-        dataTour.nameTour = data.value.nameTour.toUpperCase();
-        dataTour.duration = data.value.duration;
-        dataTour.quantity = data.value.quantity;
-        dataTour.adultPrice = data.value.adultPrice;
-        dataTour.childrenPrice = data.value.childrenPrice;
-        dataTour.itinerary = data.value.itinerary;
-        dataTour.code = data.value.code.toUpperCase();
-        dataTour.specical = data.value.specical;
-        dataTour.saleoff = data.value.saleoff;
-        dataTour.note = data.value.note;
-        dataTour.highlights = data.value.highlights;
-        dataTour.surcharge = data.value.contacts;
-        dataTour.policy = data.value.policy;
-        dataTour.empty = data.value.quantity;
-        if (data.listGuide.length > 0) {
-            for (let i = 0; i < data.listGuide.length; i++) {
-                guide = [];
-                for (let n = 0; n < data.listGuide[i].length; n++) {
+        dataSave.departure = this.capital_letter(data.value.departure);
+        dataSave.nameTour = data.value.nameTour.toUpperCase();
+        dataSave.duration = data.value.duration;
+        dataSave.quantity = data.value.quantity;
+        dataSave.adultPrice = data.value.adultPrice;
+        dataSave.childrenPrice = data.value.childrenPrice;
+        dataSave.hotel = data.value.hotel;
+        dataSave.endDay = new Date(data.value.endDay);
+        dataSave.startDay = new Date(data.value.startDay);
+        dataSave.itinerary = data.value.itinerary;
+        dataSave.code = data.value.code.toUpperCase();
+        dataSave.specical = data.value.specical;
+        dataSave.saleoff = data.value.saleoff;
+        data.Save.note = data.value.note;
+        dataSave.highlights = data.value.highlights;
+        dataSave.surcharge = data.value.contacts;
+        dataSave.policy = data.value.policy;
+        dataSave.empty = data.value.quantity;
+        if (data)
+            if (data.guide) {
+                for (let i = 0; i < data.guide.length; i++) {
                     let classGuide = Parse.Object.extend('guide');
-                    guide[n] = classGuide.createWithoutData(data.listGuide[i][n].id);
+                    guide[i] = classGuide.createWithoutData(data.guide[i].id);
                 }
-                objGuide[i] = guide;
             }
+        for (let i = 0; i < data.location.length; i++) {
+            let classLocation = Parse.Object.extend('location');
+            location[i] = classLocation.createWithoutData(data.location[i].id);
         }
-        if (data.location.length > 0) {
-            for (let i = 0; i < data.location.length; i++) {
-                let classLocation = Parse.Object.extend('location');
-                location[i] = classLocation.createWithoutData(data.location[i].id);
-            }
-        }
-        console.log(dataTour);
-        console.log(guide);
-        console.log(location);
-        // try {
-        //     let result = await objTour.save(dataTour);
-        //     if (result) {
-        //         let tourObject = tour.createWithoutData(result.id);
-        //         let schedule = Parse.Object.extend('schedule');
-        //         for (let i = 0 ; i < data.schedule.value.listSchedule.length;) {
-        //             let objSchedule = new schedule();
-        //             let dataSchedule: any = {};
-        //             dataSchedule.startDay = new Date(data.schedule.value.listSchedule[i].startDay);
-        //             dataSchedule.endDay = new Date(data.schedule.value.listSchedule[i].endDay);
-        //             dataSchedule.objTour = tourObject;
-        //             let guideRelation = result.relation('guide');
-        //             guideRelation.add(guide[i]);
-        //             console.log(dataSchedule);
-        //         }
+        try {
+            let result = await objTour.save(dataSave);
+            if (result) {
+                this.deleteImg(result);
 
-        //         let locationRelation = result.relation('locations');
-        //         locationRelation.add(location);
-        //         result.save();
-        //         dataImg.idTour = tourObject;
-        //         for (let i = 0; i < data.image.length; i++) {
-        //             let objImg = new image();
-        //             let name = 'travello';
-        //             dataImg.image = new Parse.File(name, data.image[i].file);
-        //             dataImg.nameFile = name;
-        //             await objImg.save(dataImg);
-        //         }
-        //     }
-        // } catch (ex) {}
+                let guideRelation = result.relation('guide');
+                let locationRelation = result.relation('locations');
+                guideRelation.add(guide);
+                locationRelation.add(location);
+                result.save();
+                let tourObject = tour.createWithoutData(result.id);
+                dataImg.idTour = tourObject;
+                for (let i = 0; i < data.image.length; i++) {
+                    let objImg = new image();
+                    let name = 'travello';
+                    dataImg.image = new Parse.File(name, data.image[i].file);
+                    dataImg.nameFile = name;
+                    await objImg.save(dataImg);
+                }
+            }
+        } catch (ex) {}
     }
     async editTour(data) {
         let guide: Array<any> = [];

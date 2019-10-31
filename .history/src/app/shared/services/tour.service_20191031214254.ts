@@ -30,14 +30,14 @@ export class TourService {
         let guide: Array<any> = []; // chua tung gia tri class guide
         let objGuide: Array<any> = []; // chua objGuide
         let location: Array<any> = [];
-        // dataTour.departure = this.capital_letter(data.value.departure);
-        dataTour.nameTour = data.value.nameTour.toUpperCase();
+        dataTour.departure = this.capital_letter(data.value.departure);
+        dataTour.nameTour = data.value.nameTour;
         dataTour.duration = data.value.duration;
         dataTour.quantity = data.value.quantity;
         dataTour.adultPrice = data.value.adultPrice;
         dataTour.childrenPrice = data.value.childrenPrice;
         dataTour.itinerary = data.value.itinerary;
-        dataTour.code = data.value.code.toUpperCase();
+        dataTour.code = data.value.code;
         dataTour.specical = data.value.specical;
         dataTour.saleoff = data.value.saleoff;
         dataTour.note = data.value.note;
@@ -47,12 +47,10 @@ export class TourService {
         dataTour.empty = data.value.quantity;
         if (data.listGuide.length > 0) {
             for (let i = 0; i < data.listGuide.length; i++) {
-                guide = [];
-                for (let n = 0; n < data.listGuide[i].length; n++) {
+                for (let n = 0; n < data.listGuide[i].length; i++) {
                     let classGuide = Parse.Object.extend('guide');
-                    guide[n] = classGuide.createWithoutData(data.listGuide[i][n].id);
+                    guide[i] = classGuide.createWithoutData(data.listGuide[i][n].id);
                 }
-                objGuide[i] = guide;
             }
         }
         if (data.location.length > 0) {
