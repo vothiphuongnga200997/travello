@@ -1,0 +1,85 @@
+<div class="row dashboard-container">
+    <div class="w-100">
+        <nb-card class="own-scroll">
+            <nb-card class="mb-0">
+                <nb-card-body>
+                    <div class="containermng border border-crawler ">
+                        <button type="button" class="btn-pages" (click)="toggle()"><i class="fas fa-filter"></i> Filter</button>
+                        <button type="reset" (click)="getTour()" class="btn-pages"><i class="fas fa-sync-alt"></i> Refresh</button>
+                        <button (click)="add()" type="button" class="btn-pages"><i class="fas fa-plus"></i> Add new tour</button>
+                        <button (click)="exportAs('xlsx')" type="button" class="btn-pages"><i class="fas fa-file-excel"></i> Export</button>
+
+                        <nb-accordion>
+                            <nb-accordion-item #item>
+                                <nb-accordion-item-body>
+                                    <form class="from col-auto" #filter="ngForm">
+                                        <h5 class="titlemng"><i class="fa fa-search"></i>&nbsp;Tìm kiếm tour</h5>
+                                        <hr />
+                                        <div class="form-group row">
+                                            <div class="col-4 form-group mb-0">
+                                                <label for="idck">Tên tour</label>
+                                                <input
+                                                    status="primary"
+                                                    type="text"
+                                                    id="nameTour"
+                                                    nbInput
+                                                    fullWidth
+                                                    shape="rectangle"
+                                                    placeholder="Nhập họ & tên"
+                                                />
+                                            </div>
+                                            <div class="col-4 form-group mb-0">
+                                                <label for="idck">Địa điểm</label>
+                                                <input
+                                                    status="primary"
+                                                    type="text"
+                                                    id="location"
+                                                    nbInput
+                                                    fullWidth
+                                                    shape="rectangle"
+                                                    placeholder="Nhập họ & tên"
+                                                />
+                                            </div>
+
+                                            <div class="col-4 form-group">
+                                                <label for="sourceck">Khu vực</label>
+                                                <nb-select status="primary" placeholder="Chọn khu vực">
+                                                    <nb-option>1</nb-option>
+                                                </nb-select>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </nb-accordion-item-body>
+                            </nb-accordion-item></nb-accordion
+                        >
+                    </div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Id</th>
+                                <th scope="col">Area</th>
+                                <th scope="col">Population</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of infoTour">
+                                <th scope="row">{{ data.id }}</th>
+                                <td>
+                                    {{ data.empty }}
+                                </td>
+                                <td>{{ data.name }}</td>
+                                <td>{{ data.code }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="d-flex justify-content-between p-2"></div>
+                    <!-- <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+                        </ngb-pagination> -->
+                </nb-card-body>
+            </nb-card>
+        </nb-card>
+    </div>
+</div>
+<dialog-cmp #confirmDeleteDialog [config]="dialogConfig" (rightBtnEventEmitter)="onDelete($event)"></dialog-cmp>

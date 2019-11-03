@@ -1,0 +1,127 @@
+<!-- image tour start -->
+<ngx-carousel class="banner" [inputs]="carouselBanner">
+    <ngx-item NgxCarouselItem *ngFor="let tile of this.images; let i = index">
+        <div (click)="open(i)" class="bannerStyle" [style.background]="'url(' + tile + ')'"></div>
+    </ngx-item>
+    <button NgxCarouselPrev class="leftRs">&lt;</button>
+    <button NgxCarouselNext class="rightRs">&gt;</button>
+</ngx-carousel>
+<!-- image tour end -->
+
+<div class="row info-tour" *ngFor="let i of this.infoTour">
+    <!-- form left start -->
+    <div class="left-detail col-9">
+        <h2 class="text-uppercase font-weight-bold text-center">{{ i.name }}</h2>
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Country</th>
+                        <th scope="col">Area</th>
+                        <th scope="col">Population</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of i.schedule; index as i">
+                        <th scope="row">{{ i + 1 }}</th>
+                        <td>
+                            {{ data.name }}
+                        </td>
+                        <td>{{ data.area }}</td>
+                        <td>{{ data.population }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row m-3">
+            <div class="col-6 text-center">
+                <span class=" text-uppercase"> Thời lượng: </span>
+                <span class="text-strong font-weight-bold">{{ i.duration }}</span
+                ><br />
+                <span class="text-uppercase"> Điểm khởi hành: </span>
+                <span class="text-strong font-weight-bold">{{ i.departure }}</span>
+            </div>
+
+            <div class="col-6 text-center">
+                <span class="text-uppercase"> Phương tiện: </span>
+                <span class="text-strong font-weight-bold">{{ i.vehicle }}</span
+                ><br />
+                <span class="text-uppercase"> Điểm đến: </span>
+                <span class="text-strong text-capitalize font-weight-bold" *ngFor="let n of this.location"> {{ n.location }} </span>
+            </div>
+        </div>
+        <p>{{ i.highlights }}</p>
+
+        <!-- <nb-card> -->
+        <nb-tabset>
+            <nb-tab tabTitle="Chương trình tour">
+                <button (click)="exportAs('docx')" class="btn m-2"><i class="fas fa-file-word mr-2"></i>Lưu chương trình</button>
+                <div id="txt" innerHTML="{{ i.itinerary }}"></div>
+            </nb-tab>
+            <nb-tab tabTitle="Chính sách tour">
+                <div innerHTML="{{ i.policy }}"></div>
+            </nb-tab>
+            <nb-tab tabTitle="Liên hệ">
+                <span>Content #3</span>
+            </nb-tab>
+        </nb-tabset>
+        <!-- </nb-card> -->
+    </div>
+    <!-- form left end -->
+
+    <!-- form right start -->
+    <div class="col-2 right-detail">
+        <div class="p-2">
+            <h6 class="text-center">Liên hệ</h6>
+            <p>Hotline: 1900 0000</p>
+            <div *ngIf="this.infoTour[0].saleoff > 0">
+                <div class="promotion-tour">
+                    <div class="text-promotion-tour">Giảm giá: {{ i.saleoff | number }} đ</div>
+                </div>
+                <div class="pt-5">
+                    <span class="text-uppercase">Giá người lớn: </span>
+                    <del class="text-strong ">{{ i.adultPrice | number }}đ </del><br />
+                    <span class="font-weight-bold">{{ i.price | number }}đ</span><br />
+                    <span class=" text-uppercase">Giá trẻ em: </span>
+                    <span class="text-strong font-weight-bold">{{ i.childrenPrice | number }}đ</span><br />
+                </div>
+            </div>
+            <div *ngIf="this.infoTour[0].saleoff == 0">
+                <div class="pt-5">
+                    <span class="text-uppercase">Giá người lớn: </span>
+                    <span class="text-strong ">{{ i.adultPrice | number }}đ </span><br />
+                    <span class="font-weight-bold">{{ i.price | number }}đ</span><br />
+                    <span class=" text-uppercase">Giá trẻ em: </span>
+                    <span class="text-strong font-weight-bold">{{ i.childrenPrice | number }}đ</span><br />
+                </div>
+            </div>
+        </div>
+        <button class="justify-content-center" (click)="click()" class="btn">Booking</button>
+    </div>
+
+    <!-- form right end -->
+</div>
+
+<!-- modal start -->
+<!-- <ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Login</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        Username
+        <input type="text" />
+        Password
+        <input type="password" />
+    </div>
+    <div class="modal-footer">
+        <button (click)="Google('google-login-button-sign-in')">Google</button>
+        <button type="button" class="btn btn-light" (click)="FB()">Facebook</button>
+    </div>
+    <div id="root"></div>
+</ng-template> -->
+
+<!-- modal end -->
