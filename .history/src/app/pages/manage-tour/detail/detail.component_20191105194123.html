@@ -1,0 +1,41 @@
+<nb-card>
+    <form class="form"></form>
+    <nb-tabset fullWidth (changeTab)="toggleLoadingAnimation()">
+        <nb-tab tabTitle="Thông tin tour" [nbSpinner]="loading" nbSpinnerStatus="success" nbSpinnerSize="giant">
+            <div class="row">
+                <div class="col-6">
+                    <div class="info">
+                        <span class=" text-uppercase"> Địa điểm: </span>
+                        <a *ngFor="let location of this.listLocation" class="text-strong font-weight-bold text-capitalize">{{
+                            location.location
+                        }}</a>
+                    </div>
+                    <div class="info">
+                        <span class=" text-uppercase">Thời lượng: </span>
+                        <span class="text-strong font-weight-bold text-capitalize"> {{ this.event.attributes.duration }}</span>
+                    </div>
+                    <div class="info">
+                        <span class=" text-uppercase">Già người lớn: </span>
+                        <span class="text-strong font-weight-bold text-capitalize"> {{ this.event.attributes.adultPrice | number }}đ</span>
+                    </div>
+                    <div class="info">
+                        <span class=" text-uppercase">Già trẻ em: </span>
+                        <span class="text-strong font-weight-bold text-capitalize">
+                            {{ this.event.attributes.childrenPrice | number }}đ</span
+                        >
+                    </div>
+                    <div class="info">
+                        <span class=" text-uppercase">Loại tour: </span>
+                        <span class="text-strong font-weight-bold "> {{ this.typeTour }}</span>
+                    </div>
+                    <div class="info">
+                        <span class=" text-uppercase">Phương tiện: </span>
+                        <span class="text-strong font-weight-bold "> {{ this.event.attributes.vehicle }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5"></div>
+        </nb-tab>
+        <nb-tab tabTitle="Danh sách hành khách" [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="giant"> </nb-tab>
+    </nb-tabset>
+</nb-card>
