@@ -1,0 +1,11 @@
+@import '../../../@theme/styles/themes.scss';
+@import '../../../pages/pages.component.scss';
+
+.infinite-cards {
+    nb-card {
+        &.own-scroll {
+            height: 50vh;
+            overflow: scroll;
+        }
+    }
+}

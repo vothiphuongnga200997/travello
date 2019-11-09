@@ -1,0 +1,56 @@
+<nb-card style="height: 500px; width: 1200px;">
+    <form class="from col-auto" #filter="ngForm">
+        <div class="form-group row">
+            <div class="col-4 form-group mb-0">
+                <label for="idck">Địa điểm</label>
+                <input
+                    status="primary"
+                    type="text"
+                    nbInput
+                    fullWidth
+                    shape="rectangle"
+                    placeholder="Nhập họ & tên"
+                    [(ngModel)]="location"
+                    id="locationFilter"
+                />
+            </div>
+            <div class="col-4 form-group mb-0">
+                <label for="idck">ID hướng dẫn viên</label>
+                <input
+                    status="primary"
+                    type="text"
+                    id="location"
+                    nbInput
+                    fullWidth
+                    shape="rectangle"
+                    placeholder="Nhập họ & tên"
+                    [(ngModel)]="idGuide"
+                    id="idGuideFilter"
+                />
+            </div>
+
+            <div class="col-4 form-group">
+                <label for="sourceck">Khu vực</label>
+                <nb-select style="width: 100%;" status="primary" placeholder="Chọn khu vực" id="areaFilter" [(ngModel)]="area">
+                    <nb-option value="Miền Bắc">Miền Bắc</nb-option>
+                    <nb-option value="Miền Trung">Miền Trung</nb-option>
+                    <nb-option value="Miền Nam">Miền Nam</nb-option>
+                </nb-select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                Ngày đi
+                <input status="primary" type="datetime" id="startDayFilter" nbInput fullWidth shape="rectangle" [(ngModel)]="startDay" />
+            </div>
+            <div class="col-4">
+                Ngày về
+                <input status="primary" type="datetime" id="endStartFilter" nbInput fullWidth shape="rectangle" [(ngModel)]="endDay" />
+            </div>
+            <div class="col-4">
+                Điễm khởi hành
+                <input status="primary" type="text" id="departureFilter" nbInput fullWidth shape="rectangle" [(ngModel)]="departure" />
+            </div>
+        </div>
+    </form>
+</nb-card>

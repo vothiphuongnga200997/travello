@@ -1,0 +1,38 @@
+    <form class="from col-auto" #filter="ngForm">
+        <h5 class="titlemng"><i class="fa fa-search"></i>&nbsp;Tìm kiếm tour</h5>
+        <hr />
+        <div class="form-group row">
+            <div class="col-4 form-group mb-0">
+                <label for="idck">Địa điểm</label>
+                <input status="primary" type="text" id="nameTour" nbInput fullWidth shape="rectangle" placeholder="Nhập họ & tên" />
+            </div>
+            <div class="col-4 form-group mb-0">
+                <label for="idck">ID hướng dẫn viên</label>
+                <input status="primary" type="text" id="location" nbInput fullWidth shape="rectangle" placeholder="Nhập họ & tên" />
+            </div>
+
+            <div class="col-4 form-group">
+                <label for="sourceck">Khu vực</label>
+                <nb-select status="primary" placeholder="Chọn khu vực">
+                    <nb-option value="Miền Bắc">Miền Bắc</nb-option>
+                    <nb-option value="Miền Trung">Miền Trung</nb-option>
+                    <nb-option value="Miền Nam">Miền Nam</nb-option>
+                </nb-select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                Ngày đi
+                <input status="primary" type="datetime" id="location" nbInput fullWidth shape="rectangle" />
+            </div>
+            <div class="col-4">
+                Ngày về
+                <input status="primary" type="datetime" id="location" nbInput fullWidth shape="rectangle" />
+            </div>
+            <div class="col-4">
+                Điễm khởi hành
+                <input status="primary" type="text" id="location" nbInput fullWidth shape="rectangle" />
+            </div>
+        </div>
+    </form>
+</nb-accordion-item-body>

@@ -1,0 +1,75 @@
+<nb-card>
+    <nb-tabset fullWidth (changeTab)="toggleLoadingAnimation()">
+        <nb-tab tabTitle="Danh sách thời điểm" [nbSpinner]="loading" nbSpinnerStatus="success" nbSpinnerSize="giant">
+            <div class="row mt-5">
+                <h2>Danh sách thời điểm</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Mã thời điểm</th>
+                            <th scope="col">Ngày đi</th>
+                            <th scope="col">Ngày về</th>
+                            <th scope="col">Danh sách hành khách</th>
+                            <th scope="col">Nhập liệu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of listSchedule; index as i">
+                            <th scope="row">{{ i + 1 }}</th>
+                            <td>{{ data.codeSchedule }}</td>
+                            <td>{{ data.startDay }}</td>
+                            <td>{{ data.endDay }}</td>
+                            <td>
+                                <h5 class="text-center" (click)="getTourist(data.obj)"><i class="fas fa-list-ul"></i></h5>
+                            </td>
+                            <td>
+                                <h5 (click)="inputCost(data.obj)"><i class="fas fa-file-alt"></i></h5>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </nb-tab>
+        <nb-tab tabTitle="Thông tin tour" [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="giant">
+            <div class="row">
+                <div class="col-6">
+                    <div class="info">
+                        <span class=" text-uppercase"> Hướng dẫn viên </span>
+                        <div *ngFor="let guide of this.listGuide">
+                            <span class="text-strong font-weight-bold text-capitalize">{{ guide.fullname }}</span>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <span class=" text-uppercase"> Địa điểm </span>
+                        <div *ngFor="let location of this.listLocation">
+                            <span class="text-strong font-weight-bold text-capitalize">{{ location.location }}</span>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <span class=" text-uppercase">Thời lượng: </span>
+                        <span class="text-strong font-weight-bold text-capitalize"> {{ this.event.attributes.duration }}</span>
+                    </div>
+                    <div class="info">
+                        <span class=" text-uppercase">Già người lớn: </span>
+                        <span class="text-strong font-weight-bold text-capitalize"> {{ this.event.attributes.adultPrice | number }}đ</span>
+                    </div>
+                    <div class="info">
+                        <span class=" text-uppercase">Già trẻ em: </span>
+                        <span class="text-strong font-weight-bold text-capitalize">
+                            {{ this.event.attributes.childrenPrice | number }}đ</span
+                        >
+                    </div>
+                    <div class="info">
+                        <span class=" text-uppercase">Loại tour: </span>
+                        <span class="text-strong font-weight-bold "> {{ this.typeTour }}</span>
+                    </div>
+                    <div class="info">
+                        <span class=" text-uppercase">Phương tiện: </span>
+                        <span class="text-strong font-weight-bold "> {{ this.event.attributes.vehicle }}</span>
+                    </div>
+                </div>
+            </div>
+        </nb-tab>
+    </nb-tabset>
+</nb-card>

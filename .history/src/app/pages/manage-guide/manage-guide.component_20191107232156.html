@@ -1,0 +1,30 @@
+<div class="row dashboard-container">
+    <div class="w-100">
+        <nb-card class="own-scroll">
+            <nb-card class="mb-0">
+                <nb-card-body>
+                    <ng2-smart-table
+                        [settings]="settings"
+                        [source]="source"
+                        (create)="add()"
+                        (edit)="edit($event)"
+                        (delete)="delete($event)"
+                    >
+                    </ng2-smart-table>
+                </nb-card-body>
+            </nb-card>
+        </nb-card>
+    </div>
+</div>
+<dialog-cmp #confirmDeleteDialog [config]="dialogConfig" (rightBtnEventEmitter)="onDelete($event)"></dialog-cmp>
+<ng-template #longContent let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Modal title</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        Hướng dẫn viên này hiện tại đã có lịch trình cho tour
+    </div>
+</ng-template>
