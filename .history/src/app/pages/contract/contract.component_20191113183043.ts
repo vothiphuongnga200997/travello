@@ -333,10 +333,10 @@ export class ContractComponent implements OnInit {
         }
         let result = await query.find();
         if (result) {
-            for (let data of result) {
-                try {
+            try{
+                for (let data of result) {
                     let email = await this.contractService.getUserId(data.get('objUser').id);
-                    if (data.get('objSchedule').get('endDay') < dateNow) this.status = 0;
+                    if (data.get('objTour').get('endDay') < dateNow) this.status = 0;
                     else this.status = 1;
                     this.contract.push({
                         id: data.id,
@@ -360,15 +360,15 @@ export class ContractComponent implements OnInit {
                         tourQuantity: data.get('objTour').get('quantity'),
                         status: this.status,
                     });
-                } catch (ex) {
-                    this.loadingService.stop();
-                    throw ex;
                 }
+                this.source.load(this.contract);
+                this.source.setSort([{ field: 'status', direction: 'desc' }]);
             }
-            this.source.load(this.contract);
-            this.source.setSort([{ field: 'status', direction: 'desc' }]);
             this.loadingService.stop();
-        }
+            } catch(ex){
+                throw ex;
+            }
+          
     }
     exportAs(type: SupportedExtensions, opt?: string) {
         this.config.type = type;

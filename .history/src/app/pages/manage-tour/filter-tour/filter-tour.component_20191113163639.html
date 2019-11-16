@@ -1,0 +1,77 @@
+<nb-card style="height: 500px; width: 900px;">
+    <div class="form-group row mb-0">
+        <div class="col-4 form-group mb-0">
+            <label>Địa điểm</label>
+            <input
+                class="text-capitalize"
+                status="primary"
+                type="text"
+                nbInput
+                fullWidth
+                shape="rectangle"
+                placeholder="Nhập họ & tên"
+                [(ngModel)]="location"
+                id="locationFilter"
+            />
+        </div>
+        <div class="col-4 form-group mb-0">
+            <label>ID hướng dẫn viên</label>
+            <input
+                status="primary"
+                type="text"
+                id="location"
+                nbInput
+                fullWidth
+                shape="rectangle"
+                placeholder="Nhập họ & tên"
+                [(ngModel)]="idGuide"
+                id="idGuideFilter"
+            />
+        </div>
+
+        <div class="col-4 form-group">
+            <label>Khu vực</label>
+            <br />
+            <nb-select style="width: 100%;" status="primary" placeholder="Chọn khu vực" id="areaFilter" [(ngModel)]="area">
+                <nb-option value="Miền Bắc">Miền Bắc</nb-option>
+                <nb-option value="Miền Trung">Miền Trung</nb-option>
+                <nb-option value="Miền Nam">Miền Nam</nb-option>
+            </nb-select>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-4  form-group">
+            Ngày đi
+            <input status="primary" type="datetime-local" id="startDayFilter" nbInput fullWidth shape="rectangle" [(ngModel)]="startDay" />
+        </div>
+        <div class="col-4  form-group">
+            Ngày về
+            <input status="primary" type="datetime-local" id="endStartFilter" nbInput fullWidth shape="rectangle" [(ngModel)]="endDay" />
+        </div>
+        <div class="col-4  form-group">
+            Điễm khởi hành
+            <input status="primary" id="departureFilter" nbInput fullWidth shape="rectangle" [(ngModel)]="departure" />
+        </div>
+    </div>
+    <button class="btn btn-success float-right filter" (click)="filter()">Lọc</button>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Mã tour</th>
+                <th scope="col">Ngày đi</th>
+                <th scope="col">Ngày về</th>
+                <th scope="col">Lịch trình tour</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of dataSchedule; index as i">
+                <td>{{ data.codeSchedule }}</td>
+                <td>
+                    {{ data.startDay }}
+                </td>
+                <td>{{ data.endDay }}</td>
+                <td><i class="fas fa-clipboard-list"></i></td>
+            </tr>
+        </tbody>
+    </table>
+</nb-card>

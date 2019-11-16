@@ -64,7 +64,7 @@ export class FilterTourComponent implements OnInit {
                     startDay: moment(data.get('startDay')).format('DD/MM/YYYY, h:mm A'),
                     endDay: moment(data.get('endDay')).format('DD/MM/YYYY, h:mm A'),
                     codeSchedule: data.get('codeSchedule'),
-                    nameTour: data.attributes.objTour.attributes.nameTour,
+                    nameTour: data.get('objTour').get('nameTour'),
                     itinerary: data.attributes.objTour.attributes.itinerary,
                 });
             }

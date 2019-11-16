@@ -1,4 +1,4 @@
-<div style="height: 500px; width: 900px;">
+<nb-card style="height: 500px; width: 900px;">
     <div class="m-2">
         <div class="form-group row mb-0">
             <div class="col-3 form-group mb-0">
@@ -75,25 +75,21 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col"></th>
                 <th scope="col">Mã tour</th>
                 <th scope="col">Ngày đi</th>
                 <th scope="col">Ngày về</th>
-                <th scope="col">Tên tour</th>
                 <th scope="col">Lịch trình tour</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let data of dataSchedule; index as i">
-                <td>{{ i }}</td>
                 <td>{{ data.codeSchedule }}</td>
                 <td>
                     {{ data.startDay }}
                 </td>
                 <td>{{ data.endDay }}</td>
-                <td>{{ data.nameTour }}</td>
                 <td><i class="fas fa-clipboard-list"></i></td>
             </tr>
         </tbody>
     </table>
-</div>
+</nb-card>

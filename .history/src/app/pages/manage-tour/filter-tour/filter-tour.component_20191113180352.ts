@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import * as Parse from 'parse';
-import * as moment from 'moment';
 
 @Component({
     selector: 'ngx-filter-tour',
@@ -61,10 +60,10 @@ export class FilterTourComponent implements OnInit {
         if (result.length) {
             for (let data of result) {
                 this.dataSchedule.push({
-                    startDay: moment(data.get('startDay')).format('DD/MM/YYYY, h:mm A'),
-                    endDay: moment(data.get('endDay')).format('DD/MM/YYYY, h:mm A'),
+                    startDay: data.get('startDay'),
+                    endDay: data.get('endDay'),
                     codeSchedule: data.get('codeSchedule'),
-                    nameTour: data.attributes.objTour.attributes.nameTour,
+                    nameTour: data.get('objTour').get('nameTour'),
                     itinerary: data.attributes.objTour.attributes.itinerary,
                 });
             }

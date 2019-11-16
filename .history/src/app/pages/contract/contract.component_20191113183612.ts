@@ -336,7 +336,7 @@ export class ContractComponent implements OnInit {
             for (let data of result) {
                 try {
                     let email = await this.contractService.getUserId(data.get('objUser').id);
-                    if (data.get('objSchedule').get('endDay') < dateNow) this.status = 0;
+                    if (data.get('objTour').get('endDay') < dateNow) this.status = 0;
                     else this.status = 1;
                     this.contract.push({
                         id: data.id,
