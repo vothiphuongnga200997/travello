@@ -1,0 +1,78 @@
+<div class="content">
+    <div class="row justify-content-center">
+        <a class="btn-flip" (click)="submit1()" data-back="Change information" data-front="Thông tin của bạn"></a>
+        <a class="btn-flip" (click)="submit2()" data-back="Cancel Ticket" data-front="Hợp đồng hiện có"></a>
+        <a class="btn-flip" (click)="submit3()" data-back="Buy Ticket" data-front="Hợp đồng đã ..."></a>
+    </div>
+    <div class="text-info" *ngIf="form1">
+        <h1>Thông tin cá nhân</h1>
+        <label>{{ this.type }}</label>
+        <div class="info">
+            <label>Họ & tên</label>
+            <input type="text" [(ngModel)]="this.fullname" />
+        </div>
+        <div class="info"><label>Số điện thoại</label> <input type="text" [(ngModel)]="this.phone" /></div>
+        <div class="info">
+            <label>Email</label>
+            <input type="text" [(ngModel)]="this.email" *ngIf="this.disabled ? disabled : true" />
+        </div>
+    </div>
+    <div class="text-info" *ngIf="form2">
+        <div class="product-info row" *ngFor="let info of this.pending">
+            <div class="col-4"></div>
+            <div class="col-8">
+                <h5 class="text-info">Hệ thống đã tiếp nhận hợp đồng</h5>
+                <div class="info">
+                    <span class=" text-uppercase"> Mã hợp đồng: </span>
+                    <span class="text-strong font-weight-bold">{{ info.id }}</span>
+                </div>
+
+                <div class="info">
+                    <span class=" text-uppercase"> Ngày giao dịch: </span>
+                    <span class="text-strong font-weight-bold">{{ info.daySet }} </span>
+                </div>
+                <div class="info">
+                    <span class=" text-uppercase"> Tổng tiền: </span>
+                    <span class="text-strong font-weight-bold">{{ info.price | number }}đ</span>
+                </div>
+                <div class="info">
+                    <span class=" text-uppercase">Mã tour: </span>
+                    <span class="text-strong font-weight-bold">{{ info.codeSchedule }}</span>
+                </div>
+                <div class="info">
+                    <span class=" text-uppercase">Tên tour: </span>
+                    <span class="text-strong font-weight-bold">{{ info.nameTour }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-info" *ngIf="form3">
+        <h5 class="text-info">Lịch sử hợp đồng</h5>
+        <div class="product-info row" *ngFor="let info of this.end">
+            <div class="col-4"></div>
+            <div class="col-8">
+                <div class="info">
+                    <span class=" text-uppercase"> Mã hợp đồng: </span>
+                    <span class="text-strong font-weight-bold">{{ info.id }}</span>
+                </div>
+
+                <div class="info">
+                    <span class=" text-uppercase"> Ngày giao dịch: </span>
+                    <span class="text-strong font-weight-bold">{{ info.daySet }} </span>
+                </div>
+                <div class="info">
+                    <span class=" text-uppercase"> Tổng tiền: </span>
+                    <span class="text-strong font-weight-bold">{{ info.price | number }}đ</span>
+                </div>
+                <div class="info">
+                    <span class=" text-uppercase">Mã tour: </span>
+                    <span class="text-strong font-weight-bold">{{ info.codeSchedule }}</span>
+                </div>
+                <div class="info">
+                    <span class=" text-uppercase">Tên tour: </span>
+                    <span class="text-strong font-weight-bold">{{ info.nameTour }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
