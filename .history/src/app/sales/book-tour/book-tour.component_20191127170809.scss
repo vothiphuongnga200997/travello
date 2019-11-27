@@ -1,0 +1,125 @@
+@import '../../@theme/styles/themes';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/breakpoints';
+@import '../../@theme/styles/styles.scss';
+@import '../../@theme/styles/styles';
+
+@include nb-install-component() {
+    /deep/ router-outlet + * {
+        display: block;
+        animation: fade 1s;
+
+        @keyframes fade {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    }
+}
+@include nb-install-component() {
+    nb-card {
+        width: 100%;
+    }
+}
+
+:host ::ng-deep nb-stepper .step-content {
+    text-align: center;
+
+    button {
+        cursor: pointer;
+        margin: 0.5rem;
+    }
+}
+
+.test {
+    background: red;
+}
+
+// ngu
+
+.steppers-container {
+    margin-top: 90px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+.form-right {
+    margin-left: 30px;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
+}
+// button a start
+.btn {
+    background: #0e7cb8;
+    color: white;
+    border: none;
+    border-radius: 0;
+}
+.btn:hover {
+    color: #0e7cb8;
+    background: #cbe3f0;
+}
+// button a end
+.rule {
+    width: 100%;
+    height: 250px;
+    overflow-y: scroll;
+    padding: 10px;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-right: 2px solid #ccc;
+}
+.required {
+    height: 25px;
+    color: red;
+    font-size: 12px;
+    float: right !important;
+    padding-top: 5px;
+    width: 100%;
+}
+// sale
+.promotion-tour {
+    position: absolute;
+    background: #ff002c;
+    line-height: 30px;
+    max-width: 80%;
+    margin-left: -31px;
+}
+
+.promotion-tour .text-promotion-tour {
+    position: relative;
+    padding: 0 25px 0 15px;
+    font-size: 13px;
+    color: #fff;
+    font-weight: 600;
+    line-height: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+.promotion-tour:after {
+    left: calc(100% - 15px);
+    top: 50%;
+    border: solid #ff002c;
+    content: ' ';
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: #ff002c;
+    border-right-color: transparent;
+    border-width: 15px;
+    margin-top: -15px;
+}
+// bill start
+.bill {
+    font-size: 20px;
+}
+.detail {
+    margin-bottom: 10px;
+}
+
+//bill end

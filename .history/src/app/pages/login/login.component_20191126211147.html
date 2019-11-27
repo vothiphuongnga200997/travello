@@ -1,0 +1,115 @@
+<form name="login" id="login">
+    <div class="m-3">{{ this.title }}</div>
+    <nb-tabset fullWidth (changeTab)="toggleLoadingAnimation()">
+        <nb-tab tabTitle="ACCOUNT LOGIN" nbSpinnerStatus="success" nbSpinnerSize="giant">
+            <span class="login-form">ĐĂNG NHẬP</span>
+            <label class="m-5">
+                <p class="label-txt">TÀI KHOẢN</p>
+                <input type="text" [(ngModel)]="username" name="user" />
+                <div class="line-box">
+                    <div class="line"></div>
+                </div>
+                <div class="required">
+                    <div class="float-right">{{ this.requestUser }}</div>
+                </div>
+            </label>
+            <label class="m-5">
+                <p class="label-txt">MẬT KHẨU</p>
+                <input type="password" [(ngModel)]="password" passwordToggle required name="password" />
+                <div class="line-box">
+                    <div class="line"></div>
+                </div>
+                <div class="required">
+                    <div class="float-right">{{ this.requestPassword }}</div>
+                </div>
+            </label>
+
+            <button class="btn-login" (click)="onLoginSubmit()">ĐĂNG NHẬP</button>
+
+            <button class="btn-fb" (click)="onLoginFaceBookSubmit()"><i class="fab fa-facebook-square"></i> ĐĂNG NHẬP BẰNG FACEBOOK</button>
+            <button class="btn-google" (click)="logInWithGoogle('google-login-button-sign-in')" id="google-login-button-sign-in">
+                <i class="fab fa-google-plus-square"></i>
+                ĐĂNG NHẬP BẰNG GOOGLE
+            </button>
+            <div id="root"></div>
+        </nb-tab>
+
+        <nb-tab tabTitle="CREATE ACCOUNT" nbSpinnerStatus="info" nbSpinnerSize="giant">
+            <span class="login-form">TẠO TÀI KHOẢN</span>
+            <label>
+                <div class="row">
+                    <div class="col-6">
+                        <p class="label-txt">HỌ & TÊN</p>
+                        <input type="text" />
+                        <div class="line-box">
+                            <div class="line"></div>
+                        </div>
+                        <!-- <div class="required">
+                            <div class="float-right">{{ this.requestUser }}</div>
+                        </div> -->
+                    </div>
+                    <div class="col-6">
+                        <p class="label-txt">EMAIL</p>
+                        <input type="tel" />
+                        <div class="line-box">
+                            <div class="line"></div>
+                        </div>
+                        <!-- <div class="required">
+                            <div class="float-right">{{ this.requestUser }}</div>
+                        </div> -->
+                    </div>
+                </div>
+            </label>
+            <label>
+                <div class="row">
+                    <div class="col-6">
+                        <p class="label-txt">TÀI KHOẢN</p>
+                        <input type="text" />
+                        <div class="line-box">
+                            <div class="line"></div>
+                        </div>
+                        <div class="required">
+                            <div class="float-right">{{ this.requestUser }}</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <p class="label-txt">SỐ ĐIỆN THOẠI</p>
+                        <input type="tel" />
+                        <div class="line-box">
+                            <div class="line"></div>
+                        </div>
+                        <div class="required">
+                            <div class="float-right">{{ this.requestUser }}</div>
+                        </div>
+                    </div>
+                </div>
+            </label>
+            <label class="mt-20">
+                <div class="row">
+                    <div class="col-6">
+                        <p class="label-txt">MẬT KHẨU</p>
+                        <input type="password" passwordToggle required />
+                        <div class="line-box">
+                            <div class="line"></div>
+                        </div>
+                        <div class="required">
+                            <div class="float-right">{{ this.requestPassword }}</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <p class="label-txt">NHẬP LẠI MẬT KHẨU</p>
+                        <input type="password" passwordToggle required />
+                        <div class="line-box">
+                            <div class="line"></div>
+                        </div>
+                        <div class="required">
+                            <div class="float-right">{{ this.requestPassword }}</div>
+                        </div>
+                    </div>
+                </div>
+            </label>
+
+            <button class="btn-login" (click)="onLoginSubmit()">ĐĂNG KÍ</button>
+        </nb-tab>
+    </nb-tabset>
+</form>

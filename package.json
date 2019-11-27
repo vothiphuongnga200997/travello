@@ -87,6 +87,7 @@
         "pace-js": "1.0.2",
         "pako": "1.0.10",
         "parse": "^2.4.0",
+        "randomstring": "^1.1.5",
         "roboto-fontface": "0.8.0",
         "rxjs": "6.5.2",
         "rxjs-compat": "6.3.0",
