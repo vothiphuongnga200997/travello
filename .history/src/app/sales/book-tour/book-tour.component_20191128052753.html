@@ -75,13 +75,13 @@
                                                     ><br />
                                                     <a>Thời gian: </a><b>{{ i.duration }}</b
                                                     ><br />
-                                                    <a>Người lớn </a><del>{{ i.adultPrice | number }}đ </del> <b> {{ i.priceSA | number }}đ</b
+                                                    <a>Người lớn </a><del>{{ i.adultPrice | number }}đ </del> <b> {{ i.price | number }}đ</b
                                                     ><br />
-                                                    <a>Trẻ em: </a><del>{{ i.childrenPrice | number }}đ</del> <b> {{ i.priceSC | number }}đ</b><br/>
+                                                    <a>Trẻ em: </a><b>{{ i.childrenPrice | number }}đ</b><br />
                                                     <a>Tống giá: </a><b *ngIf="this.totalMoney">{{ this.totalMoney | number }}đ</b><br />
                                                 </div>
                                             </div>
-                                            <div *ngIf="this.infoTour[0].saleoff === 0">
+                                            <div *ngIf="this.infoTour[0].saleoff == 0">
                                                 <div class="pt-1">
                                                     <a>Code: </a><b>{{ i.code }}</b
                                                     ><br />
@@ -91,7 +91,7 @@
                                                     ><br />
                                                     <a>Thời gian: </a><b>{{ i.duration }}</b
                                                     ><br />
-                                                    <a>Người lớn </a> <b>{{ i.adultPrice | number }}đ</b>
+                                                    <a>Người lớn </a>{{ i.adultPrice | number }}đ <b> {{ i.price | number }}đ</b><br />
                                                     <a>Trẻ em: </a><b>{{ i.childrenPrice | number }}đ</b><br />
                                                     <a>Tống giá: </a><b *ngIf="this.totalMoney">{{ this.totalMoney | number }}đ</b><br />
                                                 </div>

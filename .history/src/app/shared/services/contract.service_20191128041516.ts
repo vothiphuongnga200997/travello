@@ -279,7 +279,6 @@ export class ContractService {
         totalMoney: number,
         paidOfCuctomer: number,
         idCustomer: string,
-        surcharge: Array<any>,
     ) {
         let contract = Parse.Object.extend('contract');
         let obj = new contract();
@@ -302,13 +301,11 @@ export class ContractService {
         dataSave.cancelTicket = [];
         dataSave.paid = paid;
         dataSave.status = true;
-        dataSave.surcharge = surcharge;
         dataSave.expiryDate = new Date(
             moment(Date.now())
                 .add(3, 'day')
                 .format('LLL'),
         );
-        dataSave.date = new Date();
         try {
             let currentUser = Parse.User.current();
             dataUser.email = thirdForm.email;
@@ -326,7 +323,7 @@ export class ContractService {
                 dataCustomer.paid = paidOfCuctomer + totalMoney;
                 dataCustomer.discount = 0;
                 if (paidOfCuctomer + totalMoney >= 100000000) dataCustomer.discount = 0.1;
-                if (paidOfCuctomer + totalMoney < 100000000 && paidOfCuctomer + totalMoney >= 50000000) dataCustomer.discount = 0.05;
+                if (paidOfCuctomer + totalMoney < 100000000 || paidOfCuctomer + totalMoney >= 50000000) dataCustomer.discount = 0.05;
                 await objCustomer.save(dataCustomer);
             }
             return result;

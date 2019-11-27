@@ -3,7 +3,6 @@ import * as Parse from 'parse';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import * as moment from 'moment';
-import { NbDateAdapterService } from '@nebular/theme';
 
 @Injectable()
 export class ContractService {
@@ -279,15 +278,14 @@ export class ContractService {
         totalMoney: number,
         paidOfCuctomer: number,
         idCustomer: string,
-        surcharge: Array<any>,
     ) {
         let contract = Parse.Object.extend('contract');
         let obj = new contract();
         let dataSave: any = {};
         let dataUser: any = {};
-        let dataSchedule: any = {};
+        let dataTour: any = {};
         let schedule = Parse.Object.extend('schedule');
-        let ObjectSchedule = new schedule();
+        let ObjectTour = new schedule();
 
         let customer = Parse.Object.extend('customer');
         let objCustomer = new customer();
@@ -301,14 +299,9 @@ export class ContractService {
         dataSave.indemnification = 0;
         dataSave.cancelTicket = [];
         dataSave.paid = paid;
-        dataSave.status = true;
-        dataSave.surcharge = surcharge;
-        dataSave.expiryDate = new Date(
-            moment(Date.now())
-                .add(3, 'day')
-                .format('LLL'),
-        );
-        dataSave.date = new Date();
+        dataSave.expiryDate = moment(Date.now())
+            .add(3, 'day')
+            .format('LLL');
         try {
             let currentUser = Parse.User.current();
             dataUser.email = thirdForm.email;
@@ -317,16 +310,16 @@ export class ContractService {
             dataSave.objUser = currentUser;
             let result = await obj.save(dataSave);
             if (result) {
-                dataSchedule.objectId = firstForm.idSchedule;
-                dataSchedule.empty = await this.setEmpty(firstForm.idSchedule, quantity);
-                await ObjectSchedule.save(dataSchedule);
+                dataTour.objectId = firstForm.idSchedule;
+                dataTour.empty = await this.setEmpty(firstForm.idSchedule, quantity);
+                await ObjectTour.save(dataTour);
                 dataCustomer.objUser = currentUser;
                 dataCustomer.objectId = idCustomer;
                 dataCustomer.objUser = currentUser;
                 dataCustomer.paid = paidOfCuctomer + totalMoney;
                 dataCustomer.discount = 0;
                 if (paidOfCuctomer + totalMoney >= 100000000) dataCustomer.discount = 0.1;
-                if (paidOfCuctomer + totalMoney < 100000000 && paidOfCuctomer + totalMoney >= 50000000) dataCustomer.discount = 0.05;
+                if (paidOfCuctomer + totalMoney < 100000000 || paidOfCuctomer + totalMoney >= 50000000) dataCustomer.discount = 0.05;
                 await objCustomer.save(dataCustomer);
             }
             return result;

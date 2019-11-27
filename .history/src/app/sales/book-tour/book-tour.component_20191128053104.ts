@@ -50,11 +50,10 @@ export class BookTourComponent implements OnInit {
     surcharge: Array<any> = [];
     confirmation: string;
     succesConfirmation: boolean = true;
-    price: number = 0; // giá vé;
+    price: number = 0;
     idCustomer: string;
     paidOfCuctomer: number;
-    priceSurcharge: number = 0; // gia tong dich vu
-    listSurcharge: Array<any>; // gán các dịch vu duoc chon qua booking
+    priceSurcharge: number = 0;
     get contactFormGroup() {
         return this.secondForm.get('contacts') as FormArray;
     }
@@ -178,8 +177,7 @@ export class BookTourComponent implements OnInit {
                 duration: result.get('objTour').attributes.duration,
                 startDay: moment(result.get('startDay')).format('DD/MM/YYYY, hh:mm A'),
                 endDay: moment(result.get('endDay')).format('DD/MM/YYYY, hh:mm A'),
-                priceSA: result.get('objTour').attributes.adultPrice - result.get('objTour').attributes.saleoff,
-                priceSC: result.get('objTour').attributes.childrenPrice - result.get('objTour').attributes.saleoff,
+                price: result.get('objTour').attributes.adultPrice - result.get('objTour').attributes.saleoff,
                 quantity: result.get('objTour').attributes.quantity,
             });
             for (let data of result.get('objTour').attributes.surcharge) {
@@ -232,24 +230,21 @@ export class BookTourComponent implements OnInit {
     checkPrice() {
         for (let data of this.firstForm.value.surcharge) {
             this.priceSurcharge = 0;
-            this.listSurcharge = [];
             if (data.quantity > 0) {
                 this.priceSurcharge += data.quantity * data.price;
             }
-            this.listSurcharge.push(data);
         }
-        console.log(this.listSurcharge);
-        this.pay();
     }
     pay() {
         this.totalMoney = 0;
         if (this.firstForm.value.adult !== '' || this.firstForm.value.children !== '') {
-            this.price = this.infoTour[0].priceSA * this.firstForm.value.adult + this.infoTour[0].priceSA * this.firstForm.value.children;
+            this.price =
+                this.infoTour[0].price * this.firstForm.value.adult + this.infoTour[0].childrenPrice * this.firstForm.value.children;
             this.totalMoney =
                 this.priceSurcharge +
-                this.infoTour[0].priceSA * this.firstForm.value.adult +
-                this.infoTour[0].priceSC * this.firstForm.value.children -
-                (this.infoTour[0].priceSA * this.firstForm.value.adult + this.infoTour[0].priceSC * this.firstForm.value.children) *
+                this.infoTour[0].price * this.firstForm.value.adult +
+                this.infoTour[0].childrenPrice * this.firstForm.value.children -
+                (this.infoTour[0].price * this.firstForm.value.adult + this.infoTour[0].childrenPrice * this.firstForm.value.children) *
                     this.discount;
         }
         this.deposit = this.totalMoney;
@@ -293,7 +288,6 @@ export class BookTourComponent implements OnInit {
                     this.totalMoney,
                     this.paidOfCuctomer,
                     this.idCustomer,
-                    this.listSurcharge,
                 );
                 if (result) {
                     this.router.navigate(['watch-info/' + this.idUser]);
@@ -387,7 +381,6 @@ export class BookTourComponent implements OnInit {
                 this.totalMoney,
                 this.paidOfCuctomer,
                 this.idCustomer,
-                this.listSurcharge,
             );
             if (result) {
                 this.router.navigate(['watch-info/' + this.idUser]);

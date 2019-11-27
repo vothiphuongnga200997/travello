@@ -232,19 +232,17 @@ export class BookTourComponent implements OnInit {
     checkPrice() {
         for (let data of this.firstForm.value.surcharge) {
             this.priceSurcharge = 0;
-            this.listSurcharge = [];
             if (data.quantity > 0) {
                 this.priceSurcharge += data.quantity * data.price;
             }
-            this.listSurcharge.push(data);
         }
-        console.log(this.listSurcharge);
         this.pay();
     }
     pay() {
         this.totalMoney = 0;
         if (this.firstForm.value.adult !== '' || this.firstForm.value.children !== '') {
-            this.price = this.infoTour[0].priceSA * this.firstForm.value.adult + this.infoTour[0].priceSA * this.firstForm.value.children;
+            this.price =
+                this.infoTour[0].price * this.firstForm.value.adult + this.infoTour[0].childrenPrice * this.firstForm.value.children;
             this.totalMoney =
                 this.priceSurcharge +
                 this.infoTour[0].priceSA * this.firstForm.value.adult +
@@ -293,7 +291,6 @@ export class BookTourComponent implements OnInit {
                     this.totalMoney,
                     this.paidOfCuctomer,
                     this.idCustomer,
-                    this.listSurcharge,
                 );
                 if (result) {
                     this.router.navigate(['watch-info/' + this.idUser]);
@@ -387,7 +384,6 @@ export class BookTourComponent implements OnInit {
                 this.totalMoney,
                 this.paidOfCuctomer,
                 this.idCustomer,
-                this.listSurcharge,
             );
             if (result) {
                 this.router.navigate(['watch-info/' + this.idUser]);

@@ -238,7 +238,6 @@ export class BookTourComponent implements OnInit {
             }
             this.listSurcharge.push(data);
         }
-        console.log(this.listSurcharge);
         this.pay();
     }
     pay() {
@@ -293,7 +292,6 @@ export class BookTourComponent implements OnInit {
                     this.totalMoney,
                     this.paidOfCuctomer,
                     this.idCustomer,
-                    this.listSurcharge,
                 );
                 if (result) {
                     this.router.navigate(['watch-info/' + this.idUser]);
@@ -387,7 +385,6 @@ export class BookTourComponent implements OnInit {
                 this.totalMoney,
                 this.paidOfCuctomer,
                 this.idCustomer,
-                this.listSurcharge,
             );
             if (result) {
                 this.router.navigate(['watch-info/' + this.idUser]);
