@@ -1,0 +1,255 @@
+<!-- menu start -->
+<header class="header-area">
+    <!-- Navbar Area -->
+    <div class="palatin-main-menu" style="position: fixed">
+        <!-- Menu -->
+        <!-- <nav class="classy-navbar justify-content-between" id="palatinNav"> -->
+        <!-- Nav brand -->
+
+        <!-- Navbar Toggler -->
+
+        <!-- Menu -->
+        <nav class="classy-navbar justify-content-between">
+            <img class="ml-5" src="../../../assets/img/core-img/logo.png" alt="" />
+            <section class="wow fadeInUp">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li class="drop">
+                        <a>Miền Bắc</a>
+
+                        <div class="dropdownContain" data-wow-delay="500ms">
+                            <div class="dropOut">
+                                <div class="triangle"></div>
+                                <ul>
+                                    <li (click)="showTour(one.id)" *ngFor="let one of this.one">{{ one.location }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a>Miền Trung</a>
+                        <div class="dropdownContain">
+                            <div class="dropOut">
+                                <div class="triangle"></div>
+                                <ul>
+                                    <li (click)="showTour(two.id)" *ngFor="let two of this.two">{{ two.location }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a>Miền Nam</a>
+                        <div class="dropdownContain">
+                            <div class="dropOut">
+                                <div class="triangle"></div>
+                                <ul>
+                                    <li (click)="showTour(three.id)" *ngFor="let three of this.three">{{ three.location }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="#">Liên hệ</a></li>
+                    <li *ngIf="this.menuLogin">
+                        <a>Login</a>
+                        <div class="dropdownContain1">
+                            <div class="dropOut1">
+                                <div class="triangle"></div>
+                                <ul>
+                                    <li (click)="openVerticallyCentered(content)">Đăng nhập</li>
+                                    <li (click)="openVerticallyCentered(content1)">Tạo tài khoản</li>
+                                    <li (click)="loginFB()">
+                                        <i class="fab fa-facebook-square text-primary icon mr-2 "></i>Login Facebook
+                                    </li>
+                                    <li (click)="loginGoogle('google-login-button-sign-in')" id="google-login-button-sign-in">
+                                        <i class="fab fa-google-plus-square text-danger icon mr-2"></i>Login Google
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li *ngIf="this.menuLogout">
+                        <a>Xin chào: {{ this.user }}</a>
+                        <div class="dropdownContain1">
+                            <div class="dropOut1">
+                                <div class="triangle"></div>
+                                <ul>
+                                    <li (click)="watchInfo()">Hợp đồng của bạn</li>
+
+                                    <li (click)="logout()">Log out</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </nav>
+
+        <!-- Nav End -->
+        <!-- </nav> -->
+    </div>
+</header>
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Login</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        Username
+        <input type="text" />
+        Password
+        <input type="password" />
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="login()">Login</button>
+    </div>
+</ng-template>
+<ng-template #content1 let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Modal title</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>One fine body&hellip;</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>
+<div id="root"></div>
+
+<!-- menu end -->
+<div>
+    <div class="container">
+        <div class="background-description">
+            <h1 class="tour-banner-title1">Tour {{ this.location }}</h1>
+        </div>
+    </div>
+</div>
+<section class="wow fadeInUp">
+    <div class="book-now-area" data-wow-delay="300ms">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="book-now-form">
+                        <form action="#">
+                            <!-- Form Group -->
+                            <div class="form-group">
+                                <label for="select1">Check In</label>
+                                <select class="form-control" id="select1">
+                                    <option>19 June</option>
+                                    <option>20 June</option>
+                                    <option>21 June</option>
+                                    <option>22 June</option>
+                                    <option>23 June</option>
+                                    <option>24 June</option>
+                                    <option>25 June</option>
+                                </select>
+                            </div>
+
+                            <!-- Form Group -->
+                            <div class="form-group">
+                                <label for="select2">Check Out</label>
+                                <select class="form-control" id="select2">
+                                    <option>20 June</option>
+                                    <option>21 June</option>
+                                    <option>22 June</option>
+                                    <option>23 June</option>
+                                    <option>24 June</option>
+                                    <option>25 June</option>
+                                    <option>26 June</option>
+                                    <option>27 June</option>
+                                </select>
+                            </div>
+
+                            <!-- Form Group -->
+                            <div class="form-group">
+                                <label for="select3">Adults</label>
+                                <select class="form-control" id="select3">
+                                    <option>02</option>
+                                    <option>03</option>
+                                    <option>04</option>
+                                    <option>05</option>
+                                    <option>06</option>
+                                </select>
+                            </div>
+
+                            <!-- Form Group -->
+                            <div class="form-group">
+                                <label for="select4">Childrens</label>
+                                <select class="form-control" id="select4">
+                                    <option>01</option>
+                                    <option>02</option>
+                                    <option>03</option>
+                                    <option>04</option>
+                                    <option>05</option>
+                                </select>
+                            </div>
+
+                            <!-- Button -->
+                            <button type="submit">Book Now</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### Hero Area End ##### -->
+<!--Tour list start -->
+<section class="wow fadeInUp">
+    <div class="row ml-5" *ngFor="let data of listTour">
+        <div class="col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="500ms">
+            <div class="row box-search-tour">
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="box-search-tour-image">
+                        <img src="{{ data.image }}" />
+                        <div *ngIf="data.saleoff > 0 || data.special" class="promotion-tour">
+                            <div class="text-promotion-tour">
+                                Tour đặc biệt
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-8 col-xs-12" data-wow-delay="500ms">
+                    <div class="row box-search-tour-info">
+                        <div class="col-md-7 col-sm-7 col-xs-12">
+                            <div class="title-tour">
+                                {{ data.nameTour }}
+                            </div>
+                            <div class="destination-tour">
+                                <b *ngFor="let location of data.location"> {{ location }} </b>
+                            </div>
+                            <div class="detail-tour">
+                                <b>Thời gian : </b>{{ data.duration }}
+                                <br />
+                                <b>Phương tiện :</b> {{ data.vehicle }}
+                                <br />
+                                <b>Điểm khởi hành :</b> {{ data.departure }}
+                                <br />
+                                {{ data.hightLight }}
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class=" row calenlar">
+                                <i class="far fa-calendar-alt"></i> <a> {{ data.startDay }}</a>
+                            </div>
+                            <div class="row">
+                                <a class="book-room-btn btn bg-warning text-dark">Giá {{ data.adultPrice | number }} đ </a>
+                            </div>
+                            <div class="row mt-2">
+                                <a class="book-room-btn btn bg-info text-white" (click)="readMore(data.id)">Booking</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="row"></div>
+
+<!-- Tour list  end -->
