@@ -1,0 +1,147 @@
+<div class="content">
+    <div class="row justify-content-center">
+        <a class="btn-flip" (click)="submit1()" data-back="Change information" data-front="Thông tin của bạn"></a>
+        <a class="btn-flip" (click)="submit2()" data-back="Cancel Ticket" data-front="Hợp đồng hiện có"></a>
+        <a class="btn-flip" (click)="submit3()" data-back="Buy Ticket" data-front="Hợp đồng đã ..."></a>
+    </div>
+    <div class="text-info" *ngIf="form1">
+        <h1>Thông tin cá nhân</h1>
+        <h5 class="text-warning">{{ this.type }}</h5>
+        <div class="info">
+            <label>Họ & tên</label>
+            <input type="text" class="form-control text-capitalize" [(ngModel)]="this.fullname" disabled />
+        </div>
+        <div class="info"><label>Số điện thoại</label> <input disabled type="text" [(ngModel)]="this.phone" class="form-control" /></div>
+        <div class="info">
+            <label>Email</label>
+            <input disabled type="text" [(ngModel)]="this.email" class="form-control" />
+        </div>
+        <button (click)="submit1Edit()">Thay đổi thông tin</button>
+    </div>
+    <div class="text-info" *ngIf="form1edit">
+        <form [formGroup]="infoForm">
+            <h1>Thông tin cá nhân</h1>
+            <h5 class="text-warning">{{ this.type }}</h5>
+            <div class="info">
+                <label>Họ & tên</label>
+                <input
+                    type="text"
+                    class="form-control text-capitalize"
+                    [(ngModel)]="this.fullname"
+                    formControlName="fullname"
+                    [ngClass]="{ 'is-invalid': submitted && f.fullname.errors }"
+                />
+                <div class="required">
+                    <div *ngIf="submitted && f['fullname'].errors">
+                        <div class="float-right text-danger" *ngIf="f['fullname'].errors.required">Vui lòng nhập họ tên.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="info">
+                <label>Số điện thoại</label>
+                <input
+                    type="text"
+                    formControlName="phone"
+                    [ngClass]="{ 'is-invalid': submitted && f.phone.errors }"
+                    [(ngModel)]="this.phone"
+                    class="form-control"
+                    maxlength="12"
+                    minlength="9"
+                />
+                <div class="required">
+                    <div *ngIf="submitted && f['phone'].errors">
+                        <div class="float-right text-danger" *ngIf="f['phone'].errors.required">
+                            Vui lòng nhập số điện thoại.
+                        </div>
+                        <div class="float-right text-danger" *ngIf="f['phone'].errors.pattern || f['phone'].errors.minlength">
+                            số điện thoại không hợp lệ.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="info">
+                <label>Email</label>
+                <input
+                    type="text"
+                    [(ngModel)]="this.email"
+                    class="form-control"
+                    formControlName="email"
+                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                />
+                <div class="required">
+                    <div *ngIf="submitted && f['email'].errors">
+                        <div class="float-right text-danger" *ngIf="f['email'].errors.required">Vui lòng nhập email.</div>
+                        <div class="float-right text-danger" *ngIf="f['email'].errors.email">Email không hợp lệ.</div>
+                    </div>
+                </div>
+            </div>
+            <button (click)="edit()">Lưu</button>
+            <button (click)="submit1()">Hủy</button>
+        </form>
+    </div>
+    <div class="text-info" *ngIf="form2">
+        <div class="product-info row" *ngFor="let info of this.pending">
+            <div class="col-4"></div>
+            <div class="col-8">
+                <h5 class="text-info">Hệ thống đã tiếp nhận hợp đồng</h5>
+                <div class="info">
+                    <span class=" text-uppercase"> Mã hợp đồng: </span>
+                    <span class="text-strong font-weight-bold">{{ info.id }}</span>
+                </div>
+
+                <div class="info">
+                    <span class=" text-uppercase"> Ngày giao dịch: </span>
+                    <span class="text-strong font-weight-bold">{{ info.daySet }} </span>
+                </div>
+                <div class="info">
+                    <span class=" text-uppercase"> Tổng tiền: </span>
+                    <span class="text-strong font-weight-bold">{{ info.price | number }}đ</span>
+                </div>
+                <div class="info">
+                    <span class=" text-uppercase"> Đã trả: </span>
+                    <span class="text-strong font-weight-bold">{{ info.paid | number }}đ</span>
+                </div>
+
+                <div class="info">
+                    <span class=" text-uppercase">Mã tour: </span>
+                    <span class="text-strong font-weight-bold">{{ info.codeSchedule }}</span>
+                </div>
+                <div class="info">
+                    <span class=" text-uppercase">Tên tour: </span>
+                    <span class="text-strong font-weight-bold">{{ info.nameTour }}</span>
+                </div>
+                <button class="btn bg-success" (click)="detail(info.id)">Xem chi tiết</button>
+            </div>
+        </div>
+    </div>
+    <div class="text-info" *ngIf="form3">
+        <h5 class="text-info">Lịch sử hợp đồng</h5>
+        <div class="product-info row" *ngFor="let info of this.end">
+            <div class="col-4"></div>
+            <div class="col-8">
+                <div class="info">
+                    <span class=" text-uppercase"> Mã hợp đồng: </span>
+                    <span class="text-strong font-weight-bold">{{ info.id }}</span>
+                </div>
+
+                <div class="info">
+                    <span class=" text-uppercase"> Ngày giao dịch: </span>
+                    <span class="text-strong font-weight-bold">{{ info.daySet }} </span>
+                </div>
+                <div class="info">
+                    <span class=" text-uppercase"> Tổng tiền: </span>
+                    <span class="text-strong font-weight-bold">{{ info.price | number }}đ</span>
+                </div>
+                <div class="info">
+                    <span class=" text-uppercase">Mã tour: </span>
+                    <span class="text-strong font-weight-bold">{{ info.codeSchedule }}</span>
+                </div>
+                <div class="info">
+                    <span class=" text-uppercase">Tên tour: </span>
+                    <span class="text-strong font-weight-bold">{{ info.nameTour }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<dialog-cmp #confirmDeleteDialog [config]="dialogConfig" (rightBtnEventEmitter)="saveEdit()"></dialog-cmp>

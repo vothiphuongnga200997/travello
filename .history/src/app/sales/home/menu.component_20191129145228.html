@@ -1,0 +1,234 @@
+<header class="header-area">
+    <!-- Navbar Area -->
+    <div class="palatin-main-menu" style="position: fixed">
+        <!-- Menu -->
+        <!-- <nav class="classy-navbar justify-content-between" id="palatinNav"> -->
+        <!-- Nav brand -->
+
+        <!-- Navbar Toggler -->
+
+        <!-- Menu -->
+        <nav class="classy-navbar justify-content-between">
+            <img class="ml-5" src="../../../assets/img/core-img/logo.png" alt="" />
+            <section class="wow fadeInUp">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li class="drop">
+                        <a>Miền Bắc</a>
+
+                        <div class="dropdownContain" data-wow-delay="500ms">
+                            <div class="dropOut">
+                                <div class="triangle"></div>
+                                <ul>
+                                    <li (click)="showTour(one.id)" *ngFor="let one of this.one">{{ one.location }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a>Miền Trung</a>
+                        <div class="dropdownContain">
+                            <div class="dropOut">
+                                <div class="triangle"></div>
+                                <ul>
+                                    <li (click)="showTour(two.id)" *ngFor="let two of this.two">{{ two.location }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a>Miền Nam</a>
+                        <div class="dropdownContain">
+                            <div class="dropOut">
+                                <div class="triangle"></div>
+                                <ul>
+                                    <li (click)="showTour(three.id)" *ngFor="let three of this.three">{{ three.location }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="#">Liên hệ</a></li>
+                    <li *ngIf="this.menuLogin">
+                        <a>Login</a>
+                        <div class="dropdownContain1">
+                            <div class="dropOut1">
+                                <div class="triangle"></div>
+                                <ul>
+                                    <li (click)="openVerticallyCentered(content)">Đăng nhập/đăng ký</li>
+                                    <li (click)="loginFB()">
+                                        <i class="fab fa-facebook-square text-primary icon mr-2 "></i>Login Facebook
+                                    </li>
+                                    <li (click)="loginGoogle('google-login-button-sign-in')" id="google-login-button-sign-in">
+                                        <i class="fab fa-google-plus-square text-danger icon mr-2"></i>Login Google
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li *ngIf="this.menuLogout">
+                        <a
+                            >Xin chào: <a class="text-capitalize">{{ this.user }}</a></a
+                        >
+                        <div class="dropdownContain1">
+                            <div class="dropOut1">
+                                <div class="triangle"></div>
+                                <ul>
+                                    <li (click)="watchInfo()">Hợp đồng của bạn</li>
+
+                                    <li (click)="logout()">Log out</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </nav>
+
+        <!-- Nav End -->
+        <!-- </nav> -->
+    </div>
+</header>
+<ng-template #content let-modal>
+    <div class="login-wrap">
+        <div class="login-html">
+            <input id="tab-1" type="radio" name="tab" class="sign-in" checked /><label for="tab-1" class="tab">Đăng nhập</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up" /><label for="tab-2" class="tab">Đăng kí</label>
+            <div class="login-form">
+                <div class="sign-in-htm">
+                    <div class="group">
+                        <label for="user" class="label">Tài khoản</label>
+                        <input [(ngModel)]="this.username" type="text" class="input" (change)="change()" />
+                        <div class="required">
+                            <div class="text-white float-right">{{ this.requestUser }}</div>
+                        </div>
+                    </div>
+                    <div class="group">
+                        <label for="pass" class="label">Mật khẩu</label>
+                        <input [(ngModel)]="this.password" type="password" class="input" data-type="password" (change)="change()" />
+                        <div class="required">
+                            <div class="text-white float-right">{{ this.requestPassword }}</div>
+                        </div>
+                    </div>
+                    <div class="group">
+                        <input type="submit" class="button p-0" value="Đăng nhập" (click)="login(content)" />
+                    </div>
+                    <div class="hr"></div>
+                </div>
+                <form [formGroup]="registerForm">
+                    <div class="sign-up-htm">
+                        <div class="group">
+                            <label for="user" class="label">Họ & tên</label>
+                            <input
+                                type="text"
+                                formControlName="fullname"
+                                [ngClass]="{ 'is-invalid': submitted && f.fullname.errors }"
+                                class="input text-capitalize"
+                            />
+                            <div class="required">
+                                <div *ngIf="submitted && f['fullname'].errors">
+                                    <div class="float-right text-info" *ngIf="f['fullname'].errors.required">Vui lòng nhập họ tên.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group">
+                            <label for="pass" class="label">Số điện thoại.</label>
+                            <input
+                                type="tel"
+                                class="input"
+                                formControlName="phone"
+                                [ngClass]="{ 'is-invalid': submitted && f.phone.errors }"
+                            />
+                            <div class="required">
+                                <div *ngIf="submitted && f['phone'].errors">
+                                    <div class="float-right text-info" *ngIf="f['phone'].errors.required">
+                                        Vui lòng nhập số điện thoại.
+                                    </div>
+                                    <div class="float-right text-info" *ngIf="f['phone'].errors.pattern">
+                                        số điện thoại không hợp lệ.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group">
+                            <label for="pass" class="label">Email</label>
+                            <input
+                                type="email"
+                                class="input"
+                                formControlName="email"
+                                [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                            />
+                            <div class="required">
+                                <div *ngIf="submitted && f['email'].errors">
+                                    <div class="float-right text-info" *ngIf="f['email'].errors.required">Vui lòng nhập email.</div>
+                                    <div class="float-right text-info" *ngIf="f['email'].errors.email">Email không hợp lệ.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group">
+                            <label for="pass" class="label">Tài khoản</label>
+                            <input
+                                type="text"
+                                class="input"
+                                formControlName="username"
+                                [ngClass]="{ 'is-invalid': submitted && f.username.errors }"
+                            />
+                            <div class="required">
+                                <div *ngIf="submitted && f['username'].errors">
+                                    <div class="float-right text-info" *ngIf="f['username'].errors.required">
+                                        Vui lòng nhập tài khoản.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group">
+                            <label for="pass" class="label">Mật khẩu</label>
+                            <input
+                                type="password"
+                                class="input"
+                                data-type="password"
+                                formControlName="password"
+                                [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                            />
+                            <div class="required">
+                                <div *ngIf="submitted && f['password'].errors">
+                                    <div class="float-right text-info" *ngIf="f['password'].errors.required">Vui lòng nhập mật khẩu</div>
+                                    <div class="float-right text-info" *ngIf="f['password'].errors.minlength">
+                                        Mật khẩu ít nhật 6 ký tự
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group">
+                            <label for="pass" class="label">Nhập lại mật khẩu.</label>
+                            <input
+                                type="password"
+                                class="input"
+                                formControlName="confirmPassword"
+                                [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }"
+                            />
+                            <div class="required">
+                                <div *ngIf="submitted && f['confirmPassword'].errors">
+                                    <div class="float-right text-info" *ngIf="f['confirmPassword'].errors.required">
+                                        Vui lòng nhập lại mật khẩu.
+                                    </div>
+                                    <div class="float-right text-info" *ngIf="f['confirmPassword'].errors.mustMatch">
+                                        Mật khẩu không trùng khớp.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group">
+                            <input type="submit" class="button p-0" value="Đăng kí" (click)="onSubmit(content)" />
+                            <a href="#" class="btn btn-social btn-facebook"><i class="fa fa-facebook"></i> Sign in with Facebook</a>
+                            <a href="#" class="btn btn-social btn-twitter"><i class="fa fa-twitter"></i> Sign in with Twitter</a>
+                            <a href="#" class="btn btn-social btn-google"><i class="fa fa-google"></i> Sign in with Google</a>
+                            <a href="#" class="btn btn-social btn-linkedin"><i class="fa fa-linkedin"></i> Sign in with Linkedin</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<div id="root"></div>
