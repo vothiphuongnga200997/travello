@@ -1,0 +1,42 @@
+<nb-card>
+    <div class="m-2">
+        <h6>Người đại diện</h6>
+        <div *ngFor="let data of this.user">
+            <div>
+                Họ tên: <a class="text-capitalize">{{ data.fullname }}</a>
+            </div>
+            <div>Số điện thoại: {{ data.phone }}</div>
+            <div>Email: {{ data.email }}</div>
+            <div *ngIf="data.member === 0.1" class="text-warning">Khách hàng VIP</div>
+            <div *ngIf="data.member === 0.05" class="text-warning">Khách hàng thân thiện</div>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Họ & tên</th>
+                <th scope="col">Số điện thoại</th>
+                <th scope="col">Giới tính</th>
+                <th scope="col">Địa chỉ</th>
+                <th scope="col">Loại vé</th>
+                <th scope="col">Hủy vé</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let info of this.data; index as i">
+                <th scope="row">{{ i + 1 }}</th>
+                <td class="text-capitalize">
+                    {{ info.name }}
+                </td>
+                <td>{{ info.phonecustomer }}</td>
+                <td>{{ info.gender }}</td>
+                <td class="text-capitalize">{{ info.address }}</td>
+                <td>{{ info.type }}</td>
+                <td>
+                    <a (click)="deleteTicket(this.event, i)"> <i class="fas fa-trash"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</nb-card>
