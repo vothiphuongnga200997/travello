@@ -1,0 +1,107 @@
+<div style="height: 500px; width: 900px;">
+    <div class="m-2">
+        <div class="form-group row mb-0">
+            <div class="col-3 form-group mb-0">
+                <label>Địa điểm</label>
+                <input
+                    class="text-capitalize"
+                    status="primary"
+                    type="text"
+                    nbInput
+                    fullWidth
+                    shape="rectangle"
+                    [(ngModel)]="location"
+                    id="locationFilter"
+                />
+            </div>
+            <div class="col-3 form-group mb-0">
+                <label>ID hướng dẫn viên</label>
+                <input status="primary" type="text" nbInput fullWidth shape="rectangle" [(ngModel)]="idGuide" id="idGuideFilter" />
+            </div>
+            <div class="col-3 form-group">
+                <label>Trạng thái</label>
+                <br />
+                <nb-select style="width: 100%;" status="primary" placeholder="Chọn trạng thái" id="status" [(ngModel)]="status">
+                    <nb-option value="-1">Đang khởi hành</nb-option>
+                    <nb-option value="0">Chưa khởi hành</nb-option>
+                    <nb-option value="1">Đã khởi hành</nb-option>
+                </nb-select>
+            </div>
+            <div class="col-3 form-group">
+                <label>Khu vực</label>
+                <br />
+                <nb-select style="width: 100%;" status="primary" placeholder="Chọn khu vực" id="areaFilter" [(ngModel)]="area">
+                    <nb-option value="Miền Bắc">Miền Bắc</nb-option>
+                    <nb-option value="Miền Trung">Miền Trung</nb-option>
+                    <nb-option value="Miền Nam">Miền Nam</nb-option>
+                </nb-select>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-3  form-group">
+                <label> Ngày đi </label>
+                <input
+                    status="primary"
+                    type="datetime-local"
+                    id="startDayFilter"
+                    nbInput
+                    fullWidth
+                    shape="rectangle"
+                    [(ngModel)]="startDay"
+                />
+            </div>
+            <div class="col-3  form-group">
+                <label>Ngày về</label>
+                <input
+                    status="primary"
+                    type="datetime-local"
+                    id="endStartFilter"
+                    nbInput
+                    fullWidth
+                    shape="rectangle"
+                    [(ngModel)]="endDay"
+                />
+            </div>
+            <div class="col-3  form-group">
+                <label>Điễm khởi hành</label>
+                <input
+                    status="primary"
+                    class="text-capitalize"
+                    id="departureFilter"
+                    nbInput
+                    fullWidth
+                    shape="rectangle"
+                    [(ngModel)]="departure"
+                />
+            </div>
+            <div class="col-3">
+                <label></label>
+                <button class="btn btn-success filter" (click)="filter()">Lọc</button>
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Mã tour</th>
+                <th scope="col">Ngày đi</th>
+                <th scope="col">Ngày về</th>
+                <th scope="col">Tên tour</th>
+                <th scope="col">Lịch trình tour</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of dataSchedule; index as i">
+                <td>{{ i }}</td>
+                <td>{{ data.codeSchedule }}</td>
+                <td>
+                    {{ data.startDay }}
+                </td>
+                <td>{{ data.endDay }}</td>
+                <td>{{ data.nameTour }}</td>
+                <td><i class="fas fa-clipboard-list"></i></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
