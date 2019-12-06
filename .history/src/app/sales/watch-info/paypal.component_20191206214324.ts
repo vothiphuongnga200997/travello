@@ -1,9 +1,9 @@
 import { OnInit, Component } from '@angular/core';
-import { NbDialogRef, NbDialogService } from '@nebular/theme';
+import { NbDialogRef } from '@nebular/theme';
 declare let paypal: any;
 import { HttpClient } from '@angular/common/http';
 import * as Parse from 'parse';
-import { DeleteTicketComponent, DeleteComponent } from './delete.component';
+
 @Component({
     selector: 'ngx-palpay',
     template: `
@@ -106,5 +106,32 @@ export class Paypal implements OnInit {
             scripttagElement.onload = resolve;
             document.body.appendChild(scripttagElement);
         });
+    }
+}
+@Component({
+    selector: 'ngx-palpay',
+    template: `
+        <nb-card style="height: 300px; width: 400px">
+            <nb-card-header>
+                {{ title }}
+                <button type="button" class="close " aria-label="Close" (click)="dismiss()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </nb-card-header>
+            <nb-card-body>
+                <button class="btn bg-success mr-2">Hủy hợp đồng</button>
+            </nb-card-body>
+        </nb-card>
+    `,
+})
+export class InfoTicket implements OnInit {
+    title: String;
+    event: any;
+    constructor(protected ref: NbDialogRef<InfoTicket>, private http: HttpClient) {}
+    ngOnInit() {
+        console.log(this.event);
+    }
+    dismiss() {
+        this.ref.close();
     }
 }

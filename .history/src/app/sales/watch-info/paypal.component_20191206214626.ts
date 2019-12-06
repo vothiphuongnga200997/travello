@@ -108,3 +108,48 @@ export class Paypal implements OnInit {
         });
     }
 }
+@Component({
+    selector: 'ngx-palpay',
+    template: `
+        <nb-card style="height: 300px; width: 400px">
+            <nb-card-header>
+                {{ title }}
+                <button type="button" class="close " aria-label="Close" (click)="dismiss()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </nb-card-header>
+            <nb-card-body>
+                <button class="btn bg-success mr-2">Hủy hợp đồng</button>
+            </nb-card-body>
+        </nb-card>
+    `,
+})
+export class InfoTicket implements OnInit {
+    title: String;
+    event: any;
+
+    constructor(protected ref: NbDialogRef<InfoTicket>, private dialogService: NbDialogService) {}
+    ngOnInit() {
+        console.log(this.event);
+    }
+    dismiss() {
+        this.ref.close();
+    }
+    deleteContract() {
+        try {
+            this.dialogService
+                .open(DeleteComponent, {
+                    context: {
+                        title: 'Xóa hợp đồng',
+                        event: this.event,
+                    },
+                })
+                .onClose.subscribe(async data => {
+                    if (data) {
+                        if (data.pennant) {
+                        }
+                    }
+                });
+        } catch (ex) {}
+    }
+}

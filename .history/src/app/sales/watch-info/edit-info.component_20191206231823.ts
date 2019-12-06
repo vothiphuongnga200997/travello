@@ -65,7 +65,7 @@ export class EditInfoComponent implements OnInit {
     constructor(
         private completerService: CompleterService,
         private fb: FormBuilder,
-        protected ref: NbDialogRef<EditInfoComponent>,
+        protected ref: NbDialogRef<EditContractComponent>,
         private contractService: ContractService,
         private modalService: NgbModal,
         private tourService: TourService,

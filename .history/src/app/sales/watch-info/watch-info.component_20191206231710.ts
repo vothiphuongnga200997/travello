@@ -177,13 +177,11 @@ export class WatchInfoComponent implements OnInit {
                 },
             })
             .onClose.subscribe(async data => {
-                if (data) {
-                    if (data.pennant === true) {
-                        await this.getContract();
-                        this.toastrService.success(`Xóa thành công `, 'Thành công');
-                    } else {
-                        if (data.pennant !== 1 && data.pennant !== 0) this.toastrService.error(data.pennant, `Thành công`);
-                    }
+                if (data.pennant === true) {
+                    await this.getContract();
+                    this.toastrService.success(`Xóa thành công `, 'Thành công');
+                } else {
+                    if (data.pennant !== 1 && data.pennant !== 0) this.toastrService.error(data.pennant, `Thành công`);
                 }
             });
     }

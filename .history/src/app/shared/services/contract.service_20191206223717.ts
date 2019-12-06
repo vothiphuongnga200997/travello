@@ -35,6 +35,7 @@ export class ContractService {
         query.ascending('startDay');
         query.include('objTour');
         // query.greaterThan('endDay', currentDate);
+        query.select('codeSchedule', 'startDay', 'endDay', 'objTour', 'empty', 'surcharge');
         try {
             let result = await query.find();
             return result;

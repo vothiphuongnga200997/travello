@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DeleteTicketComponent, DeleteComponent } from '../delete-customer';
+import { DeleteTicketComponent, DeleteComponent } from '../delete.component';
 import { NbDialogService, NbDialogRef } from '@nebular/theme';
 import * as Parse from 'parse';
 import { ToastrService } from '../../../shared/services';
@@ -83,13 +83,33 @@ export class InfoTouristComponent implements OnInit {
         } catch (ex) {
             throw ex;
         }
+        console.log('info khach hang');
     }
     dismiss() {
         this.ref.close({
             pennant: 0,
         });
     }
-
+    deleteContract() {
+        this.dialogService
+            .open(DeleteComponent, {
+                context: {
+                    title: 'XÓA ',
+                    event: this.event,
+                },
+            })
+            .onClose.subscribe(async data => {
+                if (data) {
+                    if (data.pennant === true) {
+                        this.ref.close({
+                            pennant: true,
+                        });
+                    } else {
+                        if (data.pennant !== 1 && data.pennant !== 0) this.toastrService.error(data.pennant, `Delete Error`);
+                    }
+                }
+            });
+    }
     deleteTicket(numberTourist, i) {
         if (this.data.length === 1) {
             this.dialogService

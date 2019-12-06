@@ -35,6 +35,7 @@ export class ContractService {
         query.ascending('startDay');
         query.include('objTour');
         // query.greaterThan('endDay', currentDate);
+        query.select('codeSchedule', 'startDay', 'endDay', 'objTour', 'empty', 'surcharge');
         try {
             let result = await query.find();
             return result;
@@ -349,62 +350,61 @@ export class ContractService {
     ) {
         let contract = Parse.Object.extend('contract');
         console.log('nga');
-        console.log(price);
-        let obj = new contract();
-        let dataSave: any = {};
-        let dataUser: any = {};
-        let dataSchedule: any = {};
-        let schedule = Parse.Object.extend('schedule');
-        let ObjectSchedule = new schedule();
+        // let obj = new contract();
+        // let dataSave: any = {};
+        // let dataUser: any = {};
+        // let dataSchedule: any = {};
+        // let schedule = Parse.Object.extend('schedule');
+        // let ObjectSchedule = new schedule();
 
-        let customer = Parse.Object.extend('customer');
-        let objCustomer = new customer();
-        let dataCustomer: any = {};
+        // let customer = Parse.Object.extend('customer');
+        // let objCustomer = new customer();
+        // let dataCustomer: any = {};
 
-        dataSave.objSchedule = schedule.createWithoutData(firstForm.idSchedule);
-        dataSave.infoCustom = secondForm.contacts;
-        dataSave.price = price;
-        dataSave.numberAdult = firstForm.adult;
-        dataSave.numberKids = firstForm.children;
-        dataSave.indemnification = 0;
-        dataSave.cancelTicket = [];
-        dataSave.paid = paid;
-        dataSave.status = true;
-        dataSave.surcharge = firstForm.surcharge;
-        dataSave.sumFare = totalMoney;
-        dataSave.expiryDate = new Date(
-            moment(Date.now())
-                .add(3, 'day')
-                .format('LLL'),
-        );
-        dataSave.date = new Date();
-        dataSave.discount = 0;
-        if (paidOfCuctomer >= 100000000) dataSave.discount = 0.1;
-        if (paidOfCuctomer < 100000000 && paidOfCuctomer >= 50000000) dataSave.discount = 0.05;
-        try {
-            let currentUser = Parse.User.current();
-            dataUser.email = thirdForm.email;
-            dataUser.phone = thirdForm.phone;
-            currentUser.save(dataUser);
-            dataSave.objUser = currentUser;
-            let result = await obj.save(dataSave);
-            if (result) {
-                dataSchedule.objectId = firstForm.idSchedule;
-                dataSchedule.empty = await this.setEmpty(firstForm.idSchedule, quantity);
-                await ObjectSchedule.save(dataSchedule);
-                dataCustomer.objUser = currentUser;
-                dataCustomer.objectId = idCustomer;
-                dataCustomer.objUser = currentUser;
-                dataCustomer.paid = paidOfCuctomer + totalMoney;
-                dataCustomer.discount = 0;
-                if (paidOfCuctomer + totalMoney >= 100000000) dataCustomer.discount = 0.1;
-                if (paidOfCuctomer + totalMoney < 100000000 && paidOfCuctomer + totalMoney >= 50000000) dataCustomer.discount = 0.05;
-                await objCustomer.save(dataCustomer);
-            }
-            return result;
-        } catch (ex) {
-            console.log(ex);
-        }
+        // dataSave.objSchedule = schedule.createWithoutData(firstForm.idSchedule);
+        // dataSave.infoCustom = secondForm.contacts;
+        // dataSave.price = price;
+        // dataSave.numberAdult = firstForm.adult;
+        // dataSave.numberKids = firstForm.children;
+        // dataSave.indemnification = 0;
+        // dataSave.cancelTicket = [];
+        // dataSave.paid = paid;
+        // dataSave.status = true;
+        // dataSave.surcharge = firstForm.surcharge;
+        // dataSave.sumFare = totalMoney;
+        // dataSave.expiryDate = new Date(
+        //     moment(Date.now())
+        //         .add(3, 'day')
+        //         .format('LLL'),
+        // );
+        // dataSave.date = new Date();
+        // dataSave.discount = 0;
+        // if (paidOfCuctomer >= 100000000) dataSave.discount = 0.1;
+        // if (paidOfCuctomer < 100000000 && paidOfCuctomer >= 50000000) dataSave.discount = 0.05;
+        // try {
+        //     let currentUser = Parse.User.current();
+        //     dataUser.email = thirdForm.email;
+        //     dataUser.phone = thirdForm.phone;
+        //     currentUser.save(dataUser);
+        //     dataSave.objUser = currentUser;
+        //     let result = await obj.save(dataSave);
+        //     if (result) {
+        //         dataSchedule.objectId = firstForm.idSchedule;
+        //         dataSchedule.empty = await this.setEmpty(firstForm.idSchedule, quantity);
+        //         await ObjectSchedule.save(dataSchedule);
+        //         dataCustomer.objUser = currentUser;
+        //         dataCustomer.objectId = idCustomer;
+        //         dataCustomer.objUser = currentUser;
+        //         dataCustomer.paid = paidOfCuctomer + totalMoney;
+        //         dataCustomer.discount = 0;
+        //         if (paidOfCuctomer + totalMoney >= 100000000) dataCustomer.discount = 0.1;
+        //         if (paidOfCuctomer + totalMoney < 100000000 && paidOfCuctomer + totalMoney >= 50000000) dataCustomer.discount = 0.05;
+        //         await objCustomer.save(dataCustomer);
+        //     }
+        //     return result;
+        // } catch (ex) {
+        //     console.log(ex);
+        // }
     }
     sendMail(dataSendMail: any) {
         let header: HttpHeaders = new HttpHeaders();

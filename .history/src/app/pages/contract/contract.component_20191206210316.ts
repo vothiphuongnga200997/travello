@@ -234,30 +234,32 @@ export class ContractComponent implements OnInit {
     }
 
     ngOnInit() {
-        // setInterval(async function() {
-        //     let contract = Parse.Object.extend('contract');
-        //     const query = new Parse.Query(contract);
-        //     query.lessThanOrEqualTo('expiryDate', new Date());
-        //     query.equalTo('status', true);
-        //     let result = query.find();
-        //     if (result) {
-        //         for (let data of result) {
-        //             let objschedule = Parse.Object.extend('schedule');
-        //             let ObjectSchedule = new objschedule();
-        //             let obj = new contract();
-        //             let sum = 0;
-        //             this.getCustomer(data.get('objUser'));
-        //             for (let sur of data.get('surcharge')) {
-        //                 sum += sur.get('quantity') * sur.get('price');
-        //             }
-        //             let price = data.get('price') - data.get('price') * data.get('discount') + sum;
-        //             if (data.get('paid') === 0 || data.get('paid') === price) {
-        //             } else {
-        //                 if (data.get('paid') < price) {}
-        //             }
-        //         }
-        //     }
-        // }, 3000);
+        setInterval(async function() {
+            let contract = Parse.Object.extend('contract');
+            const query = new Parse.Query(contract);
+            query.lessThanOrEqualTo('expiryDate', new Date());
+            query.equalTo('status', true);
+            let result = query.find();
+            if (result) {
+                for (let data of result) {
+                    let objschedule = Parse.Object.extend('schedule');
+                    let ObjectSchedule = new objschedule();
+                    let obj = new contract();
+                    let sum = 0;
+                    for (let sur of data.get('surcharge')) {
+                        sum += sur.get('quantity') * sur.get('price');
+                    }
+                    let price = data.get('price') - data.get('price') * data.get('discount') + sum;
+                    if (data.get('paid') === 0 || data.get('paid') === price) {
+                    } else {
+                        if (data.get('paid') < price) {
+
+
+                        }
+                    }
+                }
+            }
+        }, 3000);
     }
     async getCustomer(idUserD) {
         const custom = Parse.Object.extend('customer');
@@ -456,13 +458,11 @@ export class ContractComponent implements OnInit {
                 },
             })
             .onClose.subscribe(async data => {
-                if (data) {
-                    if (data.pennant === true) {
-                        await this.getContract();
-                        this.toastrService.success(`Xóa thành công `, 'Thành công');
-                    } else {
-                        if (data.pennant !== 1 && data.pennant !== 0) this.toastrService.error(data.pennant, `Thành công`);
-                    }
+                if (data.pennant === true) {
+                    await this.getContract();
+                    this.toastrService.success(`Xóa thành công `, 'Thành công');
+                } else {
+                    if (data.pennant !== 1 && data.pennant !== 0) this.toastrService.error(data.pennant, `Thành công`);
                 }
             });
     }

@@ -6,7 +6,7 @@ import * as Parse from 'parse';
 import { TourService } from '../../shared/services/tour.service';
 @Component({
     selector: 'ngx-contract',
-    styleUrls: ['./delete-customer.scss'],
+    styleUrls: ['./delete.scss'],
     template: `
         <nb-card>
             <nb-card-header>
@@ -36,6 +36,7 @@ export class DeleteComponent implements OnInit {
     constructor(protected ref: NbDialogRef<DeleteComponent>, private contractService: ContractService) {}
     ngOnInit() {
         this.getCustomer();
+        console.log(this.event);
     }
     dismiss() {
         this.ref.close({
@@ -43,7 +44,7 @@ export class DeleteComponent implements OnInit {
         });
     }
     async delete() {
-        let startDate = moment(this.event.startDay, 'DD/MM/YYYY');
+        let startDate = moment(this.event[0].startDay, 'DD/MM/YYYY');
         let currenDate = moment(new Date()).format('DD/MM/YYYY');
         let endDate = moment(currenDate, 'DD/MM/YYYY');
         let diffInDays = startDate.diff(endDate, 'days');
@@ -54,14 +55,14 @@ export class DeleteComponent implements OnInit {
             let objContract = new contract();
             let dataSave: any = {};
             let dataSchedule: any = {};
-            dataSave.objectId = this.event.id;
+            dataSave.objectId = this.event[0].id;
             dataSave.status = false;
-            dataSave.indemnification = this.event.price;
+            dataSave.indemnification = this.event[0].price;
             try {
                 let result = await objContract.save(dataSave);
                 if (result) {
-                    dataSchedule.empty = await this.contractService.setEmpty(this.event.idSchedule, this.event.tourQuantity);
-                    dataSchedule.objectId = this.event.idSchedule;
+                    dataSchedule.empty = await this.contractService.setEmpty(this.event[0].idSchedule, this.event[0].tourQuantity);
+                    dataSchedule.objectId = this.event[0].idSchedule;
                     await ObjectSchedule.save(dataSchedule);
                     this.ref.close({
                         pennant: true,
@@ -90,24 +91,24 @@ export class DeleteComponent implements OnInit {
                 let dataRepay: any = {};
                 let dataSchedule: any = {};
                 dataContract.status = false;
-                dataContract.objectId = this.event.id;
+                dataContract.objectId = this.event[0].id;
                 let result = await objContract.save(dataContract);
                 if (result) {
-                    if (this.event.paid > 0) {
-                        dataRepay.repay = this.event.paid;
+                    if (this.event[0].paid > 0) {
+                        dataRepay.repay = this.event[0].paid;
                         dataRepay.objContract = result;
                         dataRepay.status = false;
                         await objRepay.save(dataRepay);
                     }
-                    dataSchedule.empty = await this.contractService.setEmpty(this.event.idSchedule, this.event.tourQuantity);
-                    dataSchedule.objectId = this.event.idSchedule;
+                    dataSchedule.empty = await this.contractService.setEmpty(this.event[0].idSchedule, this.event[0].tourQuantity);
+                    dataSchedule.objectId = this.event[0].idSchedule;
                     await ObjectSchedule.save(dataSchedule);
                     dataCustomer.objectId = this.idCustomer;
-                    dataCustomer.paid = this.paidOfCustomer - this.event.price;
-                    if (this.paidOfCustomer - this.event.price >= 100000000) {
+                    dataCustomer.paid = this.paidOfCustomer - this.event[0].price;
+                    if (this.paidOfCustomer - this.event[0].price >= 100000000) {
                         dataCustomer.discount = 0.1;
                     } else {
-                        if (this.paidOfCustomer - this.event.price < 100000000 && this.paidOfCustomer - this.event.price >= 50000000)
+                        if (this.paidOfCustomer - this.event[0].price < 100000000 && this.paidOfCustomer - this.event[0].price >= 50000000)
                             dataCustomer.discount = 0.05;
                         else {
                             dataCustomer.discount = 0;
@@ -146,7 +147,7 @@ export class DeleteComponent implements OnInit {
         const custom = Parse.Object.extend('customer');
         const query = new Parse.Query(custom);
         query.select('paid');
-        query.equalTo('objUser', this.event.idUser);
+        query.equalTo('objUser', this.event[0].idUser);
         let result = await query.first();
         if (result) {
             this.paidOfCustomer = result.attributes.paid;
@@ -158,7 +159,7 @@ export class DeleteComponent implements OnInit {
 }
 @Component({
     selector: 'ngx-contract',
-    styleUrls: ['./delete-customer.scss'],
+    styleUrls: ['./delete.scss'],
     template: `
         <nb-card>
             <nb-card-header>
@@ -168,15 +169,10 @@ export class DeleteComponent implements OnInit {
                 </h6>
             </nb-card-header>
             <nb-card-body>
-                <div *ngIf="this.form1">
-                    <h6 class="text-danger">Tour đã khởi hành không được xóa!</h6>
-                </div>
-                <div *ngIf="this.form2">
-                    <div>Bạn muốn xóa vé của {{ this.info.name }}</div>
-                    <div class="footer">
-                        <button class="float-right btn btn-info" (click)="delete()">OK</button>
-                        <button class="float-right  btn btn-hint" (click)="dismiss()">Cancel</button>
-                    </div>
+                <div>Bạn muốn xóa vé của {{ this.info.name }}</div>
+                <div class="footer">
+                    <button class="float-right btn btn-info" (click)="delete()">OK</button>
+                    <button class="float-right btn btn-info" (click)="dismiss()">Cancel</button>
                 </div>
             </nb-card-body>
         </nb-card>
@@ -198,19 +194,11 @@ export class DeleteTicketComponent implements OnInit {
     objUser: any;
     discount: number;
     saleoff: number;
-    form1: boolean;
-    form2: boolean;
     constructor(protected ref: NbDialogRef<DeleteComponent>, private contractService: ContractService, private tourService: TourService) {}
     ngOnInit() {
         this.getCustomer();
+        console.log('delet khach hang');
         console.log('ffff');
-        if (this.startDay < new Date()) {
-            this.form1 = true;
-            this.form2 = false;
-        } else {
-            this.form2 = true;
-            this.form1 = false;
-        }
     }
     dismiss() {
         this.ref.close();
@@ -293,7 +281,7 @@ export class DeleteTicketComponent implements OnInit {
                     dataSave.numberKids = result.attributes.numberKids - 1;
                     dataSave.price = price - kids;
                 }
-                dataSave.sumFare = result.attributes.sumFare - dataSave.price;
+                dataSave.sumFare = result.attributes.sumFare - dataSave.price - dataSave.price * this.discount;
                 let save = await obj.save(dataSave);
                 if (save) {
                     dataSchedule.empty = await this.contractService.setEmpty(this.idTour, this.quantity);
@@ -301,7 +289,7 @@ export class DeleteTicketComponent implements OnInit {
                     await ObjectSchedule.save(dataSchedule);
                     dataCustomer.objectId = this.idCustomer;
                     dataCustomer.objUser = this.idUser;
-                    dataCustomer.paid = this.paidOfCustomer + dataSave.price - price - price * result.attributes.discount;
+                    dataCustomer.paid = this.paidOfCustomer + dataSave.price - price;
                     dataCustomer.discount = 0;
                     if (dataCustomer.paid >= 100000000) dataCustomer.discount = 0.1;
                     if (dataCustomer.paid < 100000000 && dataCustomer.paid >= 50000000) dataCustomer.discount = 0.05;

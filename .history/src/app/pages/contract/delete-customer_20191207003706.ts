@@ -301,7 +301,7 @@ export class DeleteTicketComponent implements OnInit {
                     await ObjectSchedule.save(dataSchedule);
                     dataCustomer.objectId = this.idCustomer;
                     dataCustomer.objUser = this.idUser;
-                    dataCustomer.paid = this.paidOfCustomer + dataSave.price - price - price * result.attributes.discount;
+                    dataCustomer.paid = this.paidOfCustomer + dataSave.price - price - dataSave.price * result.attributes.discount;
                     dataCustomer.discount = 0;
                     if (dataCustomer.paid >= 100000000) dataCustomer.discount = 0.1;
                     if (dataCustomer.paid < 100000000 && dataCustomer.paid >= 50000000) dataCustomer.discount = 0.05;

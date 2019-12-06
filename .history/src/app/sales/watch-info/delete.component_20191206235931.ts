@@ -6,7 +6,7 @@ import * as Parse from 'parse';
 import { TourService } from '../../shared/services/tour.service';
 @Component({
     selector: 'ngx-contract',
-    styleUrls: ['./delete-customer.scss'],
+    styleUrls: ['./delete.scss'],
     template: `
         <nb-card>
             <nb-card-header>
@@ -158,7 +158,7 @@ export class DeleteComponent implements OnInit {
 }
 @Component({
     selector: 'ngx-contract',
-    styleUrls: ['./delete-customer.scss'],
+    styleUrls: ['./delete.scss'],
     template: `
         <nb-card>
             <nb-card-header>
@@ -168,15 +168,10 @@ export class DeleteComponent implements OnInit {
                 </h6>
             </nb-card-header>
             <nb-card-body>
-                <div *ngIf="this.form1">
-                    <h6 class="text-danger">Tour đã khởi hành không được xóa!</h6>
-                </div>
-                <div *ngIf="this.form2">
-                    <div>Bạn muốn xóa vé của {{ this.info.name }}</div>
-                    <div class="footer">
-                        <button class="float-right btn btn-info" (click)="delete()">OK</button>
-                        <button class="float-right  btn btn-hint" (click)="dismiss()">Cancel</button>
-                    </div>
+                <div>Bạn muốn xóa vé của {{ this.info.name }}</div>
+                <div class="footer">
+                    <button class="float-right btn btn-info" (click)="delete()">OK</button>
+                    <button class="float-right btn btn-info" (click)="=dismiss()">Cancel</button>
                 </div>
             </nb-card-body>
         </nb-card>
@@ -198,19 +193,11 @@ export class DeleteTicketComponent implements OnInit {
     objUser: any;
     discount: number;
     saleoff: number;
-    form1: boolean;
-    form2: boolean;
     constructor(protected ref: NbDialogRef<DeleteComponent>, private contractService: ContractService, private tourService: TourService) {}
     ngOnInit() {
         this.getCustomer();
+        console.log('delet khach hang');
         console.log('ffff');
-        if (this.startDay < new Date()) {
-            this.form1 = true;
-            this.form2 = false;
-        } else {
-            this.form2 = true;
-            this.form1 = false;
-        }
     }
     dismiss() {
         this.ref.close();
@@ -293,7 +280,7 @@ export class DeleteTicketComponent implements OnInit {
                     dataSave.numberKids = result.attributes.numberKids - 1;
                     dataSave.price = price - kids;
                 }
-                dataSave.sumFare = result.attributes.sumFare - dataSave.price;
+                dataSave.sumFare = result.attributes.sumFare - dataSave.price - dataSave.price * this.discount;
                 let save = await obj.save(dataSave);
                 if (save) {
                     dataSchedule.empty = await this.contractService.setEmpty(this.idTour, this.quantity);
@@ -301,7 +288,7 @@ export class DeleteTicketComponent implements OnInit {
                     await ObjectSchedule.save(dataSchedule);
                     dataCustomer.objectId = this.idCustomer;
                     dataCustomer.objUser = this.idUser;
-                    dataCustomer.paid = this.paidOfCustomer + dataSave.price - price - price * result.attributes.discount;
+                    dataCustomer.paid = this.paidOfCustomer + dataSave.price - price;
                     dataCustomer.discount = 0;
                     if (dataCustomer.paid >= 100000000) dataCustomer.discount = 0.1;
                     if (dataCustomer.paid < 100000000 && dataCustomer.paid >= 50000000) dataCustomer.discount = 0.05;

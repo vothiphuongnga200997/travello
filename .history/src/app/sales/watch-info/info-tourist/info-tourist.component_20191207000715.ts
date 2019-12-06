@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DeleteTicketComponent, DeleteComponent } from '../delete-customer';
+import { DeleteTicketComponent, DeleteComponent } from '../delete.component';
 import { NbDialogService, NbDialogRef } from '@nebular/theme';
 import * as Parse from 'parse';
 import { ToastrService } from '../../../shared/services';
@@ -83,6 +83,7 @@ export class InfoTouristComponent implements OnInit {
         } catch (ex) {
             throw ex;
         }
+        console.log('info khach hang');
     }
     dismiss() {
         this.ref.close({

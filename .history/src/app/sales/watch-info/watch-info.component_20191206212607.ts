@@ -12,7 +12,6 @@ import { DialogComponent } from '../../shared/modules/dialog/dialog.component';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Paypal } from './paypal.component';
-import { InfoTouristComponent } from './info-tourist/info-tourist.component';
 export function MustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
         const control = formGroup.controls[controlName];
@@ -164,28 +163,6 @@ export class WatchInfoComponent implements OnInit {
                 startDayEdit: data.get('objSchedule').get('startDay'),
             });
         }
-    }
-    async infoTicket(id) {
-        await this.getContractD(id);
-        this.dialogService
-            .open(InfoTouristComponent, {
-                context: {
-                    title: `Thông tin hành khách`,
-                    idContract: id,
-                    status: status,
-                    event: this.contract,
-                },
-            })
-            .onClose.subscribe(async data => {
-                if (data) {
-                    if (data.pennant === true) {
-                        await this.getContract();
-                        this.toastrService.success(`Xóa thành công `, 'Thành công');
-                    } else {
-                        if (data.pennant !== 1 && data.pennant !== 0) this.toastrService.error(data.pennant, `Thành công`);
-                    }
-                }
-            });
     }
     async getContract() {
         this.pending = [];

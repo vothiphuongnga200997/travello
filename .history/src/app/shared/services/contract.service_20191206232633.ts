@@ -20,7 +20,6 @@ export class ContractService {
         query.equalTo('status', true);
         query.greaterThan('empty', 0);
         // query.greaterThan('endDay', currentDate);
-        query.select('codeSchedule', 'startDay', 'endDay', 'objTour', 'empty', 'surcharge');
         try {
             let result = await query.find();
             return result;
@@ -35,6 +34,7 @@ export class ContractService {
         query.ascending('startDay');
         query.include('objTour');
         // query.greaterThan('endDay', currentDate);
+        query.select('codeSchedule', 'startDay', 'endDay', 'objTour', 'empty', 'surcharge');
         try {
             let result = await query.find();
             return result;

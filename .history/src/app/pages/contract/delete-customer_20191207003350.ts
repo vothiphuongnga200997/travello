@@ -280,11 +280,15 @@ export class DeleteTicketComponent implements OnInit {
 
                 let kids =
                     result.attributes.objSchedule.attributes.objTour.attributes.childrenPrice -
-                    result.attributes.objSchedule.attributes.objTour.attributes.saleoff;
+                    result.attributes.objSchedule.attributes.objTour.attributes.saleoff -
+                    result.attributes.objSchedule.attributes.objTour.attributes.childrenPrice *
+                    result.attributes.discount;
                 let adult =
                     result.attributes.objSchedule.attributes.objTour.attributes.adultPrice -
-                    result.attributes.objSchedule.attributes.objTour.attributes.saleoff;
-                let price = result.attributes.price;
+                    result.attributes.objSchedule.attributes.objTour.attributes.saleoff- 
+                    result.attributes.objSchedule.attributes.objTour.attributes.adultPrice -
+                    result.attributes.discount;
+                let price = result.attributes.price ;
                 if (this.info.type === 'Người lớn') {
                     dataSave.numberAdult = result.attributes.numberAdult - 1;
                     dataSave.price = price - adult;
@@ -293,7 +297,7 @@ export class DeleteTicketComponent implements OnInit {
                     dataSave.numberKids = result.attributes.numberKids - 1;
                     dataSave.price = price - kids;
                 }
-                dataSave.sumFare = result.attributes.sumFare - dataSave.price;
+                dataSave.sumFare = result.attributes.sumFare - dataSave.price - dataSave.price * this.discount;
                 let save = await obj.save(dataSave);
                 if (save) {
                     dataSchedule.empty = await this.contractService.setEmpty(this.idTour, this.quantity);
@@ -301,7 +305,7 @@ export class DeleteTicketComponent implements OnInit {
                     await ObjectSchedule.save(dataSchedule);
                     dataCustomer.objectId = this.idCustomer;
                     dataCustomer.objUser = this.idUser;
-                    dataCustomer.paid = this.paidOfCustomer + dataSave.price - price - price * result.attributes.discount;
+                    dataCustomer.paid = this.paidOfCustomer + dataSave.price - price;
                     dataCustomer.discount = 0;
                     if (dataCustomer.paid >= 100000000) dataCustomer.discount = 0.1;
                     if (dataCustomer.paid < 100000000 && dataCustomer.paid >= 50000000) dataCustomer.discount = 0.05;

@@ -116,7 +116,7 @@
                     <span class="text-strong font-weight-bold">{{ info.nameTour }}</span>
                 </div>
                 <button class="btn bg-success mr-2" (click)="detail(info.id)">Xem chi tiết</button>
-                <button class="btn bg-danger mr-2" (click)="infoTicket(info.id)">Thông tin vé</button>
+                <button class="btn bg-danger mr-2" (click)="detail(info.id)">Thông tin vé</button>
                 <button class="btn bg-warning" *ngIf="info.payable > 0" (click)="onpenPaypal(info.payable, info.id)">
                     Thanh toán số tiền còn lại
                 </button>

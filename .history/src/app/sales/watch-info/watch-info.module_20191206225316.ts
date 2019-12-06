@@ -14,7 +14,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ExportAsModule } from 'ngx-export-as';
 import { HomeModule } from '../home/home.module';
-import { Paypal } from './paypal.component';
+import { Paypal, InfoTicket } from './paypal.component';
 import { DeleteComponent, DeleteTicketComponent } from './delete.component';
 import { InfoTouristComponent } from './info-tourist/info-tourist.component';
 @NgModule({
@@ -41,7 +41,7 @@ import { InfoTouristComponent } from './info-tourist/info-tourist.component';
         HomeModule,
     ],
     exports: [WatchInfoComponent],
-    declarations: [WatchInfoComponent, EditInfoComponent, Paypal, DeleteTicketComponent, DeleteComponent, InfoTouristComponent],
-    entryComponents: [EditInfoComponent, Paypal, DeleteTicketComponent, DeleteComponent, InfoTouristComponent],
+    declarations: [WatchInfoComponent, EditInfoComponent, Paypal, InfoTicket, DeleteTicketComponent, DeleteComponent, InfoTouristComponent],
+    entryComponents: [EditInfoComponent, Paypal, InfoTicket, DeleteTicketComponent, DeleteComponent, InfoTouristComponent],
 })
 export class WatchInfoModule {}

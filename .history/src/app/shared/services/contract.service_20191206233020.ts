@@ -33,7 +33,7 @@ export class ContractService {
         const tour = Parse.Object.extend('schedule');
         const query = new Parse.Query(tour);
         query.ascending('startDay');
-        query.include('objTour');
+        // query.include('objTour');
         // query.greaterThan('endDay', currentDate);
         try {
             let result = await query.find();

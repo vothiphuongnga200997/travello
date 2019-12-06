@@ -90,7 +90,7 @@ export class InfoTouristComponent implements OnInit {
         });
     }
 
-    deleteTicket(numberTourist, i) {
+    deleteTicket(numberTourist) {
         if (this.data.length === 1) {
             this.dialogService
                 .open(DeleteComponent, {
@@ -118,7 +118,7 @@ export class InfoTouristComponent implements OnInit {
                 .open(DeleteTicketComponent, {
                     context: {
                         title: 'Delete',
-                        info: this.data[i],
+                        info: this.data[numberTourist],
                         startDay: this.startDay,
                         array: this.deleteArray,
                         idContract: this.idContract,

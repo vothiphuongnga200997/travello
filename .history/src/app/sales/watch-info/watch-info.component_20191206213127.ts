@@ -11,8 +11,7 @@ import { DialogInterface, ButtonStatusEnum } from '../../shared/interface';
 import { DialogComponent } from '../../shared/modules/dialog/dialog.component';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Paypal } from './paypal.component';
-import { InfoTouristComponent } from './info-tourist/info-tourist.component';
+import { Paypal, InfoTicket } from './paypal.component';
 export function MustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
         const control = formGroup.controls[controlName];
@@ -165,27 +164,24 @@ export class WatchInfoComponent implements OnInit {
             });
         }
     }
-    async infoTicket(id) {
-        await this.getContractD(id);
-        this.dialogService
-            .open(InfoTouristComponent, {
-                context: {
-                    title: `Thông tin hành khách`,
-                    idContract: id,
-                    status: status,
-                    event: this.contract,
-                },
-            })
-            .onClose.subscribe(async data => {
-                if (data) {
-                    if (data.pennant === true) {
-                        await this.getContract();
-                        this.toastrService.success(`Xóa thành công `, 'Thành công');
-                    } else {
-                        if (data.pennant !== 1 && data.pennant !== 0) this.toastrService.error(data.pennant, `Thành công`);
+    infoTicket() {
+        try {
+            this.dialogService
+                .open(InfoTicket, {
+                    context: {
+                        title: 'Thanh toán',
+                        event: this.contract,
+                    },
+                })
+                .onClose.subscribe(async data => {
+                    if (data) {
+                        if (data.pennant) {
+                            this.toastrService.success(`Bạn thanh toán thành công`, 'Thành công');
+                            this.getContract();
+                        }
                     }
-                }
-            });
+                });
+        } catch (ex) {}
     }
     async getContract() {
         this.pending = [];
