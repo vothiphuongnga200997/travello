@@ -1,0 +1,71 @@
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<ngx-menu></ngx-menu>
+<section class="hero-area">
+    <ngx-banner data-wow-delay="100ms"></ngx-banner>
+</section>
+<div>
+    <div class="container">
+        <div class="background-description">
+            <h1 class="tour-banner-title1">Kết quả tìm kiếm</h1>
+        </div>
+    </div>
+</div>
+<ngx-find></ngx-find>
+
+<!-- ##### Hero Area End ##### -->
+<!--Tour list start -->
+<section class="wow fadeInUp">
+    <div class="row ml-5" *ngFor="let data of listTour">
+        <div class="col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="500ms">
+            <div class="row box-search-tour">
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="box-search-tour-image">
+                        <img src="{{ data.image }}" />
+                        <div *ngIf="data.saleoff > 0" class="promotion-tour">
+                            <div class="text-promotion-tour">Giảm giá {{ data.saleoff | number }}đ</div>
+                        </div>
+                        <div *ngIf="data.special && data.saleoff == 0" class="promotion-tour">
+                            <div class="text-promotion-tour">
+                                Tour nổi bật
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-8 col-xs-12" data-wow-delay="500ms">
+                    <div class="row box-search-tour-info">
+                        <div class="col-md-7 col-sm-7 col-xs-12">
+                            <div class="title-tour">
+                                {{ data.nameTour }}
+                            </div>
+                            <div class="destination-tour">
+                                <b *ngFor="let location of data.location"> {{ location }} </b>
+                            </div>
+                            <div class="detail-tour">
+                                <b>Thời gian : </b>{{ data.duration }}
+                                <br />
+                                <b>Phương tiện :</b> {{ data.vehicle }}
+                                <br />
+                                <b>Điểm khởi hành :</b> {{ data.departure }}
+                                <br />
+                                {{ data.hightLight }}
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class=" row calenlar">
+                                <h3><i class="far fa-calendar-alt"></i></h3>
+                                <a> {{ data.startDay }}</a>
+                            </div>
+                            <div class="row">
+                                <a class="book-room-btn btn bg-warning text-dark">Giá {{ data.adultPrice | number }} đ </a>
+                            </div>
+                            <div class="row mt-2">
+                                <a class="book-room-btn btn bg-info text-white" (click)="readMore(data.id)">Đặt tour</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="row"></div>
