@@ -63,7 +63,7 @@
         "ionicons": "2.0.1",
         "jquery": "3.4.1",
         "leaflet": "1.2.0",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.21",
         "moment": "2.24.0",
         "monaco-editor": "0.17.0",
         "msal": "^1.0.0-preview.5",
