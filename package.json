@@ -64,7 +64,7 @@
         "jquery": "3.4.1",
         "leaflet": "1.2.0",
         "lodash": "^4.17.15",
-        "moment": "2.24.0",
+        "moment": "2.29.2",
         "monaco-editor": "0.17.0",
         "msal": "^1.0.0-preview.5",
         "nebular-icons": "1.1.0",
